@@ -2,21 +2,49 @@ grammar grammaire;
 
 @header{package parser;}
 
-program : instruction+ EOF;
+program : expr+ EOF;
 
-instruction
-    :affect 
-    |conditionnelle
-    |print
+expr
+    :STRING
+    |INT
+    |nil
+    |lvalue
+    |'-' expr
+    |expr binaryoperator expr
+    |lvalue ':=' expr
+    |id '(' exprlist ')'
+    |'(' exprseq ')'
+    |typeid '{' fieldlist '}'
+    |typeid '[' expr ']' 'of' expr
+    |'if' expr 'then' expr
+    |'if' expr 'then' expr 'else' expr
+    |'while' expr 'do' expr
+    |'for' id ':=' expr 'to' expr 'do' expr
+    |'break'
+    |'let' declarationlist 'in' exprseq 'end'
+    ;
+
+exprseq
+    :expr
+    |exprseq ';' expr
+    ;
+
+exprlist
+    :expr
+    |exprlist ',' expr
+    ;
+
+fieldlist
+    :id '=' expr
+    |fieldlist ',' id '=' expr
     ;
 
 
+STRING : '"'('a'..'z' | 'A'..'Z' | '0'..'9' | '?' | ',' | '!' | '.' | ';' | '=' | '<' | '>' | ':' | ')' | '(' | '-' | '_')*'"';
 
-exp : INT (('+'|'-'|'*'|'/') INT)* ;
-
-IDF : ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
+IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
 
 INT : ('0'..'9')+;
 
-WS : [ \n\t\r] + -> skip ;
+WS : [\t\n\r] + -> skip ;
 
