@@ -6,43 +6,48 @@ program : expr+ EOF;
 
 
 expr
-    :STRING A
-    |INT A
-    |nil A
-    |lvalue A
-    |'-' expr A
-    |lvalue ':=' expr A
-    |id '(' exprlist ')' A
-    |'(' exprseq ')' A
-    |typeid '{' fieldlist '}' A
-    |typeid '[' expr ']' 'of' expr A
-    |'if' expr 'then' expr A
-    |'if' expr 'then' expr 'else' expr A
-    |'while' expr 'do' expr A
-    |'for' id ':=' expr 'to' expr 'do' expr A
-    |'break' A
-    |'let' declarationlist 'in' exprseq 'end' A
+    :STRING a
+    |INT a
+    |nil a
+    |lvalue a
+    |'-' expr a
+    |lvalue ':=' expr a
+    |IDF '(' exprlist ')' a
+    |'(' exprseq ')' a
+    |typeid '{' fieldlist '}' a
+    |typeid '[' expr ']' 'of' expr a
+    |'if' expr 'then' expr a
+    |'if' expr 'then' expr 'else' expr a
+    |'while' expr 'do' expr a
+    |'for' IDF ':=' expr 'to' expr 'do' expr a
+    |'break' a
+    |'let' declarationlist 'in' exprseq 'end' a
     ;
 
-A
-	:binaryoperator expr A
+a
+	:binaryoperator expr a
 	|nil
 	;
 
 binaryoperator
     :plus
     |mult
-    |'='
-    |'<>'
-    |'<'
-    |'>'
-    |'<='
-    |'>='
-    |'&'
-    |'|'
+    |compare
+    |and
+    |or
     ;
 
+or
+    :and ('|' and)*
+    ;
 
+and
+    :compare ('&' compare)*
+    ;
+
+compare
+    :plus (('='|'<>'|'>'|'<'|'>='|'<=') plus)*
+    ;
 
 plus    
     : mult (('+'|'-') mult)*
@@ -54,44 +59,44 @@ mult
 
 
 exprseq
-	:expr B
+	:expr b
 	;
 
-B
-	: ';' expr B
+b
+	: ';' expr b
 	|nil
 	;
 
 
 exprlist
-	:expr C
+	:expr c
 	;
 
-C
-	: ',' expr C
+c
+	: ',' expr c
 	|nil
 	;
 
 
 
 fieldlist
-	:id '=' expr D
+	:IDF '=' expr d
 	;
 
-D
-	: ',' id '=' expr D
+d
+	: ',' IDF '=' expr d
 	|nil
 	;
 
 
 
 lvalue
-	:id E
+	:IDF e
 	;
 
-E
-    :'.' id E
-	| '[' expr ']' E
+e
+    :'.' IDF e
+	| '[' expr ']' e
 	|nil
 	;
 
@@ -99,11 +104,11 @@ E
 
 
 declarationlist
-    :declaration F
+    :declaration e
 	;
 
-F
-	:declaration F
+f
+	:declaration f
 	|nil
 	;
 
@@ -127,28 +132,28 @@ type
 
 
 typefields
-    :typefield G
+    :typefield g
 	;
 
-G
-	:',' typefield G
+g
+	:',' typefield g
 	|nil
 	;
 
 
 
 typefield
-    :id ':' typeid
+    :IDF ':' typeid
     ;
 
 variabledeclaration
-    :'var' id ':=' expr
-    |'var' id ':' typeid ':=' expr
+    :'var' IDF ':=' expr
+    |'var' IDF ':' typeid ':=' expr
     ;
 
 functiondeclaration
-    :'function' id '(' typefields ')' '=' expr
-    |'function' id '(' typefields ')' ':' typeid '=' expr
+    :'function' IDF '(' typefields ')' '=' expr
+    |'function' IDF '(' typefields ')' ':' typeid '=' expr
     ;
 
 
