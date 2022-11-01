@@ -1,4 +1,3 @@
-
 grammar grammaire;
 
 @header{package parser;}
@@ -30,6 +29,28 @@ A
 	|nil
 	;
 
+binaryoperator
+    :plus
+    |mult
+    |'='
+    |'<>'
+    |'<'
+    |'>'
+    |'<='
+    |'>='
+    |'&'
+    |'|'
+    ;
+
+
+
+plus    
+    : mult (('+'|'-') mult)*
+    ;
+
+mult
+    : expr (('*'|'/') expr)*
+    ;
 
 
 exprseq
@@ -69,7 +90,7 @@ lvalue
 	;
 
 E
-	:'.' id E
+    :'.' id E
 	| '[' expr ']' E
 	|nil
 	;
@@ -77,7 +98,7 @@ E
 
 
 
-declaration-list
+declarationlist
     :declaration F
 	;
 
@@ -88,46 +109,46 @@ F
 
 
 declaration
-    :type-declaration
-    |variable-declaration
-    |function-declaration
+    :typedeclaration
+    |variabledeclaration
+    |functiondeclaration
     ;
 
-type-declaration
-    :type type-id '=' type
+typedeclaration
+    :type typeid '=' type
     ;
 
 type
-    :type-id
-    |'{' type-fields '}'
-    |array 'of' type_id
+    :typeid
+    |'{' typefields '}'
+    |array 'of' typeid
     ;
 
 
 
-type-fields
-    :type-field G
+typefields
+    :typefield G
 	;
 
 G
-	:',' type-field G
+	:',' typefield G
 	|nil
 	;
 
 
 
-type-field
-    :id ':' type-id
+typefield
+    :id ':' typeid
     ;
 
-variable-declaration
+variabledeclaration
     :'var' id ':=' expr
-    :'var' id ':' type-id ':=' expr
+    |'var' id ':' typeid ':=' expr
     ;
 
-function-declaration
-    :'function' id '(' type-fields ')' '=' expr
-    :'function' id '(' type-fields ')' ':' type-id '=' expr
+functiondeclaration
+    :'function' id '(' typefields ')' '=' expr
+    |'function' id '(' typefields ')' ':' typeid '=' expr
     ;
 
 
@@ -141,4 +162,5 @@ IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
 INT : ('0'..'9')+;
 
 WS : [\t\n\r] + -> skip ;
+
 
