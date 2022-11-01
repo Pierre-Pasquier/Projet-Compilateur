@@ -1,54 +1,91 @@
+
 grammar grammaire;
 
 @header{package parser;}
 
 program : expr+ EOF;
 
+
 expr
-    :STRING
-    |INT
-    |nil
-    |lvalue
-    |'-' expr
-    |expr binaryoperator expr
-    |lvalue ':=' expr
-    |id '(' exprlist ')'
-    |'(' exprseq ')'
-    |typeid '{' fieldlist '}'
-    |typeid '[' expr ']' 'of' expr
-    |'if' expr 'then' expr
-    |'if' expr 'then' expr 'else' expr
-    |'while' expr 'do' expr
-    |'for' id ':=' expr 'to' expr 'do' expr
-    |'break'
-    |'let' declarationlist 'in' exprseq 'end'
+    :STRING A
+    |INT A
+    |nil A
+    |lvalue A
+    |'-' expr A
+    |lvalue ':=' expr A
+    |id '(' exprlist ')' A
+    |'(' exprseq ')' A
+    |typeid '{' fieldlist '}' A
+    |typeid '[' expr ']' 'of' expr A
+    |'if' expr 'then' expr A
+    |'if' expr 'then' expr 'else' expr A
+    |'while' expr 'do' expr A
+    |'for' id ':=' expr 'to' expr 'do' expr A
+    |'break' A
+    |'let' declarationlist 'in' exprseq 'end' A
     ;
+
+A
+	:binaryoperator expr A
+	|nil
+	;
+
+
 
 exprseq
-    :expr
-    |exprseq ';' expr
-    ;
+	:expr B
+	;
+
+B
+	: ';' expr B
+	|nil
+	;
+
 
 exprlist
-    :expr
-    |exprlist ',' expr
-    ;
+	:expr C
+	;
+
+C
+	: ',' expr C
+	|nil
+	;
+
+
 
 fieldlist
-    :id '=' expr
-    |fieldlist ',' id '=' expr
-    ;
+	:id '=' expr D
+	;
+
+D
+	: ',' id '=' expr D
+	|nil
+	;
+
+
 
 lvalue
-    :id
-    |lvalue '.' id
-    |lvalue '[' expr ']'
-    ;
+	:id E
+	;
+
+E
+	:'.' id E
+	| '[' expr ']' E
+	|nil
+	;
+
+
+
 
 declaration-list
-    :declaration
-    |declaration-list declaration
-    ;
+    :declaration F
+	;
+
+F
+	:declaration F
+	|nil
+	;
+
 
 declaration
     :type-declaration
@@ -66,10 +103,18 @@ type
     |array 'of' type_id
     ;
 
+
+
 type-fields
-    :type-field
-    |type-fields ',' type-field
-    ;
+    :type-field G
+	;
+
+G
+	:',' type-field G
+	|nil
+	;
+
+
 
 type-field
     :id ':' type-id
