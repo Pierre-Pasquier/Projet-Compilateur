@@ -26,7 +26,7 @@ expr
 
 a
 	:binaryoperator expr a
-	|nil
+	|null
 	;
 
 binaryoperator
@@ -46,7 +46,7 @@ and
     ;
 
 compare
-    :plus (('='|'<>'|'>'|'<'|'>='|'<=') plus)*
+    :plus (('='|'<>'|'>'|'<'|'>='|'<=') plus)?
     ;
 
 plus    
@@ -64,7 +64,7 @@ exprseq
 
 b
 	: ';' expr b
-	|nil
+	|null
 	;
 
 
@@ -74,7 +74,7 @@ exprlist
 
 c
 	: ',' expr c
-	|nil
+	|null
 	;
 
 
@@ -85,7 +85,7 @@ fieldlist
 
 d
 	: ',' IDF '=' expr d
-	|nil
+	|null
 	;
 
 
@@ -97,19 +97,19 @@ lvalue
 e
     :'.' IDF e
 	| '[' expr ']' e
-	|nil
+	|null
 	;
 
 
 
 
 declarationlist
-    :declaration e
+    :declaration f
 	;
 
 f
 	:declaration f
-	|nil
+	|null
 	;
 
 
@@ -126,7 +126,7 @@ typedeclaration
 type
     :typeid
     |'{' typefields '}'
-    |array 'of' typeid
+    |'array' 'of' typeid
     ;
 
 
@@ -137,13 +137,18 @@ typefields
 
 g
 	:',' typefield g
-	|nil
+	|null
 	;
 
 
 
 typefield
     :IDF ':' typeid
+    ;
+
+typeid
+    :'int'
+    |'string'
     ;
 
 variabledeclaration
