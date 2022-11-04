@@ -1,33 +1,30 @@
-grammar grammaire;
+grammar expr;
 
 @header{package parser;}
+
 
 program : expr+ EOF;
 
 
 expr
-    :STRING a
-    |INT a
-    |nil a
-    |lvalue a
-    |'-' expr a
-    |lvalue ':=' expr a
-    |IDF '(' exprlist ')' a
-    |'(' exprseq ')' a
-    |typeid '{' fieldlist '}' a
-    |typeid '[' expr ']' 'of' expr a
-    |'if' expr 'then' expr a
-    |'if' expr 'then' expr 'else' expr a
-    |'while' expr 'do' expr a
-    |'for' IDF ':=' expr 'to' expr 'do' expr a
-    |'break' a
-    |'let' declarationlist 'in' exprseq 'end' a
+    :STRING (binaryoperator expr)*
+    |INT (binaryoperator expr)*
+    |nil (binaryoperator expr)*
+    |lvalue (binaryoperator expr)*
+    |'-' expr (binaryoperator expr)*
+    |lvalue ':=' expr (binaryoperator expr)*
+    |IDF '(' exprlist ')' (binaryoperator expr)*
+    |'(' exprseq ')' (binaryoperator expr)*
+    |typeid '{' fieldlist '}' (binaryoperator expr)*
+    |typeid '[' expr ']' 'of' expr (binaryoperator expr)*
+    |'if' expr 'then' expr (binaryoperator expr)*
+    |'if' expr 'then' expr 'else' expr (binaryoperator expr)*
+    |'while' expr 'do' expr (binaryoperator expr)*
+    |'for' IDF ':=' expr 'to' expr 'do' expr (binaryoperator expr)*
+    |'break' (binaryoperator expr)*
+    |'let' declarationlist 'in' exprseq 'end' (binaryoperator expr)*
     ;
 
-a
-	:binaryoperator expr a
-	|null
-	;
 
 binaryoperator
     :plus
@@ -59,34 +56,20 @@ mult
 
 
 exprseq
-	:expr b
+	:expr (';' expr)*
 	;
 
-b
-	: ';' expr b
-	|null
-	;
 
 
 exprlist
-	:expr c
+	:expr (',' expr)*
 	;
-
-c
-	: ',' expr c
-	|null
-	;
-
 
 
 fieldlist
-	:IDF '=' expr d
+	:IDF '=' expr (',' IDF '=' expr)*
 	;
 
-d
-	: ',' IDF '=' expr d
-	|null
-	;
 
 
 
@@ -97,20 +80,16 @@ lvalue
 e
     :'.' IDF e
 	| '[' expr ']' e
-	|null
+	|
 	;
 
 
 
 
 declarationlist
-    :declaration f
+    :declaration+
 	;
 
-f
-	:declaration f
-	|null
-	;
 
 
 declaration
@@ -132,12 +111,7 @@ type
 
 
 typefields
-    :typefield g
-	;
-
-g
-	:',' typefield g
-	|null
+    :typefield (',' typefield)*
 	;
 
 
@@ -161,7 +135,10 @@ functiondeclaration
     |'function' IDF '(' typefields ')' ':' typeid '=' expr
     ;
 
-
+nil
+    :STRING
+    |INT
+    ;
 
 
 
@@ -171,6 +148,6 @@ IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
 
 INT : ('0'..'9')+;
 
-WS : [\t\n\r] + -> skip ;
+WS : [ \t\n\r] + -> skip ;
 
 
