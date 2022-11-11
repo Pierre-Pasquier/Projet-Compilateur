@@ -3,55 +3,27 @@ grammar expr;
 @header{package parser;}
 
 
-program : expr+ EOF;
+program : expr EOF;
+
 
 
 expr
-    :STRING (binaryoperator expr)*
-    |INT (binaryoperator expr)*
-    |nil (binaryoperator expr)*
-    |lvalue (binaryoperator expr)*
-    |'-' expr (binaryoperator expr)*
-    |lvalue ':=' expr (binaryoperator expr)*
-    |IDF '(' exprlist ')' (binaryoperator expr)*
-    |'(' exprseq ')' (binaryoperator expr)*
-    |typeid '{' fieldlist '}' (binaryoperator expr)*
-    |typeid '[' expr ']' 'of' expr (binaryoperator expr)*
-    |'if' expr 'then' expr (binaryoperator expr)*
-    |'if' expr 'then' expr 'else' expr (binaryoperator expr)*
-    |'while' expr 'do' expr (binaryoperator expr)*
-    |'for' IDF ':=' expr 'to' expr 'do' expr (binaryoperator expr)*
-    |'break' (binaryoperator expr)*
-    |'let' declarationlist 'in' exprseq 'end' (binaryoperator expr)*
+    :nil 
+    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? 
+    |lvalue (':=' expr | '(' exprlist ')' )? 
+    |'-' expr 
+    |'(' exprseq ')' 
+    |'if' expr 'then' expr ('else' expr)? 
+    |'while' expr 'do' expr 
+    |'for' IDF ':=' expr 'to' expr 'do' expr 
+    |'break' 
+    |'let' declarationlist 'in' exprseq 'end' 
     ;
 
 
-binaryoperator
-    :plus
-    |mult
-    |compare
-    |and
-    |or
-    ;
 
 or
-    :and ('|' and)*
-    ;
-
-and
-    :compare ('&' compare)*
-    ;
-
-compare
-    :plus (('='|'<>'|'>'|'<'|'>='|'<=') plus)?
-    ;
-
-plus    
-    : mult (('+'|'-') mult)*
-    ;
-
-mult
-    : expr (('*'|'/') expr)*
+    :nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)? ('&' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)?)* ('|' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)? ('&' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)?)*)*
     ;
 
 
@@ -74,13 +46,12 @@ fieldlist
 
 
 lvalue
-	:IDF e
+	:IDF e?
 	;
 
 e
     :'.' IDF e
 	| '[' expr ']' e
-	|
 	;
 
 
@@ -99,7 +70,7 @@ declaration
     ;
 
 typedeclaration
-    :type typeid '=' type
+    :'type' typeid '=' type
     ;
 
 type
@@ -123,16 +94,16 @@ typefield
 typeid
     :'int'
     |'string'
+    |'intArray'
     ;
 
 variabledeclaration
-    :'var' IDF ':=' expr
-    |'var' IDF ':' typeid ':=' expr
+    :'var' IDF (':' typeid )? ':=' expr
+
     ;
 
 functiondeclaration
-    :'function' IDF '(' typefields ')' '=' expr
-    |'function' IDF '(' typefields ')' ':' typeid '=' expr
+    :'function' IDF '(' typefields ')' (':' typeid )? '=' expr
     ;
 
 nil
