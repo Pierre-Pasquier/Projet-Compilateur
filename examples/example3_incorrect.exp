@@ -1,0 +1,13 @@
+/* erreur sur le type de a */
+
+let
+    type a = { val : int }
+    a.val = 6
+
+    function fact(n: int): int =
+        if n <= 2
+        then n
+        else n * fact(n-1)
+in
+    fact(a)    // renvoie 720
+end

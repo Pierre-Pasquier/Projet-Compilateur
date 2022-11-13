@@ -1,0 +1,10 @@
+/* erreur de déclaration dans le let ... in ... */
+
+let
+    type rec = { val : int }
+    type rec_arr = array of rec
+in
+    var  table := rec_arr[10] of nil
+    for i := 0 to 9 do
+        table[i] := rec { val = i };
+end
