@@ -1,0 +1,13 @@
+/* calcule la factorielle d'un nombre en itératif*/
+
+let
+    var a := 6
+
+    function fact(n: int): int =
+        for id := 1 to n-1 do
+            n*id
+        print(n)
+
+in
+    fact(a)    // renvoie 720
+end
