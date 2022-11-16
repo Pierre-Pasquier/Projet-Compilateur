@@ -25,35 +25,19 @@ a
     :(binaryop expr)*;
 
 binaryop
-    :or
-    |and
-    |compare
-    |plus
-    |mult
+    :plus
+    |eq
     ;
 
-or
-    :and ('|' and)*
-    ;
-
-and
-    : eq ('&' eq)*
-    ;
 
 eq
-    :(lvalue|plus|STRING) (('='|'<>') (plus|STRING|lvalue))?
+    :(lvalue|plus|STRING) (('='|'<>') (plus|STRING|lvalue))? ('&' eq)* ('|' eq)*
     ;
 
-compare
-    :(lvalue|plus|STRING) (('>'|'<'|'>='|'<=') (plus|STRING|lvalue))?
-    ;
 
 plus
-    :mult (('+'|'-') mult)*
+    : (INT|IDF) (('*'|'/') (INT|IDF))* (('+'|'-') plus)*
     ;
-
-mult 
-    :(INT|IDF) (('*'|'/') (INT|IDF))*;
 
 
 exprseq
@@ -142,12 +126,13 @@ functiondeclaration
 
 STRING : '"'('a'..'z' | 'A'..'Z' | '0'..'9' | '?' | ' ' | ',' | '!' | '.' | ';' | '=' | '<' | '>' | ':' | ')' | '(' | '-' | '_' | '%' | '#' | '\\')*'"';
 
-IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
+IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 
 INT : ('0'..'9')+;
 
 COM : '/*' .*? '*/' -> skip;
 
+RES : 'print' | 'printi' | 'flush' | 'getchar' | 'ord' | 'chr' | 'size' | 'substring' | 'concat' | 'not' | 'exit' | 'array' | 'break' | 'do' | 'else' | 'end' | 'for' | 'function' | 'if' | 'in' | 'let' | 'nil' | 'of' | 'then' | 'to' | 'type' | 'var' | 'while';
 
 WS : [ \t\n\r]+ -> skip ;
 
