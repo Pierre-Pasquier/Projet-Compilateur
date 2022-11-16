@@ -1,0 +1,99 @@
+https://www.cs.princeton.edu/courses/archive/spring20/cos320/LL1/
+
+
+OR ::= AND ('|' AND)*
+
+AND ::= COMPARE ('&' COMPARE)*
+
+COMPARE ::= PLUS (('='|'<>'|'>'|'<'|'>='|'<=') PLUS)?
+
+PLUS ::= MULT (('+'|'-') MULT)*
+
+MULT ::= NIL (('*'|'/') NIL)*
+
+
+EXPRSEQ ::= EXPR (';' EXPR)*
+
+
+EXPRLIST ::= EXPR (',' EXPR)*
+
+
+
+
+
+
+Grammaire LL(1) :
+
+
+
+
+EXPR ::= (TYPEID '{' FIELDLIST '}' | TYPEID '[' EXPR ']' 'of' EXPR)? A
+EXPR ::= NIL A
+EXPR ::= LVALUE (':=' EXPR | '(' EXPRLIST ')')? A
+EXPR ::= '-' EXPR A
+EXPR ::= '(' EXPRSEQ ')' A
+EXPR ::= 'if' EXPR 'then' EXPR ('else' EXPR)? A
+EXPR ::= 'while' EXPR 'do' EXPR A
+EXPR ::= 'for' idf ':=' EXPR 'to' EXPR 'do' EXPR A
+EXPR ::= 'break' A
+EXPR ::= 'let' DECLARATIONLIST 'in' EXPRSEQ 'end' A
+
+A ::= (OR EXPR A)?
+
+OR ::= NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)* (('='|'<>'|'>'|'<'|'>='|'<=') NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)*)? ('&' NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)* (('='|'<>'|'>'|'<'|'>='|'<=') NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)*)?)* ('|' NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)* (('='|'<>'|'>'|'<'|'>='|'<=') NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)*)? ('&' NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)* (('='|'<>'|'>'|'<'|'>='|'<=') NIL (('*'|'/') NIL)* (('+'|'-') NIL (('*'|'/') NIL)*)*)?)*)*
+
+
+EXPRSEQ ::= EXPR (';' EXPR)*
+
+
+EXPRLIST ::= EXPR (',' EXPR)*
+
+
+
+
+FIELDLIST ::= idf '=' EXPR (',' idf '=' EXPR)*
+
+
+
+
+LVALUE ::= idf E
+
+E ::= '.' E
+E ::= '[' EXPR ']' E
+E ::= ''
+
+
+
+
+DECLARATIONLIST ::= DECLARATION+
+
+DECLARATION::= TYPEDECLARATION
+DECLARATION ::= VARIABLEDECLARATION
+DECLARATION ::= FUNCTIONDECLARATION
+
+TYPEDECLARATION ::= TYPE TYPEID '=' TYPE
+
+TYPE ::= TYPEID
+TYPE ::= '{' TYPEFIELDS '}'
+TYPE ::= 'array' 'of' TYPEID
+
+
+
+TYPEFIELDS ::= TYPEFIELD (',' TYPEFIELD)*
+
+
+
+
+TYPEFIELD ::= idf ':' TYPEID
+
+TYPEID ::= 'int'
+TYPEID ::= 'string'
+
+VARIABLEDECLARATION ::= var idf (':' TYPEID)? ':=' EXPR
+
+FUNCTIONDECLARATION ::= 'function' idf '(' TYPEFIELDS ')' (':' TYPEID)? '='  EXPR
+
+
+
+NIL ::= string
+NIL ::= int
