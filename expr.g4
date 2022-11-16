@@ -8,23 +8,52 @@ program : expr EOF;
 
 
 expr
-    :nil 
-    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? 
-    |lvalue (':=' expr | '(' exprlist ')' )? 
-    |'-' expr 
-    |'(' exprseq ')' 
-    |'if' expr 'then' expr ('else' expr)? 
-    |'while' expr 'do' expr 
-    |'for' IDF ':=' expr 'to' expr 'do' expr 
-    |'break' 
-    |'let' declarationlist 'in' exprseq 'end' 
+    :a
+    |'nil' a
+    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? a
+    |lvalue (':=' expr | '(' exprlist ')' )? a
+    |'-' expr a
+    |'(' exprseq ')' a
+    |'if' expr 'then' expr ('else' expr)? a
+    |'while' expr 'do' expr a
+    |'for' IDF ':=' expr 'to' expr 'do' expr a
+    |'break' a
+    |'let' declarationlist 'in' exprseq 'end' a
     ;
 
+a
+    :(binaryop expr)*;
 
+binaryop
+    :or
+    |and
+    |compare
+    |plus
+    |mult
+    ;
 
 or
-    :nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)? ('&' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)?)* ('|' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)? ('&' nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)* (('='|'<>'|'>'|'<'|'>='|'<=') nil (('*'|'/') nil)* (('+'|'-') nil (('*'|'/') nil)*)*)?)*)*
+    :and ('|' and)*
     ;
+
+and
+    : eq ('&' eq)*
+    ;
+
+eq
+    :(plus|STRING) (('='|'<>') (plus|STRING))?
+    ;
+
+compare
+    :(plus|STRING) (('>'|'<'|'>='|'<=') (plus|STRING))?
+    ;
+
+plus
+    :mult (('+'|'-') mult)*
+    ;
+
+mult 
+    :(INT|IDF) (('*'|'/') (INT|IDF))*;
 
 
 exprseq
@@ -50,8 +79,8 @@ lvalue
 	;
 
 e
-    :'.' IDF e
-	| '[' expr ']' e
+    :'.' IDF e?
+	| '[' expr ']' e?
 	;
 
 
@@ -82,7 +111,7 @@ type
 
 
 typefields
-    :typefield (',' typefield)*
+    :typefield? (',' typefield)*
 	;
 
 
@@ -95,6 +124,7 @@ typeid
     :'int'
     |'string'
     |'intArray'
+    |IDF
     ;
 
 variabledeclaration
@@ -106,19 +136,19 @@ functiondeclaration
     :'function' IDF '(' typefields ')' (':' typeid )? '=' expr
     ;
 
-nil
-    :STRING
-    |INT
-    ;
 
 
 
-STRING : '"'('a'..'z' | 'A'..'Z' | '0'..'9' | '?' | ',' | '!' | '.' | ';' | '=' | '<' | '>' | ':' | ')' | '(' | '-' | '_' | '%' | '#')*'"';
+
+STRING : '"'('a'..'z' | 'A'..'Z' | '0'..'9' | '?' | ' ' | ',' | '!' | '.' | ';' | '=' | '<' | '>' | ':' | ')' | '(' | '-' | '_' | '%' | '#' | '\\')*'"';
 
 IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')* ;
 
 INT : ('0'..'9')+;
 
-WS : [ \t\n\r] + -> skip ;
+COM : '/*' .*? '*/' -> skip;
+
+
+WS : [ \t\n\r]+ -> skip ;
 
 
