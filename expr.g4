@@ -41,11 +41,11 @@ and
     ;
 
 eq
-    :(plus|STRING) (('='|'<>') (plus|STRING))?
+    :(lvalue|plus|STRING) (('='|'<>') (plus|STRING|lvalue))?
     ;
 
 compare
-    :(plus|STRING) (('>'|'<'|'>='|'<=') (plus|STRING))?
+    :(lvalue|plus|STRING) (('>'|'<'|'>='|'<=') (plus|STRING|lvalue))?
     ;
 
 plus
