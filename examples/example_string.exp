@@ -1,0 +1,5 @@
+/* print string2 */
+
+str a = "string1"
+a = 'string2'
+print (a)

@@ -1,0 +1,8 @@
+/*renvoie 40 */
+
+let
+    var a: int := 10  
+    var b : int := 5 + a    
+in
+    a + b * 2
+end
