@@ -8,35 +8,67 @@ program : expr EOF;
 
 
 expr
-    :a
-    |'nil' a
-    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? a
-    |lvalue (':=' expr | '(' exprlist ')' )? a
-    |'-' expr a
-    |'(' exprseq ')' a
-    |'if' expr 'then' expr ('else' expr)? a
-    |'while' expr 'do' expr a
-    |'for' IDF ':=' expr 'to' expr 'do' expr a
-    |'break' a
-    |'let' declarationlist 'in' exprseq 'end' a
+    :op
+    |'nil' op
+    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? 
+    |lvalue (':=' expr | '(' exprlist ')' )?
+    |'-' expr
+    |'(' exprseq ')' 
+    |'if' expr 'then' expr ('else' expr)? 
+    |'while' expr 'do' expr 
+    |'for' IDF ':=' expr 'to' expr 'do' expr
+    |'break'
+    |'let' declarationlist 'in' exprseq 'end'
+    |printi
+    |print
     ;
 
-a
-    :(binaryop expr)*;
+op
+    :binaryop
+    |(binaryop expr)*
+    ;
 
 binaryop
     :plus
     |eq
+    |or
+    |and
+    |compare
+    |mult
     ;
 
+
+
+or
+    :and ('|' and)*
+    ;
+
+and
+    : eq ('&' eq)*
+    | compare ('&' compare)*
+    ;
 
 eq
-    :(lvalue|plus|STRING) (('='|'<>') (plus|STRING|lvalue))? ('&' eq)* ('|' eq)*
+    :(lvalue|plus|STRING) (('='|'<>') (lvalue|plus|STRING|'nil'))?
     ;
 
+compare
+    :(lvalue|plus|STRING) (('>'|'<'|'>='|'<=') (lvalue|plus|STRING))?
+    ;
 
 plus
-    : (INT|IDF) (('*'|'/') (INT|IDF))* (('+'|'-') plus)*
+    :mult (('+'|'-') mult)* 
+    ;
+
+mult 
+    : value (('*'|'/') ( value))*
+    ;
+
+value
+    :'-'? INT
+    |'-'? IDF
+    |'-'? '(' op ')'
+    |'-'? lvalue
     ;
 
 
@@ -59,13 +91,10 @@ fieldlist
 
 
 lvalue
-	:IDF e?
+	:IDF ('.' IDF)*
+    |IDF ('[' expr ']')*
 	;
 
-e
-    :'.' IDF e?
-	| '[' expr ']' e?
-	;
 
 
 
@@ -121,7 +150,38 @@ functiondeclaration
     ;
 
 
+printi : 'printi(' op ')';
+print : 'print(' expr')';
 
+
+PRINT : 'print';
+PRINTI : 'printi';
+FLUSH : 'flush';
+GETCHAR : 'getchar';
+ORD : 'ord';
+CHR : 'chr';
+SIZE : 'size';
+SUBSTRING : 'substring';
+CONCAT : 'concat';
+NOT : 'not';
+EXIT : 'exit';
+ARRAY : 'array';
+BREAK : 'break';
+DO : 'do';
+ELSE : 'else';
+END : 'end';
+FOR : 'for';
+FUNCTION : 'function';
+IF : 'if';
+IN : 'in';
+LET : 'let';
+NIL : 'nil';
+OF : 'of';
+THEN : 'then';
+TO : 'to';
+TYPE : 'type';
+VAR : 'var';
+WHILE : 'while';
 
 
 STRING : '"'('a'..'z' | 'A'..'Z' | '0'..'9' | '?' | ' ' | ',' | '!' | '.' | ';' | '=' | '<' | '>' | ':' | ')' | '(' | '-' | '_' | '%' | '#' | '\\')*'"';
@@ -131,8 +191,6 @@ IDF : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 INT : ('0'..'9')+;
 
 COM : '/*' .*? '*/' -> skip;
-
-RES : 'print' | 'printi' | 'flush' | 'getchar' | 'ord' | 'chr' | 'size' | 'substring' | 'concat' | 'not' | 'exit' | 'array' | 'break' | 'do' | 'else' | 'end' | 'for' | 'function' | 'if' | 'in' | 'let' | 'nil' | 'of' | 'then' | 'to' | 'type' | 'var' | 'while';
 
 WS : [ \t\n\r]+ -> skip ;
 
