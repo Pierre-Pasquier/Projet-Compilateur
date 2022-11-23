@@ -1,10 +1,7 @@
-
-/* remplis une liste de valeurs */
-
 let
   type rec = { val : int }
   type rec_arr = array of rec
-  var  table := rec_arr[10] of nil
+  var  table := rec_arr[10] of 0
 in
   for i := 0 to 9 do
     table[i] := rec { val = i };

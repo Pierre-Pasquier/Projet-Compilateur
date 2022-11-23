@@ -1,8 +1,6 @@
-/*renvoie 40 */
-
 let
-    var a: int := 10  
+    var a : int := 10  
     var b : int := 5 + a    
 in
-    a + b * 2
+    a := (1-1) & 1+1 > (2*3+1)
 end

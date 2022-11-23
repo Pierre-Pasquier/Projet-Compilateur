@@ -1,4 +1,4 @@
-/* calcule la factorielle d'un nombre en itératif*/
+/* calcule la factorielle d'un nombre en iteratif */
 
 let
     var a := 6
@@ -9,5 +9,5 @@ let
         print(n)
 
 in
-    fact(a)    // renvoie 720
+    fact(a)   /* renvoie 720 */
 end
