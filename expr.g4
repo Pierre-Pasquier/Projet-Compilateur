@@ -91,8 +91,8 @@ fieldlist
 
 
 lvalue
-	:IDF ('.' IDF)*
-    |IDF ('[' expr ']')*
+	:IDF ('.' IDF)*                 #Idflist
+    |IDF ('[' expr ']')*            #Idfexprlist
 	;
 
 
@@ -106,9 +106,9 @@ declarationlist
 
 
 declaration
-    :typedeclaration
-    |variabledeclaration
-    |functiondeclaration
+    :typedeclaration        #typedecla
+    |variabledeclaration    #vardecla
+    |functiondeclaration    #fundecla
     ;
 
 typedeclaration
@@ -116,9 +116,9 @@ typedeclaration
     ;
 
 type
-    :typeid
-    |'{' typefields '}'
-    |'array' 'of' typeid
+    :typeid                     #type_id
+    |'{' typefields '}'         #typef
+    |'array' 'of' typeid        #typeidarray
     ;
 
 
@@ -134,15 +134,11 @@ typefield
     ;
 
 typeid
-    :'int'
-    |'string'
-    |'intArray'
-    |IDF
+    :IDF
     ;
 
 variabledeclaration
     :'var' IDF (':' typeid )? ':=' expr
-
     ;
 
 functiondeclaration

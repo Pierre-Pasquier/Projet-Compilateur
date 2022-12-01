@@ -95,11 +95,19 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFieldlist(exprParser.FieldlistContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#lvalue}.
+	 * Visit a parse tree produced by the {@code Idflist}
+	 * labeled alternative in {@link exprParser#lvalue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLvalue(exprParser.LvalueContext ctx);
+	T visitIdflist(exprParser.IdflistContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Idfexprlist}
+	 * labeled alternative in {@link exprParser#lvalue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdfexprlist(exprParser.IdfexprlistContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#declarationlist}.
 	 * @param ctx the parse tree
@@ -107,11 +115,26 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclarationlist(exprParser.DeclarationlistContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#declaration}.
+	 * Visit a parse tree produced by the {@code typedecla}
+	 * labeled alternative in {@link exprParser#declaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclaration(exprParser.DeclarationContext ctx);
+	T visitTypedecla(exprParser.TypedeclaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code vardecla}
+	 * labeled alternative in {@link exprParser#declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVardecla(exprParser.VardeclaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code fundecla}
+	 * labeled alternative in {@link exprParser#declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFundecla(exprParser.FundeclaContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#typedeclaration}.
 	 * @param ctx the parse tree
@@ -119,11 +142,26 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypedeclaration(exprParser.TypedeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#type}.
+	 * Visit a parse tree produced by the {@code type_id}
+	 * labeled alternative in {@link exprParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitType(exprParser.TypeContext ctx);
+	T visitType_id(exprParser.Type_idContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code typef}
+	 * labeled alternative in {@link exprParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypef(exprParser.TypefContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code typeidarray}
+	 * labeled alternative in {@link exprParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeidarray(exprParser.TypeidarrayContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#typefields}.
 	 * @param ctx the parse tree
