@@ -15,4 +15,19 @@ public interface AstVisitor<T> {
     public T visit(TypeField affect);
     public T visit(VariableDeclaration affect);
     public T visit(FunctionDeclaration affect);
+
+
+    public T visit(Exprtiret exprtiret);
+    public T visit(Nilop nil_op);
+    public T visit(Typeids typeids);
+    public T visit(Ops ops);
+    public T visit(Parenthesis parenthesis);
+    public T visit(While while1);
+    public T visit(For for1);
+    public T visit(Declarationlists declarationlists);
+    public T visit(Printis printis);
+    public T visit(Printe printe);
+    public T visit(Ifthenelse ifthenelse);
+    public T visit(Lvalues lvalues);
+
 }
