@@ -6,21 +6,20 @@ grammar expr;
 program : expr EOF;
 
 
-
 expr
-    :op
-    |'nil' op
-    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)? 
-    |lvalue (':=' expr | '(' exprlist ')' )?
-    |'-' expr
-    |'(' exprseq ')' 
-    |'if' expr 'then' expr ('else' expr)? 
-    |'while' expr 'do' expr 
-    |'for' IDF ':=' expr 'to' expr 'do' expr
-    |'break'
-    |'let' declarationlist 'in' exprseq 'end'
-    |printi
-    |print
+    :op                                                             #Ops
+    |'nil' op                                                       #Nil_op
+    |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)?    #Typeids
+    |lvalue (':=' expr | '(' exprlist ')' )?                        #Lvalues
+    |'-' expr                                                       #Exprtiret
+    |'(' exprseq ')'                                                #Paranthesis
+    |'if' expr 'then' expr ('else' expr)?                           #Ifthenelse
+    |'while' expr 'do' expr                                         #While
+    |'for' IDF ':=' expr 'to' expr 'do' expr                        #For           
+    |'break'                                                        #Break
+    |'let' declarationlist 'in' exprseq 'end'                       #Declarationlists
+    |printi                                                         #Printis
+    |print                                                          #Prints
     ;
 
 op
