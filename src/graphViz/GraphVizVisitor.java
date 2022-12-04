@@ -19,6 +19,21 @@ import ast.TypeFieldList;
 import ast.VariableDeclaration;
 
 
+import ast.Ifthenelse;
+import ast.Declarationlists;
+import ast.For;
+import ast.Exprtiret;
+import ast.Lvalues;
+import ast.Nilop;
+import ast.Ops;
+import ast.Parenthesis;
+import ast.Printe;
+import ast.Printis;
+import ast.Typeids;
+import ast.While;
+
+
+
 public class GraphVizVisitor implements AstVisitor<String> {
 
     private int state;
