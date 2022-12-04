@@ -200,4 +200,162 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	 }
+
+
+	@Override 
+	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx) { 
+		
+		Ast condition = ctx.getChild(1).accept(this);
+		Ast alors = ctx.getChild(3).accept(this);
+
+
+
+		if(ctx.getChildCount()>3){
+			Ast ouOccasionnel = ctx.getChild(5).accept(this);
+			return new Ifthenelse(condition, alors, ouOccasionnel);
+		}else{
+			return new Ifthenelse(condition, alors);
+		}
+	}
+
+
+	@Override 
+	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
+		
+		Ast affect = ctx.getChild(1).accept(this);
+		Ast dans = ctx.getChild(3).accept(this);
+
+		return new Declarationlists(dans,affect);
+	}
+
+
+	@Override 
+	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
+		
+		Ast expr_ = ctx.getChild(1).accept(this);
+
+		return new Exprtiret(expr_);
+	}
+
+
+	@Override 
+	public Ast visitFor(exprParser.ForContext ctx) { 
+
+		String idfString = ctx.getChild(1).toString();
+		Idf idf = new Idf(idfString);
+		
+		Ast deb= ctx.getChild(3).accept(this);
+		Ast fin = ctx.getChild(5).accept(this);
+		Ast faire = ctx.getChild(7).accept(this);
+
+		return new For(deb,fin,faire,idf);
+	}
+
+//on met peut etre idf mais à voir plus tard
+
+
+	@Override 
+	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
+
+		
+		Ast lvalues= ctx.getChild(0).accept(this);
+		String s1=":=";
+		String s2=ctx.getChild(1).accept(this).toString();
+
+		if(ctx.getChildCount()>1 && s1.equals(s2)){
+			Ast Expr=ctx.getChild(2).accept(this);
+			return new Lvalues(lvalues,Expr);
+		}if(ctx.getChildCount()>1){
+			Ast Exprlist=ctx.getChild(2).accept(this);
+			return new Lvalues(lvalues,Exprlist);
+		}else{
+			return new Lvalues(lvalues);
+		}
+	}
+
+
+	@Override 
+	public Ast visitNilop(exprParser.NilopContext ctx) { 
+		
+		Ast nilop = ctx.getChild(1).accept(this);
+
+		return new Nilop(nilop);
+	}
+
+
+	@Override 
+	public Ast visitOps(exprParser.OpsContext ctx) { 
+		
+		Ast op = ctx.getChild(0).accept(this);
+
+		return new Ops(op);
+	}
+
+
+	@Override 
+	public Ast visitParenthesis(exprParser.ParenthesisContext ctx) { 
+		
+		Ast parenthesis = ctx.getChild(1).accept(this);
+
+		return new Parenthesis(parenthesis);
+	}
+
+
+	@Override 
+	public Ast visitPrinte(exprParser.PrinteContext ctx) { 
+		
+		Ast printe = ctx.getChild(0).accept(this);
+
+		return new Printe(printe);
+	
+	}
+
+
+	@Override 
+	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
+		
+		Ast printis = ctx.getChild(0).accept(this);
+
+		return new Printis(printis);
+	}
+
+
+	@Override 
+	public Ast visitTypeids(exprParser.TypeidsContext ctx) { 
+		
+
+		if(ctx.getChildCount()==0){
+
+			return null;
+
+		}
+		if(ctx.getChildCount()==4){
+
+			Ast typeids1= ctx.getChild(0).accept(this);
+			Ast fieldlist1= ctx.getChild(2).accept(this);
+
+			return new Typeids(typeids1,fieldlist1);
+			
+		}
+		if(ctx.getChildCount()==6){
+
+			Ast typeids2= ctx.getChild(0).accept(this);
+			Ast expr1= ctx.getChild(2).accept(this);
+			Ast expr2= ctx.getChild(5).accept(this);
+
+			return new Typeids(typeids2, expr1, expr2);
+
+		}
+	}
+
+
+	@Override 
+	public Ast visitWhile(exprParser.WhileContext ctx) { 
+		
+		Ast condition = ctx.getChild(1).accept(this);
+		Ast faire= ctx.getChild(3).accept(this);
+
+		return new While(condition, faire);
+	}
+
 }
