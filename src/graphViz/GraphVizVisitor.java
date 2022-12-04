@@ -302,4 +302,234 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
 
+
+
+
+    @Override
+    public String visit(Exprtiret exprtiret) {
+
+        String nodeIdentifier = this.nextState();
+
+        String expr_state= exprtiret.expr_.accept(this);
+
+        this.addNode(nodeIdentifier, "Exprtiret");
+
+        this.addTransition(nodeIdentifier, expr_state);
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Nilop nil_op) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String  nilopstate = nil_op.nilop.accept(this);
+
+        this.addNode(nodeIdentifier, "Nilop");
+
+        this.addTransition(nodeIdentifier, nilopstate);
+
+        return nodeIdentifier;
+
+    }
+
+    
+    @Override
+    public String visit(Typeids typeids) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String typeids1State = typeids.typeids1.accept(this);
+        String fieldlist1State = typeids.fieldlist1.accept(this);
+        String typeids2State = typeids.typeids2.accept(this);
+        String expr1State = typeids.expr1.accept(this);
+        String expr2State = typeids.expr2.accept(this);
+
+        this.addNode(nodeIdentifier, "Typeids");
+
+        this.addTransition(nodeIdentifier, typeids1State);
+        this.addTransition(nodeIdentifier, fieldlist1State);
+        this.addTransition(nodeIdentifier, typeids2State);
+        this.addTransition(nodeIdentifier, expr1State);
+        this.addTransition(nodeIdentifier, expr2State);
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Ops ops) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String opState = ops.op.accept(this);
+
+        this.addNode(nodeIdentifier, "Ops");
+
+        this.addTransition(nodeIdentifier, opState);
+
+        return nodeIdentifier;
+
+    }
+
+    
+    @Override
+    public String visit(Parenthesis parenthesis) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String parenthesisState = parenthesis.parenthesis.accept(this);
+
+        this.addNode(nodeIdentifier, "Parenthesis");
+
+        this.addTransition(nodeIdentifier, parenthesisState);
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(While while1) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String conditionState = while1.condition.accept(this);
+        String faireState = while1.faire.accept(this);
+
+        this.addNode(nodeIdentifier, "While");
+
+        this.addTransition(nodeIdentifier, conditionState);
+        this.addTransition(nodeIdentifier, faireState);
+
+        return nodeIdentifier;
+
+    }
+   
+    @Override
+    public String visit(For for1) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String debState = for1.deb.accept(this);
+        String finState = for1.fin.accept(this);
+        String faireState = for1.faire.accept(this);
+        String idfState = for1.idf.accept(this);
+
+        this.addNode(nodeIdentifier, "For");
+
+        this.addTransition(nodeIdentifier, debState);
+        this.addTransition(nodeIdentifier, finState);
+        this.addTransition(nodeIdentifier, faireState);
+        this.addTransition(nodeIdentifier, idfState);
+
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Declarationlists declarationlists) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String affectState = declarationlists.affect.accept(this);
+        String dansState = declarationlists.dans.accept(this);
+        
+        this.addNode(nodeIdentifier, "Declarationlists");
+
+        this.addTransition(nodeIdentifier, affectState);
+        this.addTransition(nodeIdentifier, dansState);
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Printis printis) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String printisState = printis.printis.accept(this);
+
+        this.addNode(nodeIdentifier, "Printis");
+
+        this.addTransition(nodeIdentifier, printisState);
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Printe printe) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String printeState = printe.printe.accept(this);
+
+        this.addNode(nodeIdentifier, "Printe");
+
+        this.addTransition(nodeIdentifier, printeState);
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Ifthenelse ifthenelse) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String conditionState = ifthenelse.condition.accept(this);
+        String alorsState = ifthenelse.alors.accept(this);
+        String ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+
+        this.addNode(nodeIdentifier, "Ifthenelse");
+
+        this.addTransition(nodeIdentifier, conditionState);
+        this.addTransition(nodeIdentifier, alorsState);
+        this.addTransition(nodeIdentifier, ouOccasionnelState);
+
+
+        return nodeIdentifier;
+
+    }
+
+
+    @Override
+    public String visit(Lvalues lvalues) {
+        
+        String nodeIdentifier = this.nextState();
+
+        String lvalueState = lvalues.lvalue.accept(this);
+        String listexpressionState = lvalues.listexpression.accept(this);
+
+        this.addNode(nodeIdentifier, "Lvalues");
+
+        this.addTransition(nodeIdentifier, lvalueState);
+        this.addTransition(nodeIdentifier, listexpressionState);
+
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Idf idf) {
+
+        String nodeIdentifier = this.nextState();
+
+        this.addNode(nodeIdentifier, idf.name);
+
+        return nodeIdentifier;
+
+    }
+
 }
