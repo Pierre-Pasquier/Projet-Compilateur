@@ -5,11 +5,11 @@ import parser.exprParser.ProgramContext;
 public interface AstVisitor<T> {
 
     public T visit(Plus plus);
-    public T visit(Div div);
     public T visit(And and);
     public T visit(Mult mult);
     public T visit(Div div);
-    public T visit(Comp comp);
+    public T visit(Minus minus);
+    public T visit(Compare comp);
 
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);

@@ -3,6 +3,14 @@ package graphViz;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import ast.Plus;
+import ast.Minus;
+import ast.Div;
+import ast.And;
+import ast.Or;
+import ast.Mult;
+import ast.Compare;
+
 import ast.Ast;
 import ast.AstVisitor;
 import ast.Idf;
@@ -28,7 +36,6 @@ import ast.Lvalues;
 import ast.Nilop;
 import ast.Ops;
 import ast.Parenthesis;
-import ast.Plus;
 import ast.Printe;
 import ast.Printis;
 import ast.Typeids;

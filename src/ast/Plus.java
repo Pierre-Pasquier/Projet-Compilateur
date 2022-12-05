@@ -1,6 +1,7 @@
 package ast;
 
-public interface Plus implements Ast {
+
+public class Plus implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {
@@ -11,7 +12,7 @@ public interface Plus implements Ast {
     public Ast right;
 
     public Plus(Ast left, Ast right){
-        this.left=left;
-        this.right=right;
+        this.left = left;
+        this.right = right;
     }
 }

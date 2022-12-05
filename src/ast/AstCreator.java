@@ -20,7 +20,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
-	@Override public Ast visitPlus(exprParser.Plus ctx) {
+	@Override public Ast visitPlus(exprParser.PlusContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
@@ -46,40 +46,20 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
     }
 
-	@Override public Ast visitMult(exprParser.Mult ctx) {
-  
-        Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
 
-        for (int i=0;2*i<ctx.getChildCount()-1;i++){
-            
-            String operation = ctx.getChild(2*i+1).toString();
-            Ast right = ctx.getChild(2*(i+1)).accept(this);
-
-            switch (operation) {
-                case "*":
-                    noeudTemporaire = new Mult(noeudTemporaire,right);
-                    break;
-                case "/":
-                    noeudTemporaire = new Div(noeudTemporaire,right);
-                    break;
-                default:
-                    break;
-            }
-        }    
-
-        return noeudTemporaire;
-
-    }
-
-	@Override public Ast visitAnd(exprParser.And ctx)
+	@Override public Ast visitAnd(exprParser.AndContext ctx)
 	{
-		Ast left = ctx.getChild(0).accept(this);
-		Ast right = ctx.getChild(2).accept(this);
-		return new And(left, right) ;
+		And andList = new And();
+
+		for (int i = 0; i<ctx.getChildCount();i++){
+			andList.addAnd(ctx.getChild(i).accept(this));
+		}
+
+		return andList;
 	}
 
-	@Override public Ast visitMult(exprParser.Mult ctx) {
+	@Override public Ast visitMult(exprParser.MultContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 

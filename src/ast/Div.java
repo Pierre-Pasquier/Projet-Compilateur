@@ -1,6 +1,6 @@
 package ast;
 
-public interface Div implements Ast {
+public class Div implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {

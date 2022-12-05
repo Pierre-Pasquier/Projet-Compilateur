@@ -1,6 +1,6 @@
 package ast;
 
-public interface Eq implements Ast {
+public class Eq implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {

@@ -1,6 +1,6 @@
 package ast;
 
-public interface Minus implements Ast {
+public class Minus implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {

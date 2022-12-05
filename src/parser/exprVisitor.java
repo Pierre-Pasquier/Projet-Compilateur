@@ -108,17 +108,61 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrints(exprParser.PrintsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#op}.
+	 * Visit a parse tree produced by the {@code opbin}
+	 * labeled alternative in {@link exprParser#op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOp(exprParser.OpContext ctx);
+	T visitOpbin(exprParser.OpbinContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#binaryop}.
+	 * Visit a parse tree produced by the {@code opbinexpr}
+	 * labeled alternative in {@link exprParser#op}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBinaryop(exprParser.BinaryopContext ctx);
+	T visitOpbinexpr(exprParser.OpbinexprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code binplus}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinplus(exprParser.BinplusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code bineq}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBineq(exprParser.BineqContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code binor}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinor(exprParser.BinorContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code binand}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinand(exprParser.BinandContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code bincomp}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBincomp(exprParser.BincompContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code binmult}
+	 * labeled alternative in {@link exprParser#binaryop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinmult(exprParser.BinmultContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#or}.
 	 * @param ctx the parse tree
@@ -156,11 +200,33 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMult(exprParser.MultContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#value}.
+	 * Visit a parse tree produced by the {@code valint}
+	 * labeled alternative in {@link exprParser#value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValue(exprParser.ValueContext ctx);
+	T visitValint(exprParser.ValintContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code validf}
+	 * labeled alternative in {@link exprParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValidf(exprParser.ValidfContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code valop}
+	 * labeled alternative in {@link exprParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValop(exprParser.ValopContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code vallvalue}
+	 * labeled alternative in {@link exprParser#value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVallvalue(exprParser.VallvalueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#exprseq}.
 	 * @param ctx the parse tree

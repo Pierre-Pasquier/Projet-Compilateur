@@ -1,18 +1,20 @@
 package ast;
 
-public interface And implements Ast{
-
+import java.util.ArrayList;
+public class And implements Ast{
     public <T> T accept(AstVisitor<T> visitor)
     {
         return visitor.visit(this);
     }
 
-    public Ast left;
-    public Ast right;
+    public ArrayList<Ast> AndList;
 
-    public And(Ast left, Ast right){
-        this.left=left;
-        this.right=right;
+    public And(){
+        this.AndList = new ArrayList<>();
+    }
+    
+    public void addAnd(Ast and){
+        this.AndList.add(and);
     }
 
     

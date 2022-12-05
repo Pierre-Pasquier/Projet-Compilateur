@@ -1,6 +1,6 @@
 package ast;
 
-public interface Or {
+public class Or {
 
     public <T> T accept(AstVisitor<T> visitor)
     {

@@ -1,6 +1,6 @@
 package ast;
 
-public interface Mult implements Ast {
+public class Mult implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {
