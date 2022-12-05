@@ -4,7 +4,9 @@ package ast;
 public interface AstVisitor<T> {
 
     public T visit(Plus plus);
-
+    public T visit(And and);
+    public T visit(Mult mult);
+    public T visit(Comp comp);
 
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);

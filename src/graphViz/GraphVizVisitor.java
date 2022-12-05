@@ -96,6 +96,58 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         }
 
+    @Override
+        public String visit(And and) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = and.left.accept(this);
+            String rightState = and.right.accept(this);
+
+            this.addNode(nodeIdentifier, "and");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+    @Override
+    public String visit(Mult mult) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = mult.left.accept(this);
+        String rightState = mult.right.accept(this);
+
+        this.addNode(nodeIdentifier, "*");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Comp comp) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = comp.left.accept(this);
+        String rightState = comp.right.accept(this);
+
+        this.addNode(nodeIdentifier, "*");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+        
+
 //-----------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public String visit(Idf idf) {
