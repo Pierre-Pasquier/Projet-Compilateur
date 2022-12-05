@@ -25,6 +25,23 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return ctx.getChild(0).accept(this);
 	}
 
+	@Override public Ast visitOp(exprParser.BinaryopContext ctx)
+	{	
+		Op op = new Op();
+		if (ctx.getChild(1) != null){
+			for (int i=0;2*i<ctx.getChildCount()-1;i++){
+				Ast left = ctx.getChild(2*i).accept(this);
+				Ast right = ctx.getChild(2*(i+1)).accept(this);
+			}
+		}
+		else {
+			return ctx.getChild(0).accept(this);
+		}
+		
+	}
+
+	
+
 	@Override public Ast visitPlus(exprParser.PlusContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
