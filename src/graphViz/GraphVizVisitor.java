@@ -95,6 +95,23 @@ public class GraphVizVisitor implements AstVisitor<String> {
 //-----------------------------------------------------------------------------------------------------------------------------------------
 
     @Override
+        public String visit(Op op) {
+
+            String nodeIdentifier = this.nextState();
+
+            this.addNode(nodeIdentifier, "Op");
+            
+            for (Ast ast:op.Op){
+
+            String astState = ast.accept(this);
+            this.addTransition(nodeIdentifier, astState);
+
+        }
+            return nodeIdentifier;
+
+        }
+
+    @Override
         public String visit(Plus plus) {
 
             String nodeIdentifier = this.nextState();
@@ -112,12 +129,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
 
         @Override
-        public String visit(Egal plus) {
+        public String visit(Egal egal) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = egal.left.accept(this);
+            String rightState = egal.right.accept(this);
 
             this.addNode(nodeIdentifier, "=");
             
@@ -130,12 +147,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
         @Override
-        public String visit(Diff plus) {
+        public String visit(Diff diff) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = diff.left.accept(this);
+            String rightState = diff.right.accept(this);
 
             this.addNode(nodeIdentifier, "<>");
             
@@ -147,12 +164,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
 
         @Override
-        public String visit(Sup plus) {
+        public String visit(Sup sup) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = sup.left.accept(this);
+            String rightState = sup.right.accept(this);
 
             this.addNode(nodeIdentifier, ">");
             
@@ -165,12 +182,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
         @Override
-        public String visit(SupEq plus) {
+        public String visit(SupEq supeq) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = supeq.left.accept(this);
+            String rightState = supeq.right.accept(this);
 
             this.addNode(nodeIdentifier, ">=");
             
@@ -183,12 +200,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
         @Override
-        public String visit(Inf plus) {
+        public String visit(Inf inf) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = inf.left.accept(this);
+            String rightState = inf.right.accept(this);
 
             this.addNode(nodeIdentifier, "<");
             
@@ -201,12 +218,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
         @Override
-        public String visit(InfEq plus) {
+        public String visit(InfEq infeq) {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = plus.left.accept(this);
-            String rightState = plus.right.accept(this);
+            String leftState = infeq.left.accept(this);
+            String rightState = infeq.right.accept(this);
 
             this.addNode(nodeIdentifier, "<=");
             

@@ -20,6 +20,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	/*-----------------------------------------------------------------------------------------------------*/
 
+	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx)
+	{
+		return ctx.getChild(0).accept(this);
+	}
+
 	@Override public Ast visitPlus(exprParser.PlusContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
