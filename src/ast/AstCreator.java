@@ -24,7 +24,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
-
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             
             String operation = ctx.getChild(2*i+1).toString();
@@ -47,13 +49,34 @@ public class AstCreator extends exprBaseVisitor<Ast>{
     }
 
 
+	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
+		return ctx.getChild(0).accept(this);
+	}
+
+	@Override public Ast visitOpbin(exprParser.OpbinContext ctx){
+		return ctx.getChild(0).accept(this);
+	}
+
+
+	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
+		Opbinexpr binexprList = new Opbinexpr();
+		for (int i = 0; i<ctx.getChildCount()/2;i++){
+			binexprList.addOpBin(ctx.getChild(2*i).accept(this));
+			binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
+		}
+
+		return binexprList;
+	}
+
 
 	@Override public Ast visitAnd(exprParser.AndContext ctx)
 	{
 		And andList = new And();
-
-		for (int i = 0; i<ctx.getChildCount();i++){
-			andList.addAnd(ctx.getChild(i).accept(this));
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
+			andList.addAnd(ctx.getChild(2*i).accept(this));
 		}
 
 		return andList;
@@ -63,8 +86,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitOr(exprParser.OrContext ctx)
 	{
 		Or orList = new Or();
-
-		for (int i = 0; i<ctx.getChildCount();i++){
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
 			orList.addOr(ctx.getChild(i).accept(this));
 		}
 
@@ -130,8 +155,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	/*------------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitExprseq(exprParser.ExprseqContext ctx) {
 		ExprSeq exprseq = new ExprSeq();
-
-		for (int i=0; i<ctx.getChildCount()/2;i++){
+		System.out.println("len = " + ctx.getChildCount() + "\n");
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
+			System.out.println("aaaaaaaaaaaaaa\n");
 			exprseq.addExprSeq(ctx.getChild(2*i).accept(this));
 		}
 		return exprseq;
@@ -140,8 +169,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	 @Override public Ast visitExprlist(exprParser.ExprlistContext ctx) {
 		ExprList exprlist = new ExprList();
-
-		for (int i=0; i<ctx.getChildCount()/2;i++){
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
 			exprlist.addExprList(ctx.getChild(2*i).accept(this));
 		}
 
@@ -161,7 +192,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override public Ast visitIdflist(exprParser.IdflistContext ctx) {
 		IdfList Idflist = new IdfList();
-		for (int i=0; i<ctx.getChildCount()/2;i++){
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
 			String idfString = ctx.getChild(2*i).toString();
 			Idf idf = new Idf(idfString);
 			Idflist.addIdfList(idf);
@@ -175,15 +209,20 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
 		IdfExprList Idfexprlist = new IdfExprList(idf);
-		for (int i=2; i<ctx.getChildCount();i++){
-			Idfexprlist.addIdfExprList(ctx.getChild(2*i).accept(this));
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		for (int i=0; i<ctx.getChildCount()/3;i++){
+			Idfexprlist.addIdfExprList(ctx.getChild(3*i+2).accept(this));
 		}
 		return Idfexprlist;
 	}
 
 	@Override public Ast visitDeclarationlist(exprParser.DeclarationlistContext ctx) {
 		DeclarationList declaList = new DeclarationList();
-
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
 		for (int i = 0; i<ctx.getChildCount();i++){
 			declaList.addDeclaration(ctx.getChild(i).accept(this));
 		}
@@ -239,11 +278,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override public Ast visitTypefields(exprParser.TypefieldsContext ctx) {
 		TypeFieldList typefieldList = new TypeFieldList();
-
-		for (int i = 0; i<ctx.getChildCount();i++){
-			typefieldList.addTypeField(ctx.getChild(i).accept(this));
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
 		}
-
+		if (ctx.getChildCount()%2 == 0){
+			for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
+				typefieldList.addTypeField(ctx.getChild(2*i+1).accept(this));
+			}
+		} else {
+			for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
+				typefieldList.addTypeField(ctx.getChild(2*i).accept(this));
+			}
+		}
 		return typefieldList;
 	}
 
@@ -377,17 +423,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 		
 		Ast lvalues= ctx.getChild(0).accept(this);
-		String s1=":=";
-		String s2=ctx.getChild(1).accept(this).toString();
 
-		if(ctx.getChildCount()>1 && s1.equals(s2)){
+		if(ctx.getChildCount() == 3){
 			Ast Expr=ctx.getChild(2).accept(this);
 			return new Lvalues(lvalues,Expr);
-		}if(ctx.getChildCount()>1){
+		}if(ctx.getChildCount() == 4){
 			Ast Exprlist=ctx.getChild(2).accept(this);
 			return new Lvalues(lvalues,Exprlist);
 		}else{
-			return new Lvalues(lvalues);
+			return new Lvalues(lvalues,null);
 		}
 	}
 
@@ -406,7 +450,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		
 		Ast op = ctx.getChild(0).accept(this);
 
-		return new Ops(op);
+		return op;
 	}
 
 

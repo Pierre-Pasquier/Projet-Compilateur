@@ -17,6 +17,7 @@ import ast.InfEq;
 import ast.Egal;
 import ast.Diff;
 import ast.IntNode;
+import ast.Opbinexpr;
 
 import ast.Ast;
 import ast.AstVisitor;
@@ -41,7 +42,6 @@ import ast.For;
 import ast.Exprtiret;
 import ast.Lvalues;
 import ast.Nilop;
-import ast.Ops;
 import ast.Parenthesis;
 import ast.Printe;
 import ast.Printis;
@@ -66,7 +66,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
             
         FileOutputStream output = new FileOutputStream(filepath);
 
-        String buffer = this.nodeBuffer + this.linkBuffer;
+        String buffer = this.nodeBuffer + this.linkBuffer + "}";
         byte[] strToBytes = buffer.getBytes();
 
         output.write(strToBytes);
@@ -241,7 +241,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
             String nodeIdentifier = this.nextState();
 
-            this.addNode(nodeIdentifier, "And");
+            this.addNode(nodeIdentifier, "&");
 
             for (Ast ast:and.AndList){
 
@@ -260,7 +260,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
             String nodeIdentifier = this.nextState();
 
-            this.addNode(nodeIdentifier, "Or");
+            this.addNode(nodeIdentifier, "|");
 
             for (Ast ast:or.OrList){
 
@@ -462,6 +462,23 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
 
+    public String visit(Opbinexpr opbin) {
+           
+        String nodeIdentifier = this.nextState();
+
+        this.addNode(nodeIdentifier, "Opbinexpr");
+
+        for (Ast ast:opbin.opbinexpr){
+
+            String astState = ast.accept(this);
+            this.addTransition(nodeIdentifier, astState);
+
+        }
+
+        return nodeIdentifier;
+
+    }
+
     public String visit(TypeDeclaration typedecla) {
            
         String nodeIdentifier = this.nextState();
@@ -625,22 +642,6 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
 
-
-    @Override
-    public String visit(Ops ops) {
-        
-        String nodeIdentifier = this.nextState();
-
-        String opState = ops.op.accept(this);
-
-        this.addNode(nodeIdentifier, "Ops");
-
-        this.addTransition(nodeIdentifier, opState);
-
-        return nodeIdentifier;
-
-    }
-
     
     @Override
     public String visit(Parenthesis parenthesis) {
@@ -765,7 +766,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         return nodeIdentifier;
 
-    }
+    }   
 
 
     @Override
@@ -774,12 +775,18 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String nodeIdentifier = this.nextState();
 
         String lvalueState = lvalues.lvalue.accept(this);
-        String listexpressionState = lvalues.listexpression.accept(this);
+        String listexpressionState = null;
+        if (lvalues.listexpression != null){
+            listexpressionState = lvalues.listexpression.accept(this);
+        }
 
         this.addNode(nodeIdentifier, "Lvalues");
 
         this.addTransition(nodeIdentifier, lvalueState);
-        this.addTransition(nodeIdentifier, listexpressionState);
+        if (lvalues.listexpression != null){
+            this.addTransition(nodeIdentifier, listexpressionState);
+        }
+        
 
 
         return nodeIdentifier;

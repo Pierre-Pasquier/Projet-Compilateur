@@ -675,79 +675,31 @@ public class exprParser extends Parser {
 	}
 
 	public static class BinaryopContext extends ParserRuleContext {
+		public PlusContext plus() {
+			return getRuleContext(PlusContext.class,0);
+		}
+		public EqContext eq() {
+			return getRuleContext(EqContext.class,0);
+		}
+		public OrContext or() {
+			return getRuleContext(OrContext.class,0);
+		}
+		public AndContext and() {
+			return getRuleContext(AndContext.class,0);
+		}
+		public CompareContext compare() {
+			return getRuleContext(CompareContext.class,0);
+		}
+		public MultContext mult() {
+			return getRuleContext(MultContext.class,0);
+		}
 		public BinaryopContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_binaryop; }
-	 
-		public BinaryopContext() { }
-		public void copyFrom(BinaryopContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class BinplusContext extends BinaryopContext {
-		public PlusContext plus() {
-			return getRuleContext(PlusContext.class,0);
-		}
-		public BinplusContext(BinaryopContext ctx) { copyFrom(ctx); }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBinplus(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BineqContext extends BinaryopContext {
-		public EqContext eq() {
-			return getRuleContext(EqContext.class,0);
-		}
-		public BineqContext(BinaryopContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBineq(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BinandContext extends BinaryopContext {
-		public AndContext and() {
-			return getRuleContext(AndContext.class,0);
-		}
-		public BinandContext(BinaryopContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBinand(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BinmultContext extends BinaryopContext {
-		public MultContext mult() {
-			return getRuleContext(MultContext.class,0);
-		}
-		public BinmultContext(BinaryopContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBinmult(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BincompContext extends BinaryopContext {
-		public CompareContext compare() {
-			return getRuleContext(CompareContext.class,0);
-		}
-		public BincompContext(BinaryopContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBincomp(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class BinorContext extends BinaryopContext {
-		public OrContext or() {
-			return getRuleContext(OrContext.class,0);
-		}
-		public BinorContext(BinaryopContext ctx) { copyFrom(ctx); }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBinor(this);
+			if ( visitor instanceof exprVisitor ) return ((exprVisitor<? extends T>)visitor).visitBinaryop(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -760,7 +712,6 @@ public class exprParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
-				_localctx = new BinplusContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(131);
@@ -768,7 +719,6 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 2:
-				_localctx = new BineqContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(132);
@@ -776,7 +726,6 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 3:
-				_localctx = new BinorContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(133);
@@ -784,7 +733,6 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 4:
-				_localctx = new BinandContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(134);
@@ -792,7 +740,6 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 5:
-				_localctx = new BincompContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(135);
@@ -800,7 +747,6 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 6:
-				_localctx = new BinmultContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(136);

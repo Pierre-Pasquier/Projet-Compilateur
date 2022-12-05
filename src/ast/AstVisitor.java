@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.function.BinaryOperator;
+
 public interface AstVisitor<T> {
 
     public T visit(Plus plus);
@@ -16,6 +18,8 @@ public interface AstVisitor<T> {
     public T visit(Diff diff);
     public T visit(Egal egal);
     public T visit(IntNode intnode);
+    public T visit(Opbinexpr opbinexpr);
+
 
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);
@@ -35,7 +39,6 @@ public interface AstVisitor<T> {
     public T visit(Exprtiret exprtiret);
     public T visit(Nilop nil_op);
     public T visit(Typeids typeids);
-    public T visit(Ops ops);
     public T visit(Parenthesis parenthesis);
     public T visit(While while1);
     public T visit(For for1);
