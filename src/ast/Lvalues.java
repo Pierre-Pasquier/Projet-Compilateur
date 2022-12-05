@@ -16,10 +16,5 @@ public class Lvalues implements Ast {
     }
 
 
-    public Lvalues(Ast lvalue){
-        this.lvalue=lvalue;
-    }
-
-
 
 }

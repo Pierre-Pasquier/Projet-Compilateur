@@ -421,11 +421,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
 
-		
 		Ast lvalues= ctx.getChild(0).accept(this);
-
+		System.out.println("len = " + ctx.getChildCount() + "\n");
 		if(ctx.getChildCount() == 3){
 			Ast Expr=ctx.getChild(2).accept(this);
+			System.out.println("null = " + Expr == null + "\n");
 			return new Lvalues(lvalues,Expr);
 		}if(ctx.getChildCount() == 4){
 			Ast Exprlist=ctx.getChild(2).accept(this);
