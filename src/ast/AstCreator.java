@@ -276,11 +276,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Idf idf = new Idf(idfString);
 		if (ctx.getChildCount() == 4){
 			Ast expr = ctx.getChild(3).accept(this);
-			return new VariableDeclaration(idf, expr);
+			return new VariableDeclaration(idf, expr, null);
 		} else {
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
-			return new VariableDeclaration(idf, typeid, expr);
+			//System.out.println("expr = null : "+ (expr == null) + "\n");
+			return new VariableDeclaration(idf, expr, typeid);
 		}
 	}
 
@@ -468,5 +469,30 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 		return new While(condition, faire);
 	}
+
+
+	@Override 
+	public Ast visitValint(exprParser.ValintContext ctx) { 
+		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
+		return new IntNode(intString);
+	}
+
+	@Override 
+	public Ast visitValidf(exprParser.ValidfContext ctx) { 
+		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
+		return new Idf(idfString);
+	}
+
+	@Override 
+	public Ast visitValop(exprParser.ValopContext ctx) {
+		return ctx.getChild(ctx.getChildCount()-2).accept(this);
+	}
+
+	@Override 
+	public Ast visitVallvalue(exprParser.VallvalueContext ctx) {
+		return ctx.getChild(ctx.getChildCount()-1).accept(this);
+	}
+
+
 
 }

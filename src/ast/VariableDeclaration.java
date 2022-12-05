@@ -9,7 +9,7 @@ public class VariableDeclaration implements Ast {
     public Ast Idf;
     public Ast expr;
 
-    public VariableDeclaration(Ast Idf, Ast typeid, Ast expr){
+    public VariableDeclaration(Ast Idf, Ast expr, Ast typeid){
         this.typeid = typeid;
         this.Idf = Idf;
         this.expr = expr;

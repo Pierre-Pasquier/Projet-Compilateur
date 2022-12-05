@@ -14,9 +14,9 @@ import ast.Sup;
 import ast.SupEq;
 import ast.Inf;
 import ast.InfEq;
-import ast.Or;
 import ast.Egal;
 import ast.Diff;
+import ast.IntNode;
 
 import ast.Ast;
 import ast.AstVisitor;
@@ -338,6 +338,17 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
     @Override
+    public String visit(IntNode intNode) {
+
+        String nodeIdentifier = this.nextState();
+
+        this.addNode(nodeIdentifier, String.valueOf(intNode.value));
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
     public String visit(ExprSeq exprseq) {
         
         String nodeIdentifier = this.nextState();
@@ -509,9 +520,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
     public String visit(VariableDeclaration vardecla) {
            
         String nodeIdentifier = this.nextState();
-
+        String typeidState = null;
         String idfState = vardecla.Idf.accept(this);
-        String typeidState = vardecla.typeid.accept(this);
+        if (vardecla.typeid != null){
+            typeidState = vardecla.typeid.accept(this);
+        }
+       
         String exprState = vardecla.expr.accept(this);
 
         
@@ -519,7 +533,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     
         this.addTransition(nodeIdentifier, idfState);
-        this.addTransition(nodeIdentifier, typeidState);
+        if (vardecla.typeid != null){
+            this.addTransition(nodeIdentifier, typeidState);
+        }
+        
         this.addTransition(nodeIdentifier, exprState);
 
         return nodeIdentifier;

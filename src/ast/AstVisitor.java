@@ -15,6 +15,7 @@ public interface AstVisitor<T> {
     public T visit(Sup sup);
     public T visit(Diff diff);
     public T visit(Egal egal);
+    public T visit(IntNode intnode);
 
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);
