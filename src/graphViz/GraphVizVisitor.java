@@ -27,6 +27,7 @@ import ast.Lvalues;
 import ast.Nilop;
 import ast.Ops;
 import ast.Parenthesis;
+import ast.Plus;
 import ast.Printe;
 import ast.Printis;
 import ast.Typeids;
@@ -76,8 +77,26 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
    
+//-----------------------------------------------------------------------------------------------------------------------------------------
 
+    @Override
+        public String visit(Plus plus) {
 
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "+");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public String visit(Idf idf) {
 

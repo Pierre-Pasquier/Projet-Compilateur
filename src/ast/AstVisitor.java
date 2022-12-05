@@ -3,6 +3,9 @@ package ast;
 
 public interface AstVisitor<T> {
 
+    public T visit(Plus plus);
+
+
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);
     public T visit(FieldList affect);
@@ -29,5 +32,6 @@ public interface AstVisitor<T> {
     public T visit(Printe printe);
     public T visit(Ifthenelse ifthenelse);
     public T visit(Lvalues lvalues);
+
 
 }
