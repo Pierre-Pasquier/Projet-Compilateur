@@ -59,33 +59,67 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return andList;
 	}
 
-	@Override public Ast visitMult(exprParser.MultContext ctx) {
+
+	@Override public Ast visitOr(exprParser.OrContext ctx)
+	{
+		Or orList = new Or();
+
+		for (int i = 0; i<ctx.getChildCount();i++){
+			orList.addOr(ctx.getChild(i).accept(this));
+		}
+
+		return orList;
+	}
+
+	@Override public Ast visitCompare(exprParser.CompareContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
+        if (ctx.getChildCount() == 3){
+			String operation = ctx.getChild(1).toString();
+			Ast right = ctx.getChild(0).accept(this);
 
-        for (int i=0;2*i<ctx.getChildCount()-1;i++){
-            
-            String operation = ctx.getChild(2*i+1).toString();
-            Ast right = ctx.getChild(2*(i+1)).accept(this);
-
-            switch (operation) {
-                case ">":
-                    noeudTemporaire = new Sup(noeudTemporaire,right);
-                    break;
-                case "<":
-                    noeudTemporaire = new Inf(noeudTemporaire,right);
-                    break;
+			switch (operation) {
+				case ">":
+					noeudTemporaire = new Sup(noeudTemporaire,right);
+					break;
+				case "<":
+					noeudTemporaire = new Inf(noeudTemporaire,right);
+					break;
 				case ">=":
-                    noeudTemporaire = new SupEq(noeudTemporaire,right);
-                    break;
+					noeudTemporaire = new SupEq(noeudTemporaire,right);
+					break;
 				case "<=":
-                    noeudTemporaire = new InfEq(noeudTemporaire,right);
-                    break;
-                default:
-                    break;
-            }
-        }    
+					noeudTemporaire = new InfEq(noeudTemporaire,right);
+					break;
+				default:
+					break;
+			} 
+		}
+		 
+
+        return noeudTemporaire;
+
+    }
+
+	@Override public Ast visitEq(exprParser.EqContext ctx) {
+  
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+
+        if (ctx.getChildCount() == 3){
+			String operation = ctx.getChild(1).toString();
+			Ast right = ctx.getChild(0).accept(this);
+
+			switch (operation) {
+				case "=":
+					noeudTemporaire = new Egal(noeudTemporaire,right);
+					break;
+				case "<>":
+					noeudTemporaire = new Diff(noeudTemporaire,right);
+					break;
+			} 
+		}
+		 
 
         return noeudTemporaire;
 

@@ -10,6 +10,13 @@ import ast.And;
 import ast.Or;
 import ast.Mult;
 import ast.Compare;
+import ast.Sup;
+import ast.SupEq;
+import ast.Inf;
+import ast.InfEq;
+import ast.Or;
+import ast.Egal;
+import ast.Diff;
 
 import ast.Ast;
 import ast.AstVisitor;
@@ -104,6 +111,114 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         }
 
+        @Override
+        public String visit(Egal plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "=");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+
+        @Override
+        public String visit(Diff plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "<>");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+        @Override
+        public String visit(Sup plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, ">");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+
+        @Override
+        public String visit(SupEq plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, ">=");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+
+        @Override
+        public String visit(Inf plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "<");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+
+        @Override
+        public String visit(InfEq plus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "<=");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+
+
     @Override
         public String visit(Minus minus) {
 
@@ -126,13 +241,33 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
             String nodeIdentifier = this.nextState();
 
-            String leftState = and.left.accept(this);
-            String rightState = and.right.accept(this);
+            this.addNode(nodeIdentifier, "And");
 
-            this.addNode(nodeIdentifier, "and");
-            
-            this.addTransition(nodeIdentifier, leftState);
-            this.addTransition(nodeIdentifier, rightState);
+            for (Ast ast:and.AndList){
+
+                String astState = ast.accept(this);
+                this.addTransition(nodeIdentifier, astState);
+
+            }
+
+            return nodeIdentifier;
+
+        }
+
+
+        @Override
+        public String visit(Or or) {
+
+            String nodeIdentifier = this.nextState();
+
+            this.addNode(nodeIdentifier, "Or");
+
+            for (Ast ast:or.OrList){
+
+                String astState = ast.accept(this);
+                this.addTransition(nodeIdentifier, astState);
+
+            }
 
             return nodeIdentifier;
 
@@ -173,14 +308,14 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
     @Override
-    public String visit(Comp comp) {
+    public String visit(Compare comp) {
 
         String nodeIdentifier = this.nextState();
 
         String leftState = comp.left.accept(this);
         String rightState = comp.right.accept(this);
 
-        this.addNode(nodeIdentifier, "*");
+        this.addNode(nodeIdentifier, "Comp");
         
         this.addTransition(nodeIdentifier, leftState);
         this.addTransition(nodeIdentifier, rightState);

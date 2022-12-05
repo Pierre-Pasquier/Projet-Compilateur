@@ -1,7 +1,6 @@
 package ast;
 
-
-public class Compare implements Ast {
+public class Diff implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {
@@ -11,8 +10,8 @@ public class Compare implements Ast {
     public Ast left;
     public Ast right;
 
-    public Compare(Ast left, Ast right){
-        this.left = left;
-        this.right = right;
+    public Diff(Ast left, Ast right){
+        this.left=left;
+        this.right=right;
     }
 }

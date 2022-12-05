@@ -1,15 +1,20 @@
 package ast;
 
-import parser.exprParser.ProgramContext;
-
 public interface AstVisitor<T> {
 
     public T visit(Plus plus);
     public T visit(And and);
     public T visit(Mult mult);
     public T visit(Div div);
+    public T visit(Or or);
     public T visit(Minus minus);
+    public T visit(SupEq supeq);
+    public T visit(Inf inf );
+    public T visit(InfEq infeq);
     public T visit(Compare comp);
+    public T visit(Sup sup);
+    public T visit(Diff diff);
+    public T visit(Egal egal);
 
     public T visit(ExprSeq affect);
     public T visit(ExprList affect);
