@@ -17,6 +17,103 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+
+	/*-----------------------------------------------------------------------------------------------------*/
+
+	@Override public Ast visitPlus(exprParser.Plus ctx) {
+  
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+
+
+        for (int i=0;2*i<ctx.getChildCount()-1;i++){
+            
+            String operation = ctx.getChild(2*i+1).toString();
+            Ast right = ctx.getChild(2*(i+1)).accept(this);
+
+            switch (operation) {
+                case "-":
+                    noeudTemporaire = new Minus(noeudTemporaire,right);
+                    break;
+                case "+":
+                    noeudTemporaire = new Plus(noeudTemporaire,right);
+                    break;
+                default:
+                    break;
+            }
+        }    
+
+        return noeudTemporaire;
+
+    }
+
+	@Override public Ast visitMult(exprParser.Mult ctx) {
+  
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+
+
+        for (int i=0;2*i<ctx.getChildCount()-1;i++){
+            
+            String operation = ctx.getChild(2*i+1).toString();
+            Ast right = ctx.getChild(2*(i+1)).accept(this);
+
+            switch (operation) {
+                case "*":
+                    noeudTemporaire = new Mult(noeudTemporaire,right);
+                    break;
+                case "/":
+                    noeudTemporaire = new Div(noeudTemporaire,right);
+                    break;
+                default:
+                    break;
+            }
+        }    
+
+        return noeudTemporaire;
+
+    }
+
+	@Override public Ast visitAnd(exprParser.And ctx)
+	{
+		Ast left = ctx.getChild(0).accept(this);
+		Ast right = ctx.getChild(2).accept(this);
+		return new And(left, right) ;
+	}
+
+	@Override public Ast visitMult(exprParser.Mult ctx) {
+  
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+
+
+        for (int i=0;2*i<ctx.getChildCount()-1;i++){
+            
+            String operation = ctx.getChild(2*i+1).toString();
+            Ast right = ctx.getChild(2*(i+1)).accept(this);
+
+            switch (operation) {
+                case ">":
+                    noeudTemporaire = new Sup(noeudTemporaire,right);
+                    break;
+                case "<":
+                    noeudTemporaire = new Inf(noeudTemporaire,right);
+                    break;
+				case ">=":
+                    noeudTemporaire = new SupEq(noeudTemporaire,right);
+                    break;
+				case "<=":
+                    noeudTemporaire = new InfEq(noeudTemporaire,right);
+                    break;
+                default:
+                    break;
+            }
+        }    
+
+        return noeudTemporaire;
+
+    }
+	
+
+
+	/*------------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitExprseq(exprParser.ExprseqContext ctx) {
 		ExprSeq exprseq = new ExprSeq();
 

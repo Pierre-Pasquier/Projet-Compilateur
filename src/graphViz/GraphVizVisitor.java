@@ -28,6 +28,7 @@ import ast.Lvalues;
 import ast.Nilop;
 import ast.Ops;
 import ast.Parenthesis;
+import ast.Plus;
 import ast.Printe;
 import ast.Printis;
 import ast.Typeids;
@@ -77,8 +78,112 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
    
+//-----------------------------------------------------------------------------------------------------------------------------------------
 
+    @Override
+        public String visit(Plus plus) {
 
+            String nodeIdentifier = this.nextState();
+
+            String leftState = plus.left.accept(this);
+            String rightState = plus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "+");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+    @Override
+        public String visit(Minus minus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = minus.left.accept(this);
+            String rightState = minus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "-");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+    @Override
+        public String visit(And and) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = and.left.accept(this);
+            String rightState = and.right.accept(this);
+
+            this.addNode(nodeIdentifier, "and");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+    @Override
+    public String visit(Mult mult) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = mult.left.accept(this);
+        String rightState = mult.right.accept(this);
+
+        this.addNode(nodeIdentifier, "*");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Div div) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = div.left.accept(this);
+        String rightState = div.right.accept(this);
+
+        this.addNode(nodeIdentifier, "/");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Comp comp) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = comp.left.accept(this);
+        String rightState = comp.right.accept(this);
+
+        this.addNode(nodeIdentifier, "*");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+        
+
+//-----------------------------------------------------------------------------------------------------------------------------------------
     @Override
     public String visit(Idf idf) {
 
