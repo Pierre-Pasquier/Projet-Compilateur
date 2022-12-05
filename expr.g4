@@ -12,7 +12,7 @@ expr
     |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)?    #Typeids
     |lvalue (':=' expr | '(' exprlist ')' )?                        #Lvalues
     |'-' expr                                                       #Exprtiret
-    |'(' exprseq ')'                                                #Paranthesis
+    |'(' exprseq ')'                                                #Parenthesis
     |'if' expr 'then' expr ('else' expr)?                           #Ifthenelse
     |'while' expr 'do' expr                                         #While
     |'for' IDF ':=' expr 'to' expr 'do' expr                        #For           
@@ -23,16 +23,16 @@ expr
     ;
 
 op
-    :binaryop
-    |(binaryop expr)*
+    :binaryop               #opbin
+    |(binaryop expr)*       #opbinexpr
     ;
 
 binaryop
-    :plus
-    |eq
-    |or
-    |and
-    |compare
+    :plus    
+    |eq      
+    |or      
+    |and 
+    |compare 
     |mult
     ;
 
@@ -64,10 +64,10 @@ mult
     ;
 
 value
-    :'-'? INT
-    |'-'? IDF
-    |'-'? '(' op ')'
-    |'-'? lvalue
+    :'-'? INT               #valint
+    |'-'? IDF               #validf
+    |'-'? '(' op ')'        #valop
+    |'-'? lvalue            #vallvalue
     ;
 
 
