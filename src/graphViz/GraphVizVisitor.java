@@ -17,6 +17,7 @@ import ast.TypeDeclaration;
 import ast.TypeField;
 import ast.TypeFieldList;
 import ast.VariableDeclaration;
+import ast.Program;
 
 
 import ast.Ifthenelse;
@@ -522,11 +523,14 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
     @Override
-    public String visit(Idf idf) {
+    public String visit(Program program) {
 
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, idf.name);
+        String expressionState =program.expression.accept(this);
+
+        this.addNode(nodeIdentifier, "Program");
+        this.addTransition(nodeIdentifier, expressionState);
 
         return nodeIdentifier;
 

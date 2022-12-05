@@ -150,10 +150,17 @@ public class exprParser extends Parser {
 	}
 
 	public static class ExprContext extends ParserRuleContext {
-		public OpContext op() {
-			return getRuleContext(OpContext.class,0);
+		public ExprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
 		}
-		public TerminalNode NIL() { return getToken(exprParser.NIL, 0); }
+		@Override public int getRuleIndex() { return RULE_expr; }
+	 
+		public ExprContext() { }
+		public void copyFrom(ExprContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class TypeidsContext extends ExprContext {
 		public TypeidContext typeid() {
 			return getRuleContext(TypeidContext.class,0);
 		}
@@ -167,40 +174,108 @@ public class exprParser extends Parser {
 			return getRuleContext(ExprContext.class,i);
 		}
 		public TerminalNode OF() { return getToken(exprParser.OF, 0); }
+		public TypeidsContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class PrintisContext extends ExprContext {
+		public PrintiContext printi() {
+			return getRuleContext(PrintiContext.class,0);
+		}
+		public PrintisContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ExprtiretContext extends ExprContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ExprtiretContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ForContext extends ExprContext {
+		public TerminalNode FOR() { return getToken(exprParser.FOR, 0); }
+		public TerminalNode IDF() { return getToken(exprParser.IDF, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode TO() { return getToken(exprParser.TO, 0); }
+		public TerminalNode DO() { return getToken(exprParser.DO, 0); }
+		public ForContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class BreakContext extends ExprContext {
+		public TerminalNode BREAK() { return getToken(exprParser.BREAK, 0); }
+		public BreakContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class WhileContext extends ExprContext {
+		public TerminalNode WHILE() { return getToken(exprParser.WHILE, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode DO() { return getToken(exprParser.DO, 0); }
+		public WhileContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class IfthenelseContext extends ExprContext {
+		public TerminalNode IF() { return getToken(exprParser.IF, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode THEN() { return getToken(exprParser.THEN, 0); }
+		public TerminalNode ELSE() { return getToken(exprParser.ELSE, 0); }
+		public IfthenelseContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class LvaluesContext extends ExprContext {
 		public LvalueContext lvalue() {
 			return getRuleContext(LvalueContext.class,0);
+		}
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
 		public ExprlistContext exprlist() {
 			return getRuleContext(ExprlistContext.class,0);
 		}
+		public LvaluesContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class ParenthesisContext extends ExprContext {
 		public ExprseqContext exprseq() {
 			return getRuleContext(ExprseqContext.class,0);
 		}
-		public TerminalNode IF() { return getToken(exprParser.IF, 0); }
-		public TerminalNode THEN() { return getToken(exprParser.THEN, 0); }
-		public TerminalNode ELSE() { return getToken(exprParser.ELSE, 0); }
-		public TerminalNode WHILE() { return getToken(exprParser.WHILE, 0); }
-		public TerminalNode DO() { return getToken(exprParser.DO, 0); }
-		public TerminalNode FOR() { return getToken(exprParser.FOR, 0); }
-		public TerminalNode IDF() { return getToken(exprParser.IDF, 0); }
-		public TerminalNode TO() { return getToken(exprParser.TO, 0); }
-		public TerminalNode BREAK() { return getToken(exprParser.BREAK, 0); }
+		public ParenthesisContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class OpsContext extends ExprContext {
+		public OpContext op() {
+			return getRuleContext(OpContext.class,0);
+		}
+		public OpsContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class Nil_opContext extends ExprContext {
+		public TerminalNode NIL() { return getToken(exprParser.NIL, 0); }
+		public OpContext op() {
+			return getRuleContext(OpContext.class,0);
+		}
+		public Nil_opContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class DeclarationlistsContext extends ExprContext {
 		public TerminalNode LET() { return getToken(exprParser.LET, 0); }
 		public DeclarationlistContext declarationlist() {
 			return getRuleContext(DeclarationlistContext.class,0);
 		}
 		public TerminalNode IN() { return getToken(exprParser.IN, 0); }
-		public TerminalNode END() { return getToken(exprParser.END, 0); }
-		public PrintiContext printi() {
-			return getRuleContext(PrintiContext.class,0);
+		public ExprseqContext exprseq() {
+			return getRuleContext(ExprseqContext.class,0);
 		}
+		public TerminalNode END() { return getToken(exprParser.END, 0); }
+		public DeclarationlistsContext(ExprContext ctx) { copyFrom(ctx); }
+	}
+	public static class PrintsContext extends ExprContext {
 		public PrintContext print() {
 			return getRuleContext(PrintContext.class,0);
 		}
-		public ExprContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_expr; }
+		public PrintsContext(ExprContext ctx) { copyFrom(ctx); }
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -211,6 +286,7 @@ public class exprParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
+				_localctx = new OpsContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(55);
@@ -218,6 +294,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new Nil_opContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(56);
@@ -227,6 +304,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new TypeidsContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(70);
@@ -264,6 +342,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 4:
+				_localctx = new LvaluesContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(72);
@@ -293,6 +372,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 5:
+				_localctx = new ExprtiretContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(81);
@@ -302,6 +382,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 6:
+				_localctx = new ParenthesisContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(83);
@@ -313,6 +394,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 7:
+				_localctx = new IfthenelseContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(87);
@@ -338,6 +420,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 8:
+				_localctx = new WhileContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
 				setState(95);
@@ -351,6 +434,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 9:
+				_localctx = new ForContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
 				setState(100);
@@ -372,6 +456,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 10:
+				_localctx = new BreakContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
 				setState(109);
@@ -379,6 +464,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 11:
+				_localctx = new DeclarationlistsContext(_localctx);
 				enterOuterAlt(_localctx, 11);
 				{
 				setState(110);
@@ -394,6 +480,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 12:
+				_localctx = new PrintisContext(_localctx);
 				enterOuterAlt(_localctx, 12);
 				{
 				setState(116);
@@ -401,6 +488,7 @@ public class exprParser extends Parser {
 				}
 				break;
 			case 13:
+				_localctx = new PrintsContext(_localctx);
 				enterOuterAlt(_localctx, 13);
 				{
 				setState(117);

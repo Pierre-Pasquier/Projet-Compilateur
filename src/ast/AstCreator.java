@@ -5,6 +5,12 @@ import parser.exprBaseVisitor;
 import parser.exprParser;
 
 public class AstCreator extends exprBaseVisitor<Ast>{
+	@Override 
+	public Ast visitProgram(exprParser.ProgramContext ctx) { 
+
+		Ast child = ctx.getChild(0).accept(this);
+		return new Program(child);
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -275,7 +281,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	@Override 
-	public Ast visitNilop(exprParser.NilopContext ctx) { 
+	public Ast visitNil_op(exprParser.Nil_opContext ctx) { 
 		
 		Ast nilop = ctx.getChild(1).accept(this);
 
@@ -302,7 +308,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	@Override 
-	public Ast visitPrinte(exprParser.PrinteContext ctx) { 
+	public Ast visitPrints(exprParser.PrintsContext ctx) { 
 		
 		Ast printe = ctx.getChild(0).accept(this);
 
@@ -322,13 +328,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitTypeids(exprParser.TypeidsContext ctx) { 
-		
-
-		if(ctx.getChildCount()==0){
-
-			return null;
-
-		}
 		if(ctx.getChildCount()==4){
 
 			Ast typeids1= ctx.getChild(0).accept(this);
@@ -346,6 +345,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Typeids(typeids2, expr1, expr2);
 
 		}
+		return null;
 	}
 
 

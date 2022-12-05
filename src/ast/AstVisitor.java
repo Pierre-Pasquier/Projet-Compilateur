@@ -1,5 +1,6 @@
 package ast;
 
+import parser.exprParser.ProgramContext;
 
 public interface AstVisitor<T> {
 
@@ -15,6 +16,7 @@ public interface AstVisitor<T> {
     public T visit(TypeField affect);
     public T visit(VariableDeclaration affect);
     public T visit(FunctionDeclaration affect);
+    public T visit(Program affect);
 
 
     public T visit(Exprtiret exprtiret);

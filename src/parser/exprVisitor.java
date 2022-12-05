@@ -17,11 +17,96 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(exprParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link exprParser#expr}.
+	 * Visit a parse tree produced by the {@code Ops}
+	 * labeled alternative in {@link exprParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr(exprParser.ExprContext ctx);
+	T visitOps(exprParser.OpsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Nil_op}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNil_op(exprParser.Nil_opContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Typeids}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeids(exprParser.TypeidsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Lvalues}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLvalues(exprParser.LvaluesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Exprtiret}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprtiret(exprParser.ExprtiretContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Parenthesis}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesis(exprParser.ParenthesisContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Ifthenelse}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfthenelse(exprParser.IfthenelseContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code While}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile(exprParser.WhileContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code For}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(exprParser.ForContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Break}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBreak(exprParser.BreakContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Declarationlists}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclarationlists(exprParser.DeclarationlistsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Printis}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintis(exprParser.PrintisContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Prints}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrints(exprParser.PrintsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link exprParser#op}.
 	 * @param ctx the parse tree
