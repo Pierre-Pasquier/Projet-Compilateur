@@ -1,6 +1,6 @@
 package ast;
 
-public interface Eq implements Ast {
+public interface Div implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor)
     {
@@ -10,7 +10,7 @@ public interface Eq implements Ast {
     public Ast left;
     public Ast right;
 
-    public Eq(Ast left, Ast right){
+    public Div(Ast left, Ast right){
         this.left=left;
         this.right=right;
     }

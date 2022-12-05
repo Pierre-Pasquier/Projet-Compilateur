@@ -97,6 +97,23 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
 
     @Override
+        public String visit(Minus minus) {
+
+            String nodeIdentifier = this.nextState();
+
+            String leftState = minus.left.accept(this);
+            String rightState = minus.right.accept(this);
+
+            this.addNode(nodeIdentifier, "-");
+            
+            this.addTransition(nodeIdentifier, leftState);
+            this.addTransition(nodeIdentifier, rightState);
+
+            return nodeIdentifier;
+
+        }
+
+    @Override
         public String visit(And and) {
 
             String nodeIdentifier = this.nextState();
@@ -122,6 +139,23 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String rightState = mult.right.accept(this);
 
         this.addNode(nodeIdentifier, "*");
+        
+        this.addTransition(nodeIdentifier, leftState);
+        this.addTransition(nodeIdentifier, rightState);
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Div div) {
+
+        String nodeIdentifier = this.nextState();
+
+        String leftState = div.left.accept(this);
+        String rightState = div.right.accept(this);
+
+        this.addNode(nodeIdentifier, "/");
         
         this.addTransition(nodeIdentifier, leftState);
         this.addTransition(nodeIdentifier, rightState);
