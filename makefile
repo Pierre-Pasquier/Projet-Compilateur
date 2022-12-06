@@ -10,7 +10,7 @@ run :
 
 test :
 	make compile ; 
-	make run target=./examples/example1_correct.exp ;
+	make run target=./examples/example4_correct.exp ;
 	dot -Tsvg ./out/tree.dot -o ./out/tree.svg
 
 
