@@ -60,11 +60,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
 		Opbinexpr binexprList = new Opbinexpr();
-		for (int i = 0; i<ctx.getChildCount()/2;i++){
+		if (ctx.getChildCount() == 0){
+			return null;
+		}
+		for (int i = 0; i<(ctx.getChildCount()/2+1);i++){
 			binexprList.addOpBin(ctx.getChild(2*i).accept(this));
 			binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
 		}
-
 		return binexprList;
 	}
 
@@ -193,7 +195,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitIdflist(exprParser.IdflistContext ctx) {
 		IdfList Idflist = new IdfList();
 		if (ctx.getChildCount() == 1){
-			return ctx.getChild(0).accept(this);
+			String idfString = ctx.getChild(0).toString();
+			return new Idf(idfString);
 		}
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
 			String idfString = ctx.getChild(2*i).toString();
@@ -341,11 +344,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast typefields = ctx.getChild(3).accept(this);
 		if (ctx.getChildCount() == 7){
 			Ast expr = ctx.getChild(6).accept(this);
-			return new FunctionDeclaration(idf, typefields, expr);
+			return new FunctionDeclaration(idf, typefields, expr, null);
 		} else {
 			Ast typeid = ctx.getChild(6).accept(this);
 			Ast expr = ctx.getChild(8).accept(this);
-			return new FunctionDeclaration(idf, typefields, typeid, expr);
+			return new FunctionDeclaration(idf, typefields,expr, typeid);
 		} 
 	}
 
@@ -372,13 +375,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
 
-
-
-		if(ctx.getChildCount()>3){
+		if(ctx.getChildCount()==4){
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
 			return new Ifthenelse(condition, alors, ouOccasionnel);
 		}else{
-			return new Ifthenelse(condition, alors);
+			return new Ifthenelse(condition, alors,null);
 		}
 	}
 
@@ -395,10 +396,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
-		
-		Ast expr_ = ctx.getChild(1).accept(this);
-
-		return new Exprtiret(expr_);
+		return ctx.getChild(1).accept(this);
 	}
 
 
@@ -438,47 +436,34 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitNil_op(exprParser.Nil_opContext ctx) { 
-		
-		Ast nilop = ctx.getChild(1).accept(this);
-
-		return new Nilop(nilop);
+		return ctx.getChild(1).accept(this);
 	}
 
 
 	@Override 
 	public Ast visitOps(exprParser.OpsContext ctx) { 
-		
-		Ast op = ctx.getChild(0).accept(this);
-
-		return op;
+		return ctx.getChild(0).accept(this);
 	}
 
 
 	@Override 
 	public Ast visitParenthesis(exprParser.ParenthesisContext ctx) { 
-		
-		Ast parenthesis = ctx.getChild(1).accept(this);
-
-		return new Parenthesis(parenthesis);
+		return ctx.getChild(1).accept(this);
 	}
 
 
 	@Override 
 	public Ast visitPrints(exprParser.PrintsContext ctx) { 
-		
-		Ast printe = ctx.getChild(0).accept(this);
 
-		return new Printe(printe);
+		return ctx.getChild(0).accept(this);
 	
 	}
 
 
 	@Override 
 	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
-		
-		Ast printis = ctx.getChild(0).accept(this);
 
-		return new Printis(printis);
+		return ctx.getChild(0).accept(this);
 	}
 
 
@@ -489,19 +474,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast typeids1= ctx.getChild(0).accept(this);
 			Ast fieldlist1= ctx.getChild(2).accept(this);
 
-			return new Typeids(typeids1,fieldlist1);
-			
+			return new Typeids(typeids1,fieldlist1,null);
 		}
-		if(ctx.getChildCount()==6){
-
+		else{
 			Ast typeids2= ctx.getChild(0).accept(this);
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
 
 			return new Typeids(typeids2, expr1, expr2);
-
 		}
-		return null;
 	}
 
 
