@@ -472,8 +472,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
         for (Ast ast:opbin.opbinexpr){
 
-            String astState = ast.accept(this);
-            this.addTransition(nodeIdentifier, astState);
+            if(ast != null){ 
+                String astState = ast.accept(this);
+                this.addTransition(nodeIdentifier, astState);
+            }
 
         }
 
@@ -629,6 +631,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
     @Override
     public String visit(Typeids typeids) {
         
+        if(typeids.typeids1==null){
+            return(null);
+        }
+
         String nodeIdentifier = this.nextState();
         String typeids3State = null;
         String typeids1State = typeids.typeids1.accept(this);
@@ -784,6 +790,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     @Override
     public String visit(Lvalues lvalues) {
+
+        if(lvalues.lvalue==null){
+            return(null);
+        }
         
         String nodeIdentifier = this.nextState();
         //System.out.println("nullll = " + lvalues.lvalue == null + "\n");

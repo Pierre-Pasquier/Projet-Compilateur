@@ -1,13 +1,10 @@
+
 package ast;
-
-
 import parser.exprBaseVisitor;
 import parser.exprParser;
-
 public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
-
 		Ast child = ctx.getChild(0).accept(this);
 		return new Program(child);
 	}
@@ -17,13 +14,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-
 	/*-----------------------------------------------------------------------------------------------------*/
-
 	@Override public Ast visitPlus(exprParser.PlusContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
-
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}
@@ -31,7 +25,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
             
             String operation = ctx.getChild(2*i+1).toString();
             Ast right = ctx.getChild(2*(i+1)).accept(this);
-
             switch (operation) {
                 case "-":
                     noeudTemporaire = new Minus(noeudTemporaire,right);
@@ -43,10 +36,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
                     break;
             }
         }    
-
         return noeudTemporaire;
-
     }
+<<<<<<< HEAD
 
 
 
@@ -79,28 +71,33 @@ public class AstCreator extends exprBaseVisitor<Ast>{
     }
 
 
+=======
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
 		return ctx.getChild(0).accept(this);
 	}
-
 	@Override public Ast visitOpbin(exprParser.OpbinContext ctx){
 		return ctx.getChild(0).accept(this);
 	}
-
-
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
 		Opbinexpr binexprList = new Opbinexpr();
 		if (ctx.getChildCount() == 0){
 			return null;
 		}
+<<<<<<< HEAD
 		for (int i = 0; i<((ctx.getChildCount()+1)/2);i++){
 			binexprList.addOpBin(ctx.getChild(2*i).accept(this));
 			binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
+=======
+		for (int i = 0; i<(ctx.getChildCount()/2+1);i++){
+			if(ctx.getChild(2*i)!=null && ctx.getChild(2*i)!=null){
+				binexprList.addOpBin(ctx.getChild(2*i).accept(this));
+				binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
+			}
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 		}
 		return binexprList;
 	}
-
-
 	@Override public Ast visitAnd(exprParser.AndContext ctx)
 	{
 		And andList = new And();
@@ -110,11 +107,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
 			andList.addAnd(ctx.getChild(2*i).accept(this));
 		}
-
 		return andList;
 	}
-
-
 	@Override public Ast visitOr(exprParser.OrContext ctx)
 	{
 		Or orList = new Or();
@@ -124,18 +118,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		for (int i = 0; i<(ctx.getChildCount()+1)/2;i++){
 			orList.addOr(ctx.getChild(i).accept(this));
 		}
-
 		return orList;
 	}
-
 	@Override public Ast visitCompare(exprParser.CompareContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
-
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 			switch (operation) {
 				case ">":
 					noeudTemporaire = new Sup(noeudTemporaire,right);
@@ -154,19 +148,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			} 
 		}
 		 
-
         return noeudTemporaire;
-
     }
-
 	@Override public Ast visitEq(exprParser.EqContext ctx) {
   
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
-
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 			switch (operation) {
 				case "=":
 					noeudTemporaire = new Egal(noeudTemporaire,right);
@@ -177,13 +170,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			} 
 		}
 		 
-
         return noeudTemporaire;
-
     }
 	
-
-
 	/*------------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitExprseq(exprParser.ExprseqContext ctx) {
 		ExprSeq exprseq = new ExprSeq();
@@ -197,8 +186,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		return exprseq;
 	 }
-
-
 	 @Override public Ast visitExprlist(exprParser.ExprlistContext ctx) {
 		ExprList exprlist = new ExprList();
 		if (ctx.getChildCount() == 1){
@@ -207,10 +194,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
 			exprlist.addExprList(ctx.getChild(2*i).accept(this));
 		}
-
 		return exprlist ;
 	}
-
 	@Override public Ast visitFieldlist(exprParser.FieldlistContext ctx) {
 		FieldList fieldlist = new FieldList();
 		for (int i=0; i<ctx.getChildCount()/3;i++){
@@ -218,10 +203,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Idf idf = new Idf(idfString);
 			fieldlist.addFieldList(ctx.getChild(3*i+2).accept(this),idf);
 		}
-
 		return fieldlist ;
 	}
-
 	@Override public Ast visitIdflist(exprParser.IdflistContext ctx) {
 		IdfList Idflist = new IdfList();
 		if (ctx.getChildCount() == 1){
@@ -233,11 +216,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Idf idf = new Idf(idfString);
 			Idflist.addIdfList(idf);
 		}
-
 		return Idflist;
 	}
-
-
 	@Override public Ast visitIdfexprlist(exprParser.IdfexprlistContext ctx) {
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
@@ -250,7 +230,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		return Idfexprlist;
 	}
-
 	@Override public Ast visitDeclarationlist(exprParser.DeclarationlistContext ctx) {
 		DeclarationList declaList = new DeclarationList();
 		if (ctx.getChildCount() == 1){
@@ -259,56 +238,34 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		for (int i = 0; i<ctx.getChildCount();i++){
 			declaList.addDeclaration(ctx.getChild(i).accept(this));
 		}
-
 		return declaList;
 	}
-
 	@Override public Ast visitTypedecla(exprParser.TypedeclaContext ctx) { 
 		return ctx.getChild(0).accept(this); 
 	}
 	
-
 	@Override public Ast visitVardecla(exprParser.VardeclaContext ctx) { 
 		return ctx.getChild(0).accept(this);
 	}
 	
-
 	@Override public Ast visitFundecla(exprParser.FundeclaContext ctx) {
 		return ctx.getChild(0).accept(this);
 	}
-
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) { 
 		Ast typeid = ctx.getChild(1).accept(this);
 		Ast type = ctx.getChild(3).accept(this);
 		return new TypeDeclaration(typeid, type);
 	}
-
-
-
 	@Override public Ast visitType_id(exprParser.Type_idContext ctx) { 
 		return ctx.getChild(0).accept(this);
 	}
 	
-
-
-
-
 	@Override public Ast visitTypef(exprParser.TypefContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	}
-
-
-
-
-
 	@Override public Ast visitTypeidarray(exprParser.TypeidarrayContext ctx) { 
 		return ctx.getChild(2).accept(this);
 	}
-
-
-
-
-
 	@Override public Ast visitTypefields(exprParser.TypefieldsContext ctx) {
 		TypeFieldList typefieldList = new TypeFieldList();
 		if (ctx.getChildCount() == 1){
@@ -325,31 +282,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		return typefieldList;
 	}
-
-
-
-
-
 	@Override public Ast visitTypefield(exprParser.TypefieldContext ctx) { 
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
 		Ast typeid = ctx.getChild(2).accept(this);
 		return new TypeField(idf,typeid);
 	 }
-
-
-
-
-
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
 		String idfString = ctx.getChild(0).toString();
 		return new Idf(idfString); 
 	}
-
-
-
-
-
 	@Override public Ast visitVariabledeclaration(exprParser.VariabledeclarationContext ctx) { 
 		String idfString = ctx.getChild(1).toString();
 		Idf idf = new Idf(idfString);
@@ -363,11 +305,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new VariableDeclaration(idf, expr, typeid);
 		}
 	}
-
-
-
-
-
 	@Override public Ast visitFunctiondeclaration(exprParser.FunctiondeclarationContext ctx) { 
 		String idfString = ctx.getChild(1).toString();
 		Idf idf = new Idf(idfString);
@@ -381,74 +318,48 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new FunctionDeclaration(idf, typefields,expr, typeid);
 		} 
 	}
-
-
-
-
-
 	@Override public Ast visitPrinti(exprParser.PrintiContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	 }
-
-
-
-
-
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	 }
-
-
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx) { 
 		
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
-
-		if(ctx.getChildCount()==4){
+		if(ctx.getChildCount()>5){
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
 			return new Ifthenelse(condition, alors, ouOccasionnel);
 		}else{
 			return new Ifthenelse(condition, alors,null);
 		}
 	}
-
-
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
 		
 		Ast affect = ctx.getChild(1).accept(this);
 		Ast dans = ctx.getChild(3).accept(this);
-
 		return new Declarationlists(dans,affect);
 	}
-
-
 	@Override 
 	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	}
-
-
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
-
 		String idfString = ctx.getChild(1).toString();
 		Idf idf = new Idf(idfString);
 		
 		Ast deb= ctx.getChild(3).accept(this);
 		Ast fin = ctx.getChild(5).accept(this);
 		Ast faire = ctx.getChild(7).accept(this);
-
 		return new For(deb,fin,faire,idf);
 	}
-
 //on met peut etre idf mais à voir plus tard
-
-
 	@Override 
 	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
-
 		Ast lvalues= ctx.getChild(0).accept(this);
 		System.out.println("len = " + ctx.getChildCount() + "\n");
 		if(ctx.getChildCount() == 3){
@@ -462,45 +373,32 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Lvalues(lvalues,null);
 		}
 	}
-
-
 	@Override 
 	public Ast visitNil_op(exprParser.Nil_opContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	}
-
-
 	@Override 
 	public Ast visitOps(exprParser.OpsContext ctx) { 
 		return ctx.getChild(0).accept(this);
 	}
-
-
 	@Override 
 	public Ast visitParenthesis(exprParser.ParenthesisContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	}
-
-
 	@Override 
 	public Ast visitPrints(exprParser.PrintsContext ctx) { 
 
 		return ctx.getChild(0).accept(this);
 	
 	}
-
-
 	@Override 
 	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
 
 		return ctx.getChild(0).accept(this);
 	}
-
-
 	@Override 
 	public Ast visitTypeids(exprParser.TypeidsContext ctx) { 
 		if(ctx.getChildCount()==4){
-
 			Ast typeids1= ctx.getChild(0).accept(this);
 			Ast fieldlist1= ctx.getChild(2).accept(this);
 
@@ -510,44 +408,32 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast typeids2= ctx.getChild(0).accept(this);
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
-
 			return new Typeids(typeids2, expr1, expr2);
 		}
 	}
-
-
 	@Override 
 	public Ast visitWhile(exprParser.WhileContext ctx) { 
 		
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast faire= ctx.getChild(3).accept(this);
-
 		return new While(condition, faire);
 	}
-
-
 	@Override 
 	public Ast visitValint(exprParser.ValintContext ctx) { 
 		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
 		return new IntNode(intString);
 	}
-
 	@Override 
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
 		return new Idf(idfString);
 	}
-
 	@Override 
 	public Ast visitValop(exprParser.ValopContext ctx) {
 		return ctx.getChild(ctx.getChildCount()-2).accept(this);
 	}
-
 	@Override 
 	public Ast visitVallvalue(exprParser.VallvalueContext ctx) {
 		return ctx.getChild(ctx.getChildCount()-1).accept(this);
 	}
-
-
-
 }

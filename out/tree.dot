@@ -6,14 +6,13 @@ digraph "ast"{
 	N2 [label="IdfList", shape="box"];
 	N4 [label="a", shape="box"];
 	N5 [label="int", shape="box"];
-	N6 [label="10", shape="box"];
+	N6 [label="1", shape="box"];
 	N3 [label="VariableDeclaration", shape="box"];
 	N8 [label="b", shape="box"];
 	N9 [label="int", shape="box"];
-	N11 [label="5", shape="box"];
-	N12 [label="a", shape="box"];
-	N10 [label="+", shape="box"];
+	N10 [label="2", shape="box"];
 	N7 [label="VariableDeclaration", shape="box"];
+<<<<<<< HEAD
 	N14 [label="a", shape="box"];
 	N15 [label="&", shape="box"];
 	N17 [label="1", shape="box"];
@@ -29,6 +28,11 @@ digraph "ast"{
 	N23 [label="+", shape="box"];
 	N19 [label=">", shape="box"];
 	N13 [label="Lvalues", shape="box"];
+=======
+	N12 [label="1", shape="box"];
+	N13 [label="2", shape="box"];
+	N11 [label="+", shape="box"];
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 	N1 [label="Declarationlists", shape="box"];
 	N0 [label="Program", shape="box"];
 
@@ -36,12 +40,11 @@ digraph "ast"{
 	N3 -> N5; 
 	N3 -> N6; 
 	N2 -> N3; 
-	N10 -> N11; 
-	N10 -> N12; 
 	N7 -> N8; 
 	N7 -> N9; 
 	N7 -> N10; 
 	N2 -> N7; 
+<<<<<<< HEAD
 	N16 -> N17; 
 	N16 -> N18; 
 	N15 -> N16; 
@@ -56,7 +59,11 @@ digraph "ast"{
 	N15 -> N19; 
 	N13 -> N14; 
 	N13 -> N15; 
+=======
+	N11 -> N12; 
+	N11 -> N13; 
+>>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 	N1 -> N2; 
-	N1 -> N13; 
+	N1 -> N11; 
 	N0 -> N1; 
 }
