@@ -581,7 +581,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String exprState = fundecla.expr.accept(this);
 
         
-        this.addNode(nodeIdentifier, "VariableDeclaration");
+        this.addNode(nodeIdentifier, "FunctionDeclaration");
 
     
         this.addTransition(nodeIdentifier, idfState);

@@ -2,5 +2,5 @@ let
     var a : int := 1
     var b : int := 2   
 in
-    1+2
+    1+2-3*4/6 & 2
 end

@@ -38,6 +38,38 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         }    
         return noeudTemporaire;
     }
+
+
+
+	@Override public Ast visitMult(exprParser.MultContext ctx) {
+  
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+        for (int i=0;2*i<ctx.getChildCount()-1;i++){
+            
+            String operation = ctx.getChild(2*i+1).toString();
+            Ast right = ctx.getChild(2*(i+1)).accept(this);
+
+            switch (operation) {
+                case "*":
+                    noeudTemporaire = new Mult(noeudTemporaire,right);
+                    break;
+                case "/":
+                    noeudTemporaire = new Div(noeudTemporaire,right);
+                    break;
+                default:
+                    break;
+            }
+        }    
+
+        return noeudTemporaire;
+
+    }
+
+
 	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
 		return ctx.getChild(0).accept(this);
 	}
