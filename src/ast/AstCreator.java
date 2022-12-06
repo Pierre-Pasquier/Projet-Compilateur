@@ -78,10 +78,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
 		Opbinexpr binexprList = new Opbinexpr();
+		System.out.println("len = " +  ctx.getChildCount() + "\n");
 		if (ctx.getChildCount() == 0){
-			return null;
+			return new Opbinexpr(null);
 		}
-		for (int i = 0; i<(ctx.getChildCount()/2+1);i++){
+		for (int i = 0; i<((ctx.getChildCount()+1)/2);i++){
 			if(ctx.getChild(2*i)!=null && ctx.getChild(2*i)!=null){
 				binexprList.addOpBin(ctx.getChild(2*i).accept(this));
 				binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
@@ -159,12 +160,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	/*------------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitExprseq(exprParser.ExprseqContext ctx) {
 		ExprSeq exprseq = new ExprSeq();
-		System.out.println("len = " + ctx.getChildCount() + "\n");
+		//System.out.println("len = " + ctx.getChildCount() + "\n");
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
-			System.out.println("aaaaaaaaaaaaaa\n");
+			//System.out.println("aaaaaaaaaaaaaa\n");
 			exprseq.addExprSeq(ctx.getChild(2*i).accept(this));
 		}
 		return exprseq;
@@ -344,10 +345,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
 		Ast lvalues= ctx.getChild(0).accept(this);
-		System.out.println("len = " + ctx.getChildCount() + "\n");
+		//System.out.println("len = " + ctx.getChildCount() + "\n");
 		if(ctx.getChildCount() == 3){
 			Ast Expr=ctx.getChild(2).accept(this);
-			System.out.println("null = " + Expr == null + "\n");
+			//System.out.println("null = " + Expr == null + "\n");
 			return new Lvalues(lvalues,Expr);
 		}if(ctx.getChildCount() == 4){
 			Ast Exprlist=ctx.getChild(2).accept(this);

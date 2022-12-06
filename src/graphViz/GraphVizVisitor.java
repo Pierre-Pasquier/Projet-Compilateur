@@ -353,7 +353,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "ExprSeq");
+        this.addNode(nodeIdentifier, "expr ;");
 
         for (Ast ast:exprseq.ExprSeq){
 
@@ -373,7 +373,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "ExprList");
+        this.addNode(nodeIdentifier, "expr ,");
 
         for (Ast ast:exprList.ExprList){
 
@@ -391,7 +391,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "FieldList");
+        this.addNode(nodeIdentifier, "ListEq");
 
         for (Ast ast:fieldList.FieldList){
 
@@ -448,7 +448,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
            
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "IdfList");
+        this.addNode(nodeIdentifier, "DeclarationList");
 
         for (Ast ast:declalist.DeclarationList){
 
@@ -466,8 +466,9 @@ public class GraphVizVisitor implements AstVisitor<String> {
            
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "Opbinexpr");
-        if (opbin.opbinexpr == null){
+        this.addNode(nodeIdentifier, "Cacul");
+        if (opbin.arg == null){
+            System.out.println("cccccccccccccc\n");
             return nodeIdentifier;
         }
         for (Ast ast:opbin.opbinexpr){
@@ -603,7 +604,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         String expr_state= exprtiret.expr_.accept(this);
 
-        this.addNode(nodeIdentifier, "Exprtiret");
+        this.addNode(nodeIdentifier, "Negatif");
 
         this.addTransition(nodeIdentifier, expr_state);
 
@@ -736,7 +737,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         String printisState = printis.printis.accept(this);
 
-        this.addNode(nodeIdentifier, "Printis");
+        this.addNode(nodeIdentifier, "Printi");
 
         this.addTransition(nodeIdentifier, printisState);
 
@@ -752,7 +753,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         String printeState = printe.printe.accept(this);
 
-        this.addNode(nodeIdentifier, "Printe");
+        this.addNode(nodeIdentifier, "Print");
 
         this.addTransition(nodeIdentifier, printeState);
 
