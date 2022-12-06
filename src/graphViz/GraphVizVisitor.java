@@ -357,8 +357,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         for (Ast ast:exprseq.ExprSeq){
 
-            String astState = ast.accept(this);
-            this.addTransition(nodeIdentifier, astState);
+            if(ast!=null){
+                String astState = ast.accept(this);
+                this.addTransition(nodeIdentifier, astState);
+            }
 
         }
 

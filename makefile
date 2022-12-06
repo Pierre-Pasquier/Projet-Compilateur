@@ -10,7 +10,11 @@ run :
 
 test :
 	make compile ; 
+<<<<<<< HEAD
 	make run target=./examples/example5_correct.exp ;
+=======
+	make run target=./examples/example4_correct.exp ;
+>>>>>>> 7a73a5b5b8a758072fae033a7c3cc25cef9ff066
 	dot -Tsvg ./out/tree.dot -o ./out/tree.svg
 
 arbre :
