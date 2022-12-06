@@ -13,4 +13,8 @@ test :
 	make run target=./examples/example_compute.exp ;
 	dot -Tsvg ./out/tree.dot -o ./out/tree.svg
 
-
+arbre :
+	java -jar ./lib/antlr-4.9.2-complete.jar;
+	java -jar ./lib/antlr-4.9.2-complete.jar expr.g4 -no-listener -no-visitor -o ./src/parser;
+	javac -cp ./lib/antlr-4.9.2-complete.jar:./src ./src/Main_grammaire.java -d ./bin;
+	java -cp ./lib/antlr-4.9.2-complete.jar:./bin Main_grammaire ./examples/example_compute.exp
