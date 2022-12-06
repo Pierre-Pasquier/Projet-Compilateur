@@ -204,7 +204,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         public String visit(InfEq plus) {
 
             String nodeIdentifier = this.nextState();
-
+            System.out.println("" + plus.left == null + "\n");
             String leftState = plus.left.accept(this);
             String rightState = plus.right.accept(this);
 
@@ -467,7 +467,9 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String nodeIdentifier = this.nextState();
 
         this.addNode(nodeIdentifier, "Opbinexpr");
-
+        if (opbin.opbinexpr == null){
+            return nodeIdentifier;
+        }
         for (Ast ast:opbin.opbinexpr){
 
             String astState = ast.accept(this);
@@ -565,10 +567,13 @@ public class GraphVizVisitor implements AstVisitor<String> {
     public String visit(FunctionDeclaration fundecla) {
            
         String nodeIdentifier = this.nextState();
-
+        String typeidState = null;
         String idfState = fundecla.Idf.accept(this);
         String typefieldsState = fundecla.typefields.accept(this);
-        String typeidState = fundecla.typeid.accept(this);
+        if (fundecla.typeid != null){
+            typeidState = fundecla.typeid.accept(this);
+        }
+        
         String exprState = fundecla.expr.accept(this);
 
         
@@ -577,7 +582,9 @@ public class GraphVizVisitor implements AstVisitor<String> {
     
         this.addTransition(nodeIdentifier, idfState);
         this.addTransition(nodeIdentifier, typefieldsState);
-        this.addTransition(nodeIdentifier, typeidState);
+        if (fundecla.typeid != null){
+            this.addTransition(nodeIdentifier, typeidState);
+        }
         this.addTransition(nodeIdentifier, exprState);
 
         return nodeIdentifier;
@@ -627,20 +634,20 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
 
         String nodeIdentifier = this.nextState();
-
+        String typeids3State = null;
         String typeids1State = typeids.typeids1.accept(this);
-        String fieldlist1State = typeids.fieldlist1.accept(this);
         String typeids2State = typeids.typeids2.accept(this);
-        String expr1State = typeids.expr1.accept(this);
-        String expr2State = typeids.expr2.accept(this);
+        if (typeids.typeids3 != null){
+            typeids3State = typeids.typeids3.accept(this);
+        }
 
         this.addNode(nodeIdentifier, "Typeids");
 
         this.addTransition(nodeIdentifier, typeids1State);
-        this.addTransition(nodeIdentifier, fieldlist1State);
         this.addTransition(nodeIdentifier, typeids2State);
-        this.addTransition(nodeIdentifier, expr1State);
-        this.addTransition(nodeIdentifier, expr2State);
+        if (typeids.typeids3 != null){
+            this.addTransition(nodeIdentifier, typeids3State);
+        }
 
         return nodeIdentifier;
 
@@ -756,16 +763,22 @@ public class GraphVizVisitor implements AstVisitor<String> {
     public String visit(Ifthenelse ifthenelse) {
         
         String nodeIdentifier = this.nextState();
-
+        String ouOccasionnelState = null;
         String conditionState = ifthenelse.condition.accept(this);
+        System.out.println(" " + ifthenelse.alors == null + "\n");
         String alorsState = ifthenelse.alors.accept(this);
-        String ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+        if (ifthenelse.ouOccasionnel != null){
+            ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+        }
+        
 
         this.addNode(nodeIdentifier, "Ifthenelse");
 
         this.addTransition(nodeIdentifier, conditionState);
         this.addTransition(nodeIdentifier, alorsState);
-        this.addTransition(nodeIdentifier, ouOccasionnelState);
+        if (ifthenelse.ouOccasionnel != null){
+            this.addTransition(nodeIdentifier, ouOccasionnelState);
+        }
 
 
         return nodeIdentifier;
@@ -781,9 +794,12 @@ public class GraphVizVisitor implements AstVisitor<String> {
         }
         
         String nodeIdentifier = this.nextState();
-
+        //System.out.println("nullll = " + lvalues.lvalue == null + "\n");
         String lvalueState = lvalues.lvalue.accept(this);
+        //System.out.println("aaaaaaaaaaaaaa\n");
         String listexpressionState = null;
+
+        
         if (lvalues.listexpression != null){
             listexpressionState = lvalues.listexpression.accept(this);
         }
