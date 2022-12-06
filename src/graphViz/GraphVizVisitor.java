@@ -622,6 +622,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
     @Override
     public String visit(Typeids typeids) {
         
+        if(typeids.typeids1==null){
+            return(null);
+        }
+
         String nodeIdentifier = this.nextState();
 
         String typeids1State = typeids.typeids1.accept(this);
@@ -771,6 +775,10 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     @Override
     public String visit(Lvalues lvalues) {
+
+        if(lvalues.lvalue==null){
+            return(null);
+        }
         
         String nodeIdentifier = this.nextState();
 
