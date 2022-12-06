@@ -36,8 +36,6 @@ binaryop
     |mult
     ;
 
-
-
 or
     :and ('|' and)*
     ;
