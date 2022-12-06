@@ -50,8 +50,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return null;
 		}
 		for (int i = 0; i<(ctx.getChildCount()/2+1);i++){
-			binexprList.addOpBin(ctx.getChild(2*i).accept(this));
-			binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
+			if(ctx.getChild(2*i)!=null && ctx.getChild(2*i)!=null){
+				binexprList.addOpBin(ctx.getChild(2*i).accept(this));
+				binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
+			}
 		}
 		return binexprList;
 	}
@@ -82,7 +84,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
-			Ast right = ctx.getChild(0).accept(this);
+			Ast right = ctx.getChild(2).accept(this);
 			switch (operation) {
 				case ">":
 					noeudTemporaire = new Sup(noeudTemporaire,right);
@@ -108,7 +110,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
-			Ast right = ctx.getChild(0).accept(this);
+			Ast right = ctx.getChild(2).accept(this);
 			switch (operation) {
 				case "=":
 					noeudTemporaire = new Egal(noeudTemporaire,right);
