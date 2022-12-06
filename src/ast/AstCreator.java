@@ -38,7 +38,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         }    
         return noeudTemporaire;
     }
-<<<<<<< HEAD
 
 
 
@@ -71,8 +70,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
     }
 
 
-=======
->>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
 		return ctx.getChild(0).accept(this);
 	}
@@ -84,17 +81,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (ctx.getChildCount() == 0){
 			return null;
 		}
-<<<<<<< HEAD
-		for (int i = 0; i<((ctx.getChildCount()+1)/2);i++){
-			binexprList.addOpBin(ctx.getChild(2*i).accept(this));
-			binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
-=======
 		for (int i = 0; i<(ctx.getChildCount()/2+1);i++){
 			if(ctx.getChild(2*i)!=null && ctx.getChild(2*i)!=null){
 				binexprList.addOpBin(ctx.getChild(2*i).accept(this));
 				binexprList.addOpBin(ctx.getChild(2*i+1).accept(this));
 			}
->>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 		}
 		return binexprList;
 	}
@@ -126,10 +117,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
-<<<<<<< HEAD
-
-=======
->>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 			switch (operation) {
 				case ">":
 					noeudTemporaire = new Sup(noeudTemporaire,right);
@@ -156,10 +143,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
-<<<<<<< HEAD
-
-=======
->>>>>>> 6a417ba3aca051cf4e12a3bfd12decc63641c2ed
 			switch (operation) {
 				case "=":
 					noeudTemporaire = new Egal(noeudTemporaire,right);
