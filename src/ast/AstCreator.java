@@ -78,7 +78,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
 		Opbinexpr binexprList = new Opbinexpr();
-		System.out.println("len = " +  ctx.getChildCount() + "\n");
+		//System.out.println("len = " +  ctx.getChildCount() + "\n");
 		if (ctx.getChildCount() == 0){
 			return new Opbinexpr(null);
 		}
@@ -205,7 +205,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitIdfexprlist(exprParser.IdfexprlistContext ctx) {
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
-		IdfExprList Idfexprlist = new IdfExprList(idf);
+		IdfExprList Idfexprlist = new IdfExprList();
+		Idfexprlist.addIdfExprList(idf);
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}

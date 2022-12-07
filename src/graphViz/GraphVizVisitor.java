@@ -468,9 +468,9 @@ public class GraphVizVisitor implements AstVisitor<String> {
            
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "Cacul");
+        this.addNode(nodeIdentifier, "Calcul");
         if (opbin.arg == null){
-            System.out.println("cccccccccccccc\n");
+            //System.out.println("cccccccccccccc\n");
             return nodeIdentifier;
         }
         for (Ast ast:opbin.opbinexpr){

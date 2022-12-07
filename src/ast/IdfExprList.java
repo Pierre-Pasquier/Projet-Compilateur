@@ -10,9 +10,8 @@ public class IdfExprList implements Ast {
     public ArrayList<Ast> IdfExprList;
     public Ast Idf;
 
-    public IdfExprList(Ast Idf){
+    public IdfExprList(){
         this.IdfExprList = new ArrayList<>();
-        this.Idf = Idf;
     }
     
     public void addIdfExprList(Ast expr){
