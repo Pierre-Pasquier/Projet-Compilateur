@@ -37,6 +37,7 @@ import ast.Program;
 
 
 import ast.Ifthenelse;
+import ast.Ifthen;
 import ast.Declarationlists;
 import ast.For;
 import ast.Exprtiret;
@@ -785,6 +786,23 @@ public class GraphVizVisitor implements AstVisitor<String> {
             this.addTransition(nodeIdentifier, ouOccasionnelState);
         }
 
+
+        return nodeIdentifier;
+
+    }
+
+    @Override
+    public String visit(Ifthen ifthen) {
+        
+        String nodeIdentifier = this.nextState();
+        String conditionState = ifthen.condition.accept(this);
+        System.out.println(" " + ifthen.alors == null + "\n");
+        String alorsState = ifthen.alors.accept(this);
+
+        this.addNode(nodeIdentifier, "Ifthen");
+
+        this.addTransition(nodeIdentifier, conditionState);
+        this.addTransition(nodeIdentifier, alorsState);
 
         return nodeIdentifier;
 

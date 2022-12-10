@@ -314,13 +314,21 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
-		if(ctx.getChildCount()>5){
-			Ast ouOccasionnel = ctx.getChild(5).accept(this);
-			return new Ifthenelse(condition, alors, ouOccasionnel);
-		}else{
-			return new Ifthenelse(condition, alors,null);
+		Ast ouOccasionnel = ctx.getChild(5).accept(this);
+		return new Ifthenelse(condition, alors, ouOccasionnel);
+			
 		}
 	}
+
+	@Override 
+	public Ast visitIfthen(exprParser.IfthenContext ctx) { 
+		
+		Ast condition = ctx.getChild(1).accept(this);
+		Ast alors = ctx.getChild(3).accept(this);
+		return new Ifthen(condition, alors);
+		
+	}
+
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
 		
