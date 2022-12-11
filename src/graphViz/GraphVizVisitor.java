@@ -37,7 +37,9 @@ import ast.Program;
 
 
 import ast.Ifthenelse;
-import ast.Ifthen;
+import ast.If;
+import ast.Else;
+import ast.Then;
 import ast.Declarationlists;
 import ast.For;
 import ast.Exprtiret;

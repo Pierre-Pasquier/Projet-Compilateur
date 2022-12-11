@@ -43,8 +43,11 @@ public interface AstVisitor<T> {
     public T visit(Printis printis);
     public T visit(Printe printe);
     public T visit(Ifthenelse ifthenelse);
-    public T visit(Ifthen ifthen);
+    public T visit(If if);
+    public T visit(Else else);
+    public T visit (Then then);
     public T visit(Lvalues lvalues);
+    
 
 
 }

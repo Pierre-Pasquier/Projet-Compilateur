@@ -309,25 +309,49 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	 }
-	@Override 
-	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx) { 
-		
-		Ast condition = ctx.getChild(1).accept(this);
-		Ast alors = ctx.getChild(3).accept(this);
-		Ast ouOccasionnel = ctx.getChild(5).accept(this);
-		return new Ifthenelse(condition, alors, ouOccasionnel);
-			
-		}
-	}
 
 	@Override 
-	public Ast visitIfthen(exprParser.IfthenContext ctx) { 
-		
+	public Ast visitIf(exprParser.IfContext ctx) { 
+		 
+		Ast condition = ctx.getChild(1).accept(this);
+		return new If(condition);
+			 
+		}
+	
+	@Override 
+	public Ast visitThen(exprParser.ThenContext ctx) { 
+		 
+		Ast alors = ctx.getChild(1).accept(this);
+		return new Then(alors);
+			 
+		}
+
+	@Override 
+		public Ast visitIf(exprParser.IfContext ctx) { 
+			
+			Ast ouOccasionnel = ctx.getChild(1).accept(this);
+			return new Else(ouOccasionnel);
+				
+			}
+	 
+	@Override 
+	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
+	{
+			
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
-		return new Ifthen(condition, alors);
-		
+		if(ctx.getChildCount()>5)
+		{
+			Ast ouOccasionnel = ctx.getChild(5).accept(this);
+			return new Ifthenelse(new If(condition), new Then(alors), new Else(ouOccasionnel));
+		}
+		else
+		{
+			return new Ifthenelse(new If(condition), new Then(alors),null);
+		}
+
 	}
+	
 
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 

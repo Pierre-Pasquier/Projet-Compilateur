@@ -18,4 +18,9 @@ public class Ifthenelse implements Ast {
     }
 
 
+    public Ifthenelse(Ast condition,Ast alors){
+        this.condition=condition;
+        this.alors=alors;
+    }
+
 }
