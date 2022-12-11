@@ -327,7 +327,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 
 	@Override 
-		public Ast visitIf(exprParser.IfContext ctx) { 
+		public Ast visitElse(exprParser.IfContext ctx) { 
 			
 			Ast ouOccasionnel = ctx.getChild(1).accept(this);
 			return new Else(ouOccasionnel);

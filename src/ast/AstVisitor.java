@@ -42,8 +42,8 @@ public interface AstVisitor<T> {
     public T visit(Declarationlists declarationlists);
     public T visit(Printis printis);
     public T visit(Printe printe);
-    public T visit(If if);
-    public T visit(Else else);
+    public T visit(If if1);
+    public T visit(Else else1);
     public T visit (Then then);
     public T visit(Ifthenelse ifthenelse);
     public T visit(Lvalues lvalues);

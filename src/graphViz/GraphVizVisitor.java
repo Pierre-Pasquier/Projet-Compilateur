@@ -766,6 +766,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
 
+
     @Override
     public String visit(Ifthenelse ifthenelse) {
         
@@ -787,6 +788,35 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
 
+    @Override
+    public String visit(If if1) {
+        
+        String nodeIdentifier = this.nextState();
+        String conditionState = if1.condition.accept(this);
+        this.addNode(nodeIdentifier, "If");
+        this.addTransition(nodeIdentifier, conditionState);
+
+        return nodeIdentifier;}
+
+    @Override
+    public String visit(Then then) {
+        
+        String nodeIdentifier = this.nextState();
+        String alorsState = then.alors.accept(this);
+        this.addNode(nodeIdentifier, "Then");
+        this.addTransition(nodeIdentifier, alorsState);
+
+        return nodeIdentifier;}
+
+    @Override
+        public String visit(Else else1) {
+            
+            String nodeIdentifier = this.nextState();
+            String ouOccasionnelState = else1.ouOccasionnel.accept(this);
+            this.addNode(nodeIdentifier, "Else");
+            this.addTransition(nodeIdentifier, ouOccasionnelState);
+
+            return nodeIdentifier;}
 
     @Override
     public String visit(Lvalues lvalues) {
