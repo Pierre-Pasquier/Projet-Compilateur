@@ -13,8 +13,7 @@ expr
     |lvalue (':=' expr | '(' exprlist ')' )?                        #Lvalues
     |'-' expr                                                       #Exprtiret
     |'(' exprseq ')'                                                #Parenthesis
-    |'if' expr 'then' expr 'else' expr                        #Ifthenelse
-    |'if' expr 'then' expr                                          #Ifthen
+    |'if' expr 'then' expr ('else' expr)?                           #Ifthenelse
     |'while' expr 'do' expr                                         #While
     |'for' IDF ':=' expr 'to' expr 'do' expr                        #For           
     |'break'                                                        #Break
