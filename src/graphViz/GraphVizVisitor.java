@@ -35,11 +35,10 @@ import ast.TypeFieldList;
 import ast.VariableDeclaration;
 import ast.Program;
 
-
-import ast.Ifthenelse;
 import ast.If;
 import ast.Else;
 import ast.Then;
+import ast.Ifthenelse;
 import ast.Declarationlists;
 import ast.For;
 import ast.Exprtiret;

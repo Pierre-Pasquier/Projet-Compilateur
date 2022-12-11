@@ -309,9 +309,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	 }
-
+	 
 	@Override 
-	public Ast visitIf(exprParser.IfContext ctx) { 
+	public Ast visitIf(exprParser.Ifcontext ctx) { 
 		 
 		Ast condition = ctx.getChild(1).accept(this);
 		return new If(condition);
@@ -333,7 +333,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Else(ouOccasionnel);
 				
 			}
-	 
+	
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
 	{
@@ -350,6 +350,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Ifthenelse(new If(condition), new Then(alors),null);
 		}
 	}
+
+
 	
 
 	@Override 
