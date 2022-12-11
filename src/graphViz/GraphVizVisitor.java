@@ -787,23 +787,6 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     }
 
-    @Override
-    public String visit(Ifthen ifthen) {
-        
-        String nodeIdentifier = this.nextState();
-        String conditionState = ifthen.condition.accept(this);
-        System.out.println(" " + ifthen.alors == null + "\n");
-        String alorsState = ifthen.alors.accept(this);
-
-        this.addNode(nodeIdentifier, "Ifthen");
-
-        this.addTransition(nodeIdentifier, conditionState);
-        this.addTransition(nodeIdentifier, alorsState);
-
-        return nodeIdentifier;
-
-    }
-
 
     @Override
     public String visit(Lvalues lvalues) {
