@@ -349,7 +349,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		{
 			return new Ifthenelse(new If(condition), new Then(alors),null);
 		}
-
 	}
 	
 
