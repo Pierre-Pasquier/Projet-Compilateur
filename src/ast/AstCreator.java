@@ -310,7 +310,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return ctx.getChild(1).accept(this);
 	 }
 	 
-	@Override 
+	
 	public Ast visitIf(exprParser.Ifcontext ctx) { 
 		 
 		Ast condition = ctx.getChild(1).accept(this);
@@ -318,7 +318,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			 
 		}
 	
-	@Override 
+	 
 	public Ast visitThen(exprParser.ThenContext ctx) { 
 		 
 		Ast alors = ctx.getChild(1).accept(this);
@@ -326,13 +326,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			 
 		}
 
-	@Override 
-		public Ast visitElse(exprParser.IfContext ctx) { 
+	 
+	public Ast visitElse(exprParser.ElseContext ctx) { 
 			
-			Ast ouOccasionnel = ctx.getChild(1).accept(this);
-			return new Else(ouOccasionnel);
+		Ast ouOccasionnel = ctx.getChild(1).accept(this);
+		return (Ast)new Else(ouOccasionnel);
 				
-			}
+		}
 	
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
@@ -343,11 +343,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if(ctx.getChildCount()>5)
 		{
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
-			return new Ifthenelse(new If(condition), new Then(alors), new Else(ouOccasionnel));
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors), (Ast)new Else(ouOccasionnel));
 		}
 		else
 		{
-			return new Ifthenelse(new If(condition), new Then(alors),null);
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors),null);
 		}
 	}
 
