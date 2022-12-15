@@ -313,29 +313,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 }
 	 
 	
-	public Ast visitIf(exprParser.Ifcontext ctx) { 
-		 
-		Ast condition = ctx.getChild(1).accept(this);
-		return new If(condition);
-			 
-		}
-	
-	 
-	public Ast visitThen(exprParser.ThenContext ctx) { 
-		 
-		Ast alors = ctx.getChild(1).accept(this);
-		return new Then(alors);
-			 
-		}
-
-	 
-	public Ast visitElse(exprParser.ElseContext ctx) { 
-			
-		Ast ouOccasionnel = ctx.getChild(1).accept(this);
-		return (Ast)new Else(ouOccasionnel);
-				
-		}
-	
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
 	{

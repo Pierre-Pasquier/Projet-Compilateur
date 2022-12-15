@@ -770,12 +770,14 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
     @Override
     public String visit(Ifthenelse ifthenelse) {
-        
+        String ouOccasionnelState = null;
         String nodeIdentifier = this.nextState();
         String conditionState = ifthenelse.condition.accept(this);
-        //System.out.println(" " + ifthenelse.alors == null + "\n");
+        if (ifthenelse.ouOccasionnel != null){
+            ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+        }
         String alorsState = ifthenelse.alors.accept(this);
-        String ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+        
         
         
 
@@ -783,7 +785,9 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         this.addTransition(nodeIdentifier, conditionState);
         this.addTransition(nodeIdentifier, alorsState);
-        this.addTransition(nodeIdentifier, ouOccasionnelState);
+        if (ifthenelse.ouOccasionnel != null){
+            this.addTransition(nodeIdentifier, ouOccasionnelState);
+        }
         
         return nodeIdentifier;
 
