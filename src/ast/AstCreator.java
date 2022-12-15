@@ -78,7 +78,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
 		Opbinexpr binexprList = new Opbinexpr();
-		//System.out.println("len = " +  ctx.getChildCount() + "\n");
+		System.out.println("len = " +  ctx.getChildCount() + "\n");
 		if (ctx.getChildCount() == 0){
 			return new Opbinexpr(null);
 		}
@@ -304,10 +304,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		} 
 	}
 	@Override public Ast visitPrinti(exprParser.PrintiContext ctx) { 
-		return ctx.getChild(1).accept(this);
+		Ast printe = ctx.getChild(1).accept(this);
+		return new Printe(printe);
 	 }
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
-		return ctx.getChild(1).accept(this);
+		Ast printe = ctx.getChild(1).accept(this);
+		return new Printe(printe);
 	 }
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx) { 
@@ -372,13 +374,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitPrints(exprParser.PrintsContext ctx) { 
-
 		return ctx.getChild(0).accept(this);
 	
 	}
 	@Override 
 	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
-
 		return ctx.getChild(0).accept(this);
 	}
 	@Override 

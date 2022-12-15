@@ -204,7 +204,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         public String visit(InfEq plus) {
 
             String nodeIdentifier = this.nextState();
-            System.out.println("" + plus.left == null + "\n");
+            //System.out.println("" + plus.left == null + "\n");
             String leftState = plus.left.accept(this);
             String rightState = plus.right.accept(this);
 
@@ -696,17 +696,18 @@ public class GraphVizVisitor implements AstVisitor<String> {
         
         String nodeIdentifier = this.nextState();
 
+        String idfState = for1.idf.accept(this);
         String debState = for1.deb.accept(this);
         String finState = for1.fin.accept(this);
         String faireState = for1.faire.accept(this);
-        String idfState = for1.idf.accept(this);
 
         this.addNode(nodeIdentifier, "For");
 
+        this.addTransition(nodeIdentifier, idfState);
         this.addTransition(nodeIdentifier, debState);
         this.addTransition(nodeIdentifier, finState);
         this.addTransition(nodeIdentifier, faireState);
-        this.addTransition(nodeIdentifier, idfState);
+        
 
 
         return nodeIdentifier;
@@ -733,11 +734,11 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
     @Override
-    public String visit(Printis printis) {
+    public String visit(Printis printi) {
         
         String nodeIdentifier = this.nextState();
 
-        String printisState = printis.printis.accept(this);
+        String printisState = printi.printis.accept(this);
 
         this.addNode(nodeIdentifier, "Printi");
 
@@ -749,11 +750,11 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
 
     @Override
-    public String visit(Printe printe) {
+    public String visit(Printe printi) {
         
         String nodeIdentifier = this.nextState();
 
-        String printeState = printe.printe.accept(this);
+        String printeState = printi.printe.accept(this);
 
         this.addNode(nodeIdentifier, "Print");
 
@@ -770,7 +771,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String nodeIdentifier = this.nextState();
         String ouOccasionnelState = null;
         String conditionState = ifthenelse.condition.accept(this);
-        System.out.println(" " + ifthenelse.alors == null + "\n");
+        //System.out.println(" " + ifthenelse.alors == null + "\n");
         String alorsState = ifthenelse.alors.accept(this);
         if (ifthenelse.ouOccasionnel != null){
             ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
