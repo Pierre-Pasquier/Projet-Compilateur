@@ -311,18 +311,51 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast printe = ctx.getChild(1).accept(this);
 		return new Printe(printe);
 	 }
+	 
+	
+	public Ast visitIf(exprParser.Ifcontext ctx) { 
+		 
+		Ast condition = ctx.getChild(1).accept(this);
+		return new If(condition);
+			 
+		}
+	
+	 
+	public Ast visitThen(exprParser.ThenContext ctx) { 
+		 
+		Ast alors = ctx.getChild(1).accept(this);
+		return new Then(alors);
+			 
+		}
+
+	 
+	public Ast visitElse(exprParser.ElseContext ctx) { 
+			
+		Ast ouOccasionnel = ctx.getChild(1).accept(this);
+		return (Ast)new Else(ouOccasionnel);
+				
+		}
+	
 	@Override 
-	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx) { 
-		
+	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
+	{
+			
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
-		if(ctx.getChildCount()>5){
+		if(ctx.getChildCount()>5)
+		{
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
-			return new Ifthenelse(condition, alors, ouOccasionnel);
-		}else{
-			return new Ifthenelse(condition, alors,null);
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors), (Ast)new Else(ouOccasionnel));
+		}
+		else
+		{
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors),null);
 		}
 	}
+
+
+	
+
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
 		

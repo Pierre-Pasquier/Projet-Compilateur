@@ -35,7 +35,9 @@ import ast.TypeFieldList;
 import ast.VariableDeclaration;
 import ast.Program;
 
-
+import ast.If;
+import ast.Else;
+import ast.Then;
 import ast.Ifthenelse;
 import ast.Declarationlists;
 import ast.For;
@@ -765,32 +767,57 @@ public class GraphVizVisitor implements AstVisitor<String> {
     }
 
 
+
     @Override
     public String visit(Ifthenelse ifthenelse) {
         
         String nodeIdentifier = this.nextState();
-        String ouOccasionnelState = null;
         String conditionState = ifthenelse.condition.accept(this);
         //System.out.println(" " + ifthenelse.alors == null + "\n");
         String alorsState = ifthenelse.alors.accept(this);
-        if (ifthenelse.ouOccasionnel != null){
-            ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
-        }
+        String ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
+        
         
 
         this.addNode(nodeIdentifier, "Ifthenelse");
 
         this.addTransition(nodeIdentifier, conditionState);
         this.addTransition(nodeIdentifier, alorsState);
-        if (ifthenelse.ouOccasionnel != null){
-            this.addTransition(nodeIdentifier, ouOccasionnelState);
-        }
-
-
+        this.addTransition(nodeIdentifier, ouOccasionnelState);
+        
         return nodeIdentifier;
 
     }
 
+    @Override
+    public String visit(If if1) {
+        
+        String nodeIdentifier = this.nextState();
+        String conditionState = if1.condition.accept(this);
+        this.addNode(nodeIdentifier, "If");
+        this.addTransition(nodeIdentifier, conditionState);
+
+        return nodeIdentifier;}
+
+    @Override
+    public String visit(Then then) {
+        
+        String nodeIdentifier = this.nextState();
+        String alorsState = then.alors.accept(this);
+        this.addNode(nodeIdentifier, "Then");
+        this.addTransition(nodeIdentifier, alorsState);
+
+        return nodeIdentifier;}
+
+    @Override
+        public String visit(Else else1) {
+            
+            String nodeIdentifier = this.nextState();
+            String ouOccasionnelState = else1.ouOccasionnel.accept(this);
+            this.addNode(nodeIdentifier, "Else");
+            this.addTransition(nodeIdentifier, ouOccasionnelState);
+
+            return nodeIdentifier;}
 
     @Override
     public String visit(Lvalues lvalues) {
