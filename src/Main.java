@@ -17,6 +17,8 @@ public class Main {
 
     public static void main(String[] args){
 
+        
+
         if (args.length < 1){
             System.out.println("Error : Expected 1 argument filepath, found 0");
             return;
@@ -45,6 +47,8 @@ public class Main {
             ast.accept(graphViz);
             graphViz.dumpGraph("./out/tree.dot");
 
+            //Affichage de la TDS
+            System.out.println(creator.tds);
 
         } catch (IOException e) {
             e.printStackTrace();

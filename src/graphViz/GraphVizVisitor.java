@@ -58,6 +58,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
     private String nodeBuffer;
     private String linkBuffer;
 
+
     public GraphVizVisitor(){
         this.state = 0;
         this.nodeBuffer = "digraph \"ast\"{\n\n\tnodesep=1;\n\tranksep=1;\n\n";
@@ -470,17 +471,11 @@ public class GraphVizVisitor implements AstVisitor<String> {
            
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "Calcul");
-        if (opbin.arg == null){
-            //System.out.println("cccccccccccccc\n");
-            return nodeIdentifier;
-        }
+        this.addNode(nodeIdentifier, "Idf");
         for (Ast ast:opbin.opbinexpr){
-
-            if(ast != null){ 
-                String astState = ast.accept(this);
-                this.addTransition(nodeIdentifier, astState);
-            }
+            String astState = ast.accept(this);
+            System.out.println(astState);
+            this.addTransition(nodeIdentifier, astState);
 
         }
 
@@ -773,10 +768,11 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String ouOccasionnelState = null;
         String nodeIdentifier = this.nextState();
         String conditionState = ifthenelse.condition.accept(this);
+        String alorsState = ifthenelse.alors.accept(this);
         if (ifthenelse.ouOccasionnel != null){
             ouOccasionnelState = ifthenelse.ouOccasionnel.accept(this);
         }
-        String alorsState = ifthenelse.alors.accept(this);
+        
         
         
         

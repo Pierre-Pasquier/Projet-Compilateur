@@ -8,15 +8,11 @@ public class Opbinexpr implements Ast{
     }
     
     public ArrayList<Ast> opbinexpr;
-    public Ast arg;
 
     public Opbinexpr(){
         this.opbinexpr = new ArrayList<>();
     }
 
-    public Opbinexpr(Ast arg){
-        this.arg = arg;
-    }
     
     public void addOpBin(Ast binexpr){
         this.opbinexpr.add(binexpr);
