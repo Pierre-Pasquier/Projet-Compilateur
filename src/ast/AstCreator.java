@@ -380,13 +380,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
 		return ctx.getChild(1).accept(this);
 	}
+
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
 		List<List> list_for = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
+		List<String> caractéristiques = new ArrayList<>();
 		nom.add("TDS_for_" + (num_region++) + "_" + (num_imbrication++));
 		list_for.add(nom);
-		tds.add(list_for);
+
 
 		String idfString = ctx.getChild(1).toString();
 		Idf idf = new Idf(idfString);
@@ -394,6 +396,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast deb= ctx.getChild(3).accept(this);
 		Ast fin = ctx.getChild(5).accept(this);
 		Ast faire = ctx.getChild(7).accept(this);
+		
+		caractéristiques.add(idfString);
+		caractéristiques.add("COMPT");
+		caractéristiques.add(deb.toString());
+		caractéristiques.add(fin.toString());
+
+		list_for.add(caractéristiques);
+
+		tds.add(list_for);
+
 		return new For(deb,fin,faire,idf);
 	}
 //on met peut etre idf mais à voir plus tard
