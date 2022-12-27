@@ -239,11 +239,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	
 	@Override public Ast visitFundecla(exprParser.FundeclaContext ctx) {
-		List<List> list_fundecla = new ArrayList<>();
-		List<String> nom = new ArrayList<>();
-		name.add("TDS_Fundecla_" + (num_region++) + "_" + (num_imbrication++));
-		list_fundecla.add(name);
-		tds.add(list_fundecla);
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) {
@@ -303,13 +298,23 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return new Idf(idfString); 
 	}
 	@Override public Ast visitVariabledeclaration(exprParser.VariabledeclarationContext ctx) { 
+		List<String> line = new ArrayList<>();
 		String idfString = ctx.getChild(1).toString();
+		line.add(idfString);
+		line.add("VAR");
+
 		Idf idf = new Idf(idfString);
 		if (ctx.getChildCount() == 4){
+			//line.add("PRIVATE");
 			Ast expr = ctx.getChild(3).accept(this);
 			return new VariableDeclaration(idf, expr, null);
 		} else {
+			String typeidString = ctx.getChild(3).toString();
+			line.add(typeidString);
+			//line.add("PRIVATE");
+			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
+
 			Ast expr = ctx.getChild(5).accept(this);
 			//System.out.println("expr = null : "+ (expr == null) + "\n");
 			return new VariableDeclaration(idf, expr, typeid);
