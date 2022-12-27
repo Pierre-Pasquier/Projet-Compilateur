@@ -239,6 +239,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	
 	@Override public Ast visitFundecla(exprParser.FundeclaContext ctx) {
+		List<List> list_fundecla = new ArrayList<>();
+		List<String> nom = new ArrayList<>();
+		name.add("TDS_Fundecla_" + (num_region++) + "_" + (num_imbrication++));
+		list_fundecla.add(name);
+		tds.add(list_fundecla);
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) {
