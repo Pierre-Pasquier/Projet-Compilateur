@@ -302,18 +302,19 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(1).toString();
 		line.add(idfString);
 		line.add("VAR");
-
+		List<List> list = tds.get(tds.size()-1);
+		
 
 		Idf idf = new Idf(idfString);
 		if (ctx.getChildCount() == 4){
 			//line.add("PRIVATE");
-			line.add("FinLigne");
+			list.get(list.size()-1).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
 			return new VariableDeclaration(idf, expr, null);
 		} else {
 			String typeidString = ctx.getChild(3).toString();
 			line.add(typeidString);
-			line.add("FinLigne");
+			list.get(list.size()-1).add(line);
 			//line.add("PRIVATE");
 			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
