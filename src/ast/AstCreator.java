@@ -382,6 +382,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx){
+		pere = "if";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_if = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
@@ -444,18 +445,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 		String idfString = ctx.getChild(1).toString();
-
-		
-		Ast deb= ctx.getChild(3).accept(this);
-		Ast fin = ctx.getChild(5).accept(this);
-		Ast faire = ctx.getChild(7).accept(this);
-		
 		caractéristiques.add(idfString);
 		caractéristiques.add("COMPT");
 
 		list_for.add(caractéristiques);
 
 		tds.add(list_for);
+		
+		Ast deb= ctx.getChild(3).accept(this);
+		Ast fin = ctx.getChild(5).accept(this);
+		Ast faire = ctx.getChild(7).accept(this);
+		
+		
 		num_imbrication--;
 		pile_region.remove(pile_region.size()-1);
 		//System.out.println(pile_region);
@@ -542,6 +543,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			} else {
 				calcul = calcul + intString;
 			}
+			line.set(line.size()-1,calcul);
 		}
 		return new IntNode(intString);
 	}
@@ -549,6 +551,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
 		if (pere != null && pere.equals("for")){
+			System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
+			System.out.println("tds : " + tds);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -558,6 +562,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			} else {
 				calcul = calcul + idfString;
 			}
+			line.set(line.size()-1,calcul);
 		}
 		
 		
