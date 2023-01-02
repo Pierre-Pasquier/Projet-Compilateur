@@ -289,9 +289,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Idf idf = new Idf(idfString);
 		Ast typeid = ctx.getChild(2).accept(this);
 		List<List> list = tds.get(tds.size()-1);
-		if (pere.equals("typefields")){
-			list.get(list.size()-1).add(idfString);
-		}
+		list.get(list.size()-1).add(idfString);
 		return new TypeField(idf,typeid);
 	 }
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
@@ -299,9 +297,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(0).toString();
 		System.out.println("idf = " + idfString);
 		List<List> list = tds.get(tds.size()-1);
-		if (pere.equals("typeids") || pere.equals("typedeclaration")){
-			list.get(list.size()-1).add(idfString);
-		}
+		list.get(list.size()-1).add(idfString);
 		
 		return new Idf(idfString); 
 	}
