@@ -405,6 +405,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return ctx.getChild(1).accept(this);
 	}
 
+
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
 		List<List> list_for = new ArrayList<>();
@@ -415,7 +416,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 		String idfString = ctx.getChild(1).toString();
-		Idf idf = new Idf(idfString);
+
 		
 		Ast deb= ctx.getChild(3).accept(this);
 		Ast fin = ctx.getChild(5).accept(this);
@@ -430,7 +431,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 		tds.add(list_for);
 		num_imbrication--;
-		return new For(deb,fin,faire,idf);
+		return new For((Ast)new Idf(idfString), (Ast)new BorneInf(deb), (Ast)new BorneSup(fin),(Ast)new Do(faire));
 	}
 //on met peut etre idf mais à voir plus tard
 	@Override 
