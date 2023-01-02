@@ -120,7 +120,7 @@ public class Main {
         return -1;
     }
 
-    final static class Result {     //Pour renvoyer plusieurs valeurs dans la fonction is_in_tds
+    public static class Result {     //Pour renvoyer plusieurs valeurs dans la fonction is_in_tds
         private final int first;
         private final int second;
         private final int third;
@@ -145,7 +145,7 @@ public class Main {
     }
 
     //Pour renvoyer plusieurs valeurs dans la fonction getTypeArgs
-    final static class Args {       
+    public static class Args {       
         private final int nombre;
         private final List<String> types;
     

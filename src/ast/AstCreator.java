@@ -10,6 +10,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public int num_region = 1;
 	public int num_imbrication = 0;
 	public String pere = null;
+	public List<String> pile_region = new ArrayList<>();
 
 	@Override 
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
@@ -288,7 +289,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
 		Ast typeid = ctx.getChild(2).accept(this);
-		List<List> list = tds.get(tds.size()-1);
+		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+		List<List> list = tds.get(indice);
 		list.get(list.size()-1).add(idfString);
 		return new TypeField(idf,typeid);
 	 }
@@ -296,7 +298,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		System.out.println("Dans typeid");
 		String idfString = ctx.getChild(0).toString();
 		System.out.println("idf = " + idfString);
-		List<List> list = tds.get(tds.size()-1);
+		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+		List<List> list = tds.get(indice);
 		list.get(list.size()-1).add(idfString);
 		
 		return new Idf(idfString); 
@@ -306,18 +309,17 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(1).toString();
 		line.add(idfString);
 		line.add("VAR");
-		List<List> list = tds.get(tds.size()-1);
-		
+		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);		
 
 		Idf idf = new Idf(idfString);
 		if (ctx.getChildCount() == 4){
-			tds.get(tds.size()-1).add(line);
+			tds.get(indice).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
 			return new VariableDeclaration(idf, expr, null);
 		} else {
 			String typeidString = ctx.getChild(3).toString();
 			line.add(typeidString);
-			tds.get(tds.size()-1).add(line);
+			tds.get(indice).add(line);
 			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
@@ -326,6 +328,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 	}
 	@Override public Ast visitFunctiondeclaration(exprParser.FunctiondeclarationContext ctx) { 
+		pile_region.add(String.valueOf(num_region));
 		String idfString = ctx.getChild(1).toString();
 		List<List> list_fun = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
@@ -338,11 +341,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (ctx.getChildCount() == 7){
 			Ast expr = ctx.getChild(6).accept(this);
 			num_imbrication--;
+			pile_region.remove(pile_region.size()-1);
+			System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null);
 		} else {
 			String typeidString = ctx.getChild(6).toString();
 			Ast typeid = ctx.getChild(6).accept(this);
 			Ast expr = ctx.getChild(8).accept(this);
+			pile_region.remove(pile_region.size()-1);
+			System.out.println(pile_region);
 			num_imbrication--;
 			return new FunctionDeclaration(idf, typefields,expr, typeid);
 		} 
@@ -358,8 +365,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 
 	
 	@Override 
-	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx)
-	{
+	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx){
+		pile_region.add(String.valueOf(num_region));
 		List<List> list_if = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
 		nom.add("TDS_if_" + (num_region++) + "_" + (num_imbrication++));
@@ -371,12 +378,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if(ctx.getChildCount()>5)
 		{
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
+			pile_region.remove(pile_region.size()-1);
+			System.out.println(pile_region);
 			num_imbrication--;
 			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors), (Ast)new Else(ouOccasionnel));
 		}
 		else
 		{
 			num_imbrication--;
+			pile_region.remove(pile_region.size()-1);
+			System.out.println(pile_region);
 			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors),null);
 		}
 	}
@@ -386,6 +397,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
+		pile_region.add(String.valueOf(num_region));
 		List<List> list_let = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
 		nom.add("TDS_let_" + (num_region++) + "_" + (num_imbrication++));
@@ -393,6 +405,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		tds.add(list_let);
 		Ast affect = ctx.getChild(1).accept(this);
 		num_imbrication--;
+		pile_region.remove(pile_region.size()-1);
+		System.out.println(pile_region);
 		Ast dans = ctx.getChild(3).accept(this);
 		return new Declarationlists(dans,affect);
 	}
@@ -404,6 +418,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
+		pile_region.add(String.valueOf(num_region));
 		List<List> list_for = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
 		List<String> caractéristiques = new ArrayList<>();
@@ -427,6 +442,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 		tds.add(list_for);
 		num_imbrication--;
+		pile_region.remove(pile_region.size()-1);
+		System.out.println(pile_region);
 		return new For((Ast)new Idf(idfString), (Ast)new BorneInf(deb), (Ast)new BorneSup(fin),(Ast)new Do(faire));
 	}
 //on met peut etre idf mais à voir plus tard
@@ -483,6 +500,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitWhile(exprParser.WhileContext ctx) { 
+		pile_region.add(String.valueOf(num_region));
 		List<List> list_while = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
 		nom.add("TDS_while_" + (num_region++) + "_" + (num_imbrication++));
@@ -492,6 +510,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast faire= ctx.getChild(3).accept(this);
 		num_imbrication--;
+		pile_region.remove(pile_region.size()-1);
+		System.out.println(pile_region);
 		return new While(condition, faire);
 	}
 	@Override 
