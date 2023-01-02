@@ -285,15 +285,19 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		return typefieldList;
 	}
-	@Override public Ast visitTypefield(exprParser.TypefieldContext ctx) { 
+	@Override public Ast visitTypefield(exprParser.TypefieldContext ctx) {
+		List<String> line = new ArrayList<>(); 
 		String idfString = ctx.getChild(0).toString();
+		line.add(idfString);
 		Idf idf = new Idf(idfString);
 		Ast typeid = ctx.getChild(2).accept(this);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		List<List> list = tds.get(indice);
-		list.get(list.size()-1).add(idfString);
+		list.add(line);
 		return new TypeField(idf,typeid);
 	 }
+
+
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
 		System.out.println("Dans typeid");
 		String idfString = ctx.getChild(0).toString();
