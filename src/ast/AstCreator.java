@@ -24,32 +24,32 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	/*-----------------------------------------------------------------------------------------------------*/
-	@Override public Ast visitPlus(exprParser.PlusContext ctx) {		
-        Ast noeudTemporaire = ctx.getChild(0).accept(this);
+	@Override public Ast visitPlus(exprParser.PlusContext ctx) {	
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}
+		String operator = ctx.getChild(1).toString();	
+		if (operator.equals("-") && pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			line.add("-");
+		} else if(operator.equals("+") && pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			line.add("+");
+		}
+
+        Ast noeudTemporaire = ctx.getChild(0).accept(this);
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
-            
             String operation = ctx.getChild(2*i+1).toString();
             Ast right = ctx.getChild(2*(i+1)).accept(this);
             switch (operation) {
                 case "-":
-					if (pere != null && pere.equals("if")){
-						int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
-						List<List> list = tds.get(indice);
-						List<String> line = list.get(list.size()-1);
-						line.add("-");
-					}
 					noeudTemporaire = new Minus(noeudTemporaire,right);
 					break;
 				case "+":
-					if (pere != null && pere.equals("if")){
-						int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
-						List<List> list = tds.get(indice);
-						List<String> line = list.get(list.size()-1);
-						line.add("+");
-					}
                     noeudTemporaire = new Minus(noeudTemporaire,right);
                     break;
                 default:
@@ -460,6 +460,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		num_imbrication--;
 		pile_region.remove(pile_region.size()-1);
 		//System.out.println(pile_region);
+		pere = null;
 		return new For((Ast)new Idf(idfString), (Ast)new BorneInf(deb), (Ast)new BorneSup(fin),(Ast)new Do(faire));
 	}
 //on met peut etre idf mais à voir plus tard
@@ -538,12 +539,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
 			String calcul = line.get(line.size()-1);
-			if (calcul.length() == 1){
-				calcul = intString + calcul;
+			if (calcul.charAt(calcul.length()-1) == '+' || calcul.charAt(calcul.length()-1) == '-' || calcul.charAt(calcul.length()-1) == '*' || calcul.charAt(calcul.length()-1) == '/'){
+				if (calcul.length() == 1){
+					calcul = intString + calcul;
+				} else {
+					calcul = calcul + intString;
+				}
+				line.set(line.size()-1,calcul);
 			} else {
-				calcul = calcul + intString;
+				line.add("" + intString);
 			}
-			line.set(line.size()-1,calcul);
 		}
 		return new IntNode(intString);
 	}
@@ -557,12 +562,17 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
 			String calcul = line.get(line.size()-1);
-			if (calcul.length() == 1){
-				calcul = idfString + calcul;
+			if (calcul.charAt(calcul.length()-1) == '+' || calcul.charAt(calcul.length()-1) == '-' || calcul.charAt(calcul.length()-1) == '*' || calcul.charAt(calcul.length()-1) == '/'){
+				if (calcul.length() == 1){
+					calcul = idfString + calcul;
+				} else {
+					calcul = calcul + idfString;
+				}
+				line.set(line.size()-1,calcul);
 			} else {
-				calcul = calcul + idfString;
+				line.add("" + idfString);
 			}
-			line.set(line.size()-1,calcul);
+			
 		}
 		
 		
