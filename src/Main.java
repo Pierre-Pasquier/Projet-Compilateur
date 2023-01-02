@@ -114,6 +114,7 @@ public class Main {
             List<String> tds_region = tds.get(0);
             String nom = tds_region.get(0);
             if (nom.matches("TDS_.*_"+num_region+"_.*")){
+                System.out.println("Dans getTds : "+ num_region + " " + i);
                 return i;
             }
         }

@@ -24,8 +24,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	/*-----------------------------------------------------------------------------------------------------*/
-	@Override public Ast visitPlus(exprParser.PlusContext ctx) {
-  
+	@Override public Ast visitPlus(exprParser.PlusContext ctx) {		
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
@@ -36,10 +35,22 @@ public class AstCreator extends exprBaseVisitor<Ast>{
             Ast right = ctx.getChild(2*(i+1)).accept(this);
             switch (operation) {
                 case "-":
+					if (pere != null && pere.equals("if")){
+						int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+						List<List> list = tds.get(indice);
+						List<String> line = list.get(list.size()-1);
+						line.add("-");
+					}
+					noeudTemporaire = new Minus(noeudTemporaire,right);
+					break;
+				case "+":
+					if (pere != null && pere.equals("if")){
+						int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+						List<List> list = tds.get(indice);
+						List<String> line = list.get(list.size()-1);
+						line.add("+");
+					}
                     noeudTemporaire = new Minus(noeudTemporaire,right);
-                    break;
-                case "+":
-                    noeudTemporaire = new Plus(noeudTemporaire,right);
                     break;
                 default:
                     break;
@@ -291,24 +302,21 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		line.add(idfString);
 		line.add("PARAM");
 		Idf idf = new Idf(idfString);
-		Ast typeid = ctx.getChild(2).accept(this);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
-		List<List> list = tds.get(indice);
-		list.add(line);
+		tds.get(indice).add(line);
+		Ast typeid = ctx.getChild(2).accept(this);
 		return new TypeField(idf,typeid);
 	 }
 
 
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
-		//System.out.println("Dans typeid");
+		System.out.println("Dans typeid");
 		String idfString = ctx.getChild(0).toString();
-		//System.out.println("idf = " + idfString);
+		System.out.println("idf = " + idfString);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		List<List> list = tds.get(indice);
 		List<String> line = list.get(list.size()-1);
-		tds.get(indice).remove(list.size()-1);
 		line.add(idfString);
-		tds.get(indice).add(line);
 		
 		return new Idf(idfString); 
 	}
@@ -426,6 +434,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
+		pere = "for";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_for = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
@@ -443,8 +452,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		
 		caractéristiques.add(idfString);
 		caractéristiques.add("COMPT");
-		caractéristiques.add(deb.toString());
-		caractéristiques.add(fin.toString());
 
 		list_for.add(caractéristiques);
 
@@ -523,14 +530,37 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return new While(condition, faire);
 	}
 	@Override 
-	public Ast visitValint(exprParser.ValintContext ctx) { 
+	public Ast visitValint(exprParser.ValintContext ctx) {
 		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
+		if (pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			String calcul = line.get(line.size()-1);
+			if (calcul.length() == 1){
+				calcul = intString + calcul;
+			} else {
+				calcul = calcul + intString;
+			}
+		}
 		return new IntNode(intString);
 	}
 	@Override 
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
-		//System.out.println("Validf : " + idfString + "\n");
+		if (pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			String calcul = line.get(line.size()-1);
+			if (calcul.length() == 1){
+				calcul = idfString + calcul;
+			} else {
+				calcul = calcul + idfString;
+			}
+		}
+		
+		
 		return new Idf(idfString);
 	}
 	@Override 
