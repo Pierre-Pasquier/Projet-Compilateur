@@ -289,6 +289,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		List<String> line = new ArrayList<>(); 
 		String idfString = ctx.getChild(0).toString();
 		line.add(idfString);
+		line.add("PARAM");
 		Idf idf = new Idf(idfString);
 		Ast typeid = ctx.getChild(2).accept(this);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
