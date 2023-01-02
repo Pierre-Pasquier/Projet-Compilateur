@@ -6,6 +6,7 @@ import java.io.IOException;
 import ast.Plus;
 import ast.Minus;
 import ast.Div;
+import ast.Do;
 import ast.And;
 import ast.Or;
 import ast.Mult;
@@ -21,6 +22,8 @@ import ast.Opbinexpr;
 
 import ast.Ast;
 import ast.AstVisitor;
+import ast.BorneInf;
+import ast.BorneSup;
 import ast.Idf;
 import ast.DeclarationList;
 import ast.ExprList;
@@ -49,6 +52,7 @@ import ast.Printe;
 import ast.Printis;
 import ast.Typeids;
 import ast.While;
+
 
 
 
@@ -219,6 +223,39 @@ public class GraphVizVisitor implements AstVisitor<String> {
             return nodeIdentifier;
 
         }
+
+
+
+    @Override
+    public String visit(BorneInf borneInf1) {
+        
+        String nodeIdentifier = this.nextState();
+        String borneinfState = borneInf1.deb.accept(this);
+        this.addNode(nodeIdentifier, "BorneInf");
+        this.addTransition(nodeIdentifier, borneinfState);
+
+        return nodeIdentifier;}
+
+    @Override
+    public String visit(BorneSup borneSup1) {
+        
+        String nodeIdentifier = this.nextState();
+        String borneSupeState = borneSup1.fin.accept(this);
+        this.addNode(nodeIdentifier, "BorneSup");
+        this.addTransition(nodeIdentifier, borneSupeState);
+
+        return nodeIdentifier;}
+
+    @Override
+    public String visit(Do faire1) {
+        
+        String nodeIdentifier = this.nextState();
+        String faireState = faire1.faire.accept(this);
+        this.addNode(nodeIdentifier, "Do");
+        this.addTransition(nodeIdentifier, faireState);
+
+        return nodeIdentifier;}
+
 
 
 
