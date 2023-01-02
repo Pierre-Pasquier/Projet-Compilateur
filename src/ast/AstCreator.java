@@ -78,8 +78,25 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 
+
 	@Override public Ast visitMult(exprParser.MultContext ctx) {
 		pere2 = "Mult";
+
+		if (ctx.getChildCount() == 1){
+			return ctx.getChild(0).accept(this);
+		}
+		String operator = ctx.getChild(1).toString();	
+		if (operator.equals("*") && pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			line.add("*");
+		} else if(operator.equals("/") && pere != null && pere.equals("for")){
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			line.add("/");
+		}
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
 		if (ctx.getChildCount() == 1){
@@ -88,6 +105,22 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             
             String operation = ctx.getChild(2*i+1).toString();
+
+			if (i != 0 && operation.equals("*") && pere != null && pere.equals("for")){
+				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+				List<List> list = tds.get(indice);
+				List<String> line = list.get(list.size()-1);
+				String calcul = line.get(line.size()-1);
+				calcul = calcul + "*";
+				line.set(line.size()-1,calcul);
+			} else if(i != 0 && operation.equals("/") && pere != null && pere.equals("for")){
+				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+				List<List> list = tds.get(indice);
+				List<String> line = list.get(list.size()-1);
+				String calcul = line.get(line.size()-1);
+				calcul = calcul + "/";
+				line.set(line.size()-1,calcul);
+			}
             Ast right = ctx.getChild(2*(i+1)).accept(this);
 
             switch (operation) {
@@ -105,6 +138,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         return noeudTemporaire;
 
     }
+
 
 
 	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
