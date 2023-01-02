@@ -10,6 +10,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public int num_region = 1;
 	public int num_imbrication = 0;
 	public String pere = null;
+	public String pere2 = null;
 	public List<String> pile_region = new ArrayList<>();
 
 	@Override 
@@ -25,6 +26,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 */
 	/*-----------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitPlus(exprParser.PlusContext ctx) {	
+		pere2 = "Plus";
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}
@@ -44,6 +46,21 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             String operation = ctx.getChild(2*i+1).toString();
+			if (i != 0 && operation.equals("-") && pere != null && pere.equals("for")){
+				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+				List<List> list = tds.get(indice);
+				List<String> line = list.get(list.size()-1);
+				String calcul = line.get(line.size()-1);
+				calcul = calcul + "-";
+				line.set(line.size()-1,calcul);
+			} else if(i != 0 && operation.equals("+") && pere != null && pere.equals("for")){
+				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+				List<List> list = tds.get(indice);
+				List<String> line = list.get(list.size()-1);
+				String calcul = line.get(line.size()-1);
+				calcul = calcul + "+";
+				line.set(line.size()-1,calcul);
+			}
             Ast right = ctx.getChild(2*(i+1)).accept(this);
             switch (operation) {
                 case "-":
@@ -62,11 +79,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	@Override public Ast visitMult(exprParser.MultContext ctx) {
-  
+		pere2 = "Mult";
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 
 		if (ctx.getChildCount() == 1){
-			return ctx.getChild(0).accept(this);
+			return noeudTemporaire;
 		}
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             
@@ -91,12 +108,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	@Override public Ast visitBinaryop(exprParser.BinaryopContext ctx){
+		pere2 = "Binaryop";
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitOpbin(exprParser.OpbinContext ctx){
+		pere2 = "Opbin";
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitOpbinexpr(exprParser.OpbinexprContext ctx) {
+		pere2 = "Opbinexpr";
 		Opbinexpr binexprList = new Opbinexpr();
 		if (ctx.getChildCount() == 0){
 			return binexprList;
@@ -107,8 +127,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		return binexprList;
 	}
-	@Override public Ast visitAnd(exprParser.AndContext ctx)
-	{
+	@Override public Ast visitAnd(exprParser.AndContext ctx){
+		pere2 = "And";
 		And andList = new And();
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
@@ -120,6 +140,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitOr(exprParser.OrContext ctx)
 	{
+		pere2 = "Or";
 		Or orList = new Or();
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
@@ -130,7 +151,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return orList;
 	}
 	@Override public Ast visitCompare(exprParser.CompareContext ctx) {
-  
+		pere2 = "Compare";
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
@@ -156,7 +177,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         return noeudTemporaire;
     }
 	@Override public Ast visitEq(exprParser.EqContext ctx) {
-  
+		pere2 = "Eq";
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
@@ -176,6 +197,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	
 	/*------------------------------------------------------------------------------------------------------*/
 	@Override public Ast visitExprseq(exprParser.ExprseqContext ctx) {
+		pere2 = "Exprseq";
 		ExprSeq exprseq = new ExprSeq();
 		//System.out.println("len = " + ctx.getChildCount() + "\n");
 		if (ctx.getChildCount() == 1){
@@ -188,6 +210,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return exprseq;
 	 }
 	 @Override public Ast visitExprlist(exprParser.ExprlistContext ctx) {
+		pere2 = "Exprlist";
 		ExprList exprlist = new ExprList();
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
@@ -198,6 +221,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return exprlist ;
 	}
 	@Override public Ast visitFieldlist(exprParser.FieldlistContext ctx) {
+		pere2 = "Fieldlist";
 		//System.out.println("Dans Fieldlist");
 		FieldList fieldlist = new FieldList();
 		for (int i=0; i<ctx.getChildCount()/3;i++){
@@ -208,6 +232,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return fieldlist ;
 	}
 	@Override public Ast visitIdflist(exprParser.IdflistContext ctx) {
+		pere2 = "Idflist";
 		IdfList Idflist = new IdfList();
 		if (ctx.getChildCount() == 1){
 			String idfString = ctx.getChild(0).toString();
@@ -221,6 +246,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return Idflist;
 	}
 	@Override public Ast visitIdfexprlist(exprParser.IdfexprlistContext ctx) {
+		pere2 = "Idfexprlist";
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
 		IdfExprList Idfexprlist = new IdfExprList();
@@ -234,6 +260,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return Idfexprlist;
 	}
 	@Override public Ast visitDeclarationlist(exprParser.DeclarationlistContext ctx) {
+		pere2 = "Declarationlist";
 		DeclarationList declaList = new DeclarationList();
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
@@ -244,17 +271,21 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return declaList;
 	}
 	@Override public Ast visitTypedecla(exprParser.TypedeclaContext ctx) { 
+		pere2 = "Typedecla";
 		return ctx.getChild(0).accept(this); 
 	}
 	
 	@Override public Ast visitVardecla(exprParser.VardeclaContext ctx) { 
+		pere2 = "Vardecla";
 		return ctx.getChild(0).accept(this);
 	}
 	
 	@Override public Ast visitFundecla(exprParser.FundeclaContext ctx) {
+		pere2 = "Fundecla";
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) {
+		pere2 = "Typedeclaration";
 		pere = "typedeclaration";
 		List<String> typedecla = new ArrayList<>();
 		tds.get(tds.size()-1).add(typedecla);
@@ -263,23 +294,27 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return new TypeDeclaration(typeid, type);
 	}
 	@Override public Ast visitType_id(exprParser.Type_idContext ctx) { 
+		pere2 = "Type_id";
 		List<List> list = tds.get(tds.size()-1);
 		list.get(list.size()-1).add("TYPEID");
 		return ctx.getChild(0).accept(this);
 	}
 	
 	@Override public Ast visitTypef(exprParser.TypefContext ctx) {
+		pere2 = "Typef";
 		List<List> list = tds.get(tds.size()-1);
 		list.get(list.size()-1).add("TYPEFIELD");
 		return ctx.getChild(1).accept(this);
 	}
 	@Override public Ast visitTypeidarray(exprParser.TypeidarrayContext ctx) { 
+		pere2 = "Typeidarray";
 		//System.out.println("Taille : " + tds.size());
 		List<List> list = tds.get(tds.size()-1);
 		list.get(list.size()-1).add("TYPEARRAY");
 		return ctx.getChild(2).accept(this);
 	}
 	@Override public Ast visitTypefields(exprParser.TypefieldsContext ctx) {
+		pere2 = "Typefields";
 		TypeFieldList typefieldList = new TypeFieldList();
 		pere = "typefields";
 		if (ctx.getChildCount() == 1){
@@ -297,6 +332,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return typefieldList;
 	}
 	@Override public Ast visitTypefield(exprParser.TypefieldContext ctx) {
+		pere2 = "Typefield";
 		List<String> line = new ArrayList<>(); 
 		String idfString = ctx.getChild(0).toString();
 		line.add(idfString);
@@ -310,6 +346,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
+		pere2 = "Typeid";
 		System.out.println("Dans typeid");
 		String idfString = ctx.getChild(0).toString();
 		System.out.println("idf = " + idfString);
@@ -321,6 +358,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return new Idf(idfString); 
 	}
 	@Override public Ast visitVariabledeclaration(exprParser.VariabledeclarationContext ctx) { 
+		pere2 = "Variabledeclaration";
 		List<String> line = new ArrayList<>();
 		String idfString = ctx.getChild(1).toString();
 		line.add(idfString);
@@ -344,6 +382,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 	}
 	@Override public Ast visitFunctiondeclaration(exprParser.FunctiondeclarationContext ctx) { 
+		pere2 = "Functiondeclaration";
 		pile_region.add(String.valueOf(num_region));
 		String idfString = ctx.getChild(1).toString();
 		List<List> list_fun = new ArrayList<>();
@@ -371,10 +410,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		} 
 	}
 	@Override public Ast visitPrinti(exprParser.PrintiContext ctx) { 
+		pere2 = "Printi";
 		Ast printe = ctx.getChild(1).accept(this);
 		return new Printe(printe);
 	 }
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
+		pere2 = "Print";
 		Ast printe = ctx.getChild(1).accept(this);
 		return new Printe(printe);
 	 }
@@ -382,6 +423,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	
 	@Override 
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx){
+		pere2 = "Ifthenelse";
 		pere = "if";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_if = new ArrayList<>();
@@ -414,6 +456,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitDeclarationlists(exprParser.DeclarationlistsContext ctx) { 
+		pere2 = "Declarationlists";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_let = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
@@ -429,12 +472,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
+		pere2 = "Exprtiret";
 		return ctx.getChild(1).accept(this);
 	}
 
 
 	@Override 
 	public Ast visitFor(exprParser.ForContext ctx) { 
+		pere2 = "For";
 		pere = "for";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_for = new ArrayList<>();
@@ -466,6 +511,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 //on met peut etre idf mais à voir plus tard
 	@Override 
 	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
+		pere2 = "Lvalues";
 		Ast lvalues= ctx.getChild(0).accept(this);
 		//System.out.println("len = " + ctx.getChildCount() + "\n");
 		if(ctx.getChildCount() == 3){
@@ -481,28 +527,34 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitNil_op(exprParser.Nil_opContext ctx) { 
+		pere2 = "Nilop";
 		return ctx.getChild(1).accept(this);
 	}
 	@Override 
 	public Ast visitOps(exprParser.OpsContext ctx) { 
+		pere2 = "Ops";
 		return ctx.getChild(0).accept(this);
 	}
 	@Override 
 	public Ast visitParenthesis(exprParser.ParenthesisContext ctx) { 
+		pere2 = "Parenthesis";
 		System.out.println("Dans parentheses");
 		return ctx.getChild(1).accept(this);
 	}
 	@Override 
 	public Ast visitPrints(exprParser.PrintsContext ctx) { 
+		pere2 = "Prints";
 		return ctx.getChild(0).accept(this);
 	
 	}
 	@Override 
 	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
+		pere2 = "Printis";
 		return ctx.getChild(0).accept(this);
 	}
 	@Override 
 	public Ast visitTypeids(exprParser.TypeidsContext ctx) { 
+		pere2 = "Typeids";
 		pere = "typeids";
 		if(ctx.getChildCount()==4){
 			Ast typeids1= ctx.getChild(0).accept(this);
@@ -518,6 +570,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitWhile(exprParser.WhileContext ctx) { 
+		pere2 = "While";
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_while = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
@@ -535,9 +588,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitValint(exprParser.ValintContext ctx) {
 		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
 		if (pere != null && pere.equals("for")){
+			System.out.println("pere = " + pere2);
+			System.out.println("Idf : " + intString);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
+			//System.out.println("line = " + line);
 			String calcul = line.get(line.size()-1);
 			if (calcul.charAt(calcul.length()-1) == '+' || calcul.charAt(calcul.length()-1) == '-' || calcul.charAt(calcul.length()-1) == '*' || calcul.charAt(calcul.length()-1) == '/'){
 				if (calcul.length() == 1){
@@ -555,9 +611,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
+		//System.out.println("Pere : " + pere + "\n");
 		if (pere != null && pere.equals("for")){
-			System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
-			System.out.println("tds : " + tds);
+			System.out.println("pere = " + pere2);
+			//System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
+			System.out.println("Idf : " + idfString);
+			//System.out.println("tds : " + tds);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -580,10 +639,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override 
 	public Ast visitValop(exprParser.ValopContext ctx) {
+		pere2 = "Valop";
 		return ctx.getChild(ctx.getChildCount()-2).accept(this);
 	}
 	@Override 
 	public Ast visitVallvalue(exprParser.VallvalueContext ctx) {
+		pere2 = "Vallvalue";
 		return ctx.getChild(ctx.getChildCount()-1).accept(this);
 	}
 }
