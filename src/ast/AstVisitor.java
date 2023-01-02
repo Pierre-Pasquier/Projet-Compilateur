@@ -47,7 +47,9 @@ public interface AstVisitor<T> {
     public T visit (Then then);
     public T visit(Ifthenelse ifthenelse);
     public T visit(Lvalues lvalues);
-    
+    public T visit(BorneInf borneInf);
+    public T visit(BorneSup borneSup);
+    public T visit(Do faire);
 
 
 }
