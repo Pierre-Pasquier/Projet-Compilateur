@@ -597,6 +597,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Typeids(typeids1,fieldlist1,null);
 		} else{
 			Ast typeids2= ctx.getChild(0).accept(this);
+			String nb_elts = ctx.getChild(2).toString();
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = list.get(list.size()-1);
+			line.add(nb_elts);
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
 			return new Typeids(typeids2, expr1, expr2);
