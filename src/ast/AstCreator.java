@@ -533,6 +533,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		
 		Ast deb= ctx.getChild(3).accept(this);
 		Ast fin = ctx.getChild(5).accept(this);
+		pere="finFor";
 		Ast faire = ctx.getChild(7).accept(this);
 		
 		
