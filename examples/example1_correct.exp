@@ -7,7 +7,7 @@ let
     var diag2 := intArray [ N+N-1 ] of 0
     function printboard(c:int, a:string) =
         (for i := 0 to N-1
-        do (for j := 0 to N-1
+        do (for j := 0 to N*1+1
             do print(if col[i]=j then 1+2 else 2*3);
             print(1+2));
         print(1+2))

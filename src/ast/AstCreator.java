@@ -12,6 +12,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public String pere = null;
 	public String pere2 = null;
 	public List<String> pile_region = new ArrayList<>();
+	public List<String> args = new ArrayList<>();
 
 	@Override 
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
@@ -31,12 +32,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return ctx.getChild(0).accept(this);
 		}
 		String operator = ctx.getChild(1).toString();	
-		if (operator.equals("-") && pere != null && pere.equals("for")){
+		if (operator.equals("-") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
 			line.add("-");
-		} else if(operator.equals("+") && pere != null && pere.equals("for")){
+		} else if(operator.equals("+") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -46,14 +47,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             String operation = ctx.getChild(2*i+1).toString();
-			if (i != 0 && operation.equals("-") && pere != null && pere.equals("for")){
+			if (i != 0 && operation.equals("-") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
 				String calcul = line.get(line.size()-1);
 				calcul = calcul + "-";
 				line.set(line.size()-1,calcul);
-			} else if(i != 0 && operation.equals("+") && pere != null && pere.equals("for")){
+			} else if(i != 0 && operation.equals("+") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
@@ -86,12 +87,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return ctx.getChild(0).accept(this);
 		}
 		String operator = ctx.getChild(1).toString();	
-		if (operator.equals("*") && pere != null && pere.equals("for")){
+		if (operator.equals("*") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
 			line.add("*");
-		} else if(operator.equals("/") && pere != null && pere.equals("for")){
+		} else if(operator.equals("/") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -106,14 +107,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
             
             String operation = ctx.getChild(2*i+1).toString();
 
-			if (i != 0 && operation.equals("*") && pere != null && pere.equals("for")){
+			if (i != 0 && operation.equals("*") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
 				String calcul = line.get(line.size()-1);
 				calcul = calcul + "*";
 				line.set(line.size()-1,calcul);
-			} else if(i != 0 && operation.equals("/") && pere != null && pere.equals("for")){
+			} else if(i != 0 && operation.equals("/") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
@@ -380,9 +381,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
+		String idfString = ctx.getChild(0).toString();
+		if (pere2.equals("Typefield")){
+			args.add(idfString);
+		}
 		pere2 = "Typeid";
 		System.out.println("Dans typeid");
-		String idfString = ctx.getChild(0).toString();
 		System.out.println("idf = " + idfString);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		List<List> list = tds.get(indice);
@@ -431,6 +435,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast expr = ctx.getChild(6).accept(this);
 			num_imbrication--;
 			pile_region.remove(pile_region.size()-1);
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = new ArrayList<>();
+			line.add(idfString);
+			line.add("METHOD");
+			line.add("void");
+			line.add(Integer.toString(args.size()));
+			line.addAll(args);
+			list.add(line);
+			args.clear();
 			//System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null);
 		} else {
@@ -440,6 +454,16 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			pile_region.remove(pile_region.size()-1);
 			//System.out.println(pile_region);
 			num_imbrication--;
+			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
+			List<List> list = tds.get(indice);
+			List<String> line = new ArrayList<>();
+			line.add(idfString);
+			line.add("METHOD");
+			line.add(ctx.getChild(6).accept(this).toString());
+			line.add(Integer.toString(args.size()));
+			line.addAll(args);
+			list.add(line);
+			args.clear();
 			return new FunctionDeclaration(idf, typefields,expr, typeid);
 		} 
 	}
@@ -598,11 +622,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return new Typeids(typeids1,fieldlist1,null);
 		} else{
 			Ast typeids2= ctx.getChild(0).accept(this);
-			String nb_elts = ctx.getChild(2).toString();
-			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
-			List<List> list = tds.get(indice);
-			List<String> line = list.get(list.size()-1);
-			line.add(nb_elts);
+			
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
 			return new Typeids(typeids2, expr1, expr2);
@@ -627,7 +647,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitValint(exprParser.ValintContext ctx) {
 		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
-		if (pere != null && pere.equals("for")){
+		if (pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			System.out.println("pere = " + pere2);
 			System.out.println("Idf : " + intString);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
@@ -652,7 +672,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
 		//System.out.println("Pere : " + pere + "\n");
-		if (pere != null && pere.equals("for")){
+		if (pere != null && (pere.equals("for") || pere.equals("typeids"))){
 			System.out.println("pere = " + pere2);
 			//System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
 			System.out.println("Idf : " + idfString);
