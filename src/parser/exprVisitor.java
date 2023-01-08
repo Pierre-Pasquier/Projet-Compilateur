@@ -17,13 +17,6 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgram(exprParser.ProgramContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Ops}
-	 * labeled alternative in {@link exprParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOps(exprParser.OpsContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code Nil_op}
 	 * labeled alternative in {@link exprParser#expr}.
 	 * @param ctx the parse tree
@@ -93,6 +86,13 @@ public interface exprVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclarationlists(exprParser.DeclarationlistsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Ops}
+	 * labeled alternative in {@link exprParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOps(exprParser.OpsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code Printis}
 	 * labeled alternative in {@link exprParser#expr}.

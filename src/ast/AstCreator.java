@@ -2,6 +2,7 @@ package ast;
 import parser.exprBaseVisitor;
 import parser.exprParser;
 import java.util.List;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 public class AstCreator extends exprBaseVisitor<Ast>{
 
@@ -13,10 +14,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public String pere2 = null;
 	public List<String> pile_region = new ArrayList<>();
 	public List<String> args = new ArrayList<>();
+	PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
+
+
+	public AstCreator() throws Exception{
+	}
+
 
 	@Override 
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
+		writer.println("Contrôles sémantiques :");
 		Ast child = ctx.getChild(0).accept(this);
+		writer.close();
 		return new Program(child);
 	}
 	/**
@@ -620,12 +629,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast fieldlist1= ctx.getChild(2).accept(this);
 
 			return new Typeids(typeids1,fieldlist1,null);
-		} else{
+		} else if (ctx.getChildCount()==6){
 			Ast typeids2= ctx.getChild(0).accept(this);
 			
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
 			return new Typeids(typeids2, expr1, expr2);
+		} else {
+			return new Typeids(null, null, null);
 		}
 	}
 	@Override 

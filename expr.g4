@@ -7,8 +7,7 @@ program : expr EOF;
 
 
 expr
-    :op                                                             #Ops
-    |'nil' op                                                       #Nil_op
+    :'nil' op                                                       #Nil_op
     |(typeid '{' fieldlist '}' | typeid '[' expr ']' 'of' expr)?    #Typeids
     |lvalue (':=' expr | '(' exprlist ')' )?                        #Lvalues
     |'-' expr                                                       #Exprtiret
@@ -18,6 +17,7 @@ expr
     |'for' IDF ':=' expr 'to' expr 'do' expr                        #For           
     |'break'                                                        #Break
     |'let' declarationlist 'in' exprseq 'end'                       #Declarationlists
+    |op                                                             #Ops
     |printi                                                         #Printis
     |print                                                          #Prints
     ;

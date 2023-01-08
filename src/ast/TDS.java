@@ -35,7 +35,7 @@ public class TDS {
     }
 
 
-    //Renvoie l'indice de la tds, sa ligne et sa colonne de l'élément passé en paramètre
+    //Renvoie l'indice dans la tds, sa ligne et sa colonne de l'élément passé en paramètre
     public static Result is_in_tds(String x, List<List> list_tds, int num_region){ 
         int i = getTds(num_region, list_tds);   //Récupère le numéro de la tds avec le num de la région
         List<List> tds = list_tds.get(i);
