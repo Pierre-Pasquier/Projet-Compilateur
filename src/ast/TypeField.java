@@ -16,9 +16,13 @@ public class TypeField implements Ast{
         this.typeid = typeid;
     }
 
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
+
 }

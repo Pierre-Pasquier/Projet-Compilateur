@@ -11,9 +11,13 @@ public class Then implements Ast{
     public Then(Ast alors){
         this.alors=alors;
     }
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
+
 }

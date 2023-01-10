@@ -19,9 +19,12 @@ public class Typeids implements Ast {
         this.typeids3 = typeids3;
     }
 
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
 }

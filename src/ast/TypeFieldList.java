@@ -20,9 +20,12 @@ public class TypeFieldList implements Ast{
         this.typefieldList.add(typefield);
     }
 
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
 }

@@ -16,10 +16,15 @@ public class Stringg implements Ast{
         this.name = name;
     }
 
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
+        // TODO Auto-generated method stub
+        return null;
         
     }
+
+
    
 
 }
