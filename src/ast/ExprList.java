@@ -22,7 +22,15 @@ public class ExprList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < ExprList.size(); i++) {
+            if (i == 0){
+                TDS.setFonctionEtudiee(ExprList.get(i).ControleSemantique().get(0));
+                TDS.setFonctionEtudiee(null);
+            }
+            else{
+                ExprList.get(i).ControleSemantique();
+            }
+        }
         return null;
         
     }

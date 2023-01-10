@@ -19,6 +19,7 @@ public class Program implements Ast {
     }
 
     public List<String> ControleSemantique() {
+        System.out.println("Controle sémantique Program --------------- ");
         this.expression.ControleSemantique();
         return null;
     }

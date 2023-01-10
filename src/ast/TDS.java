@@ -1,19 +1,23 @@
 package ast;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TDS {
-    int num_region;
-    int num_imbrication;
-	PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
+    public static int num_region;
+    public static int num_imbrication;
+	public static PrintWriter writer;
+    public static String fonction_etudiee = null;
+    public static List<List> tds;
 
-    public TDS(int num_region, int num_imbrication, PrintWriter writer) throws Exception{
+    public TDS(int num_region, int num_imbrication) throws FileNotFoundException, UnsupportedEncodingException{
         this.num_region = num_region;
         this.num_imbrication = num_imbrication;
-        this.writer = writer;
+        this.writer = new PrintWriter("out/output.txt", "UTF-8");
     }
 
     //Renvoie le déplacement de l'élément passé en paramètre 
@@ -231,25 +235,44 @@ public class TDS {
         return -1;
     }
 
-    public int getRegion(){
-        return this.num_region;
+    public static int getRegion(){
+        return num_region;
     }
 
-    public int getImbrication(){
-        return this.num_imbrication;
+    public static int getImbrication(){
+        return num_imbrication;
     }
 
-    public void setRegion(int num_region){
-        this.num_region = num_region;
+    public static void setRegion(int num_region){
+        num_region = num_region;
     }
 
-    public void setImbrication(int num_imbrication){
-        this.num_imbrication = num_imbrication;
+    public static void setImbrication(int num_imbrication){
+        num_imbrication = num_imbrication;
     }
 
-    public void write(String x){
-        this.writer.println(x);
+    public static void write(String x){
+        writer.println(x);
     }
+
+    public static void setFonctionEtudiee(String x){
+        fonction_etudiee = x;
+    }
+
+    public static String getFonctionEtudiee(){
+        return fonction_etudiee;
+    }
+
+    public static void setTds(List<List> tdss){
+        tds = tdss;
+    }
+
+    public static List<List> getTds(){
+        return tds;
+    }
+
+
+
 
 }
 

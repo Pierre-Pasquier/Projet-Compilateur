@@ -22,7 +22,7 @@ public class DeclarationList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        System.out.println("Controle sémantique DeclarationList nb fils : " + DeclarationList.size() +  "--------------- ");
         return null;
         
     }

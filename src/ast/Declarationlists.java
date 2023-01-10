@@ -22,7 +22,7 @@ public class Declarationlists implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        affect.ControleSemantique();
         return null;
         
     }

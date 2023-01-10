@@ -28,6 +28,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		writer.println("Contrôles sémantiques :");
 		Ast child = ctx.getChild(0).accept(this);
 		writer.close();
+		TDS.setTds(tds);
 		return new Program(child,ctx.getStart().getLine());
 	}
 	/**
