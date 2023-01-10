@@ -52,6 +52,9 @@ public class Main {
             //Affichage de la TDS
             print_tds(creator.tds);
 
+            //Controle sémantique
+            ast.ControleSemantique();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
