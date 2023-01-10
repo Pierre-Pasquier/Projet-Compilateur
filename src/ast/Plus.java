@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Plus implements Ast {
@@ -22,7 +23,12 @@ public class Plus implements Ast {
     @Override
     public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
-        return null;
+
+        List<String> plus=new ArrayList<>();
+        plus.addAll(left.ControleSemantique());
+        plus.addAll(right.ControleSemantique());
+
+        return plus;
         
     }
 

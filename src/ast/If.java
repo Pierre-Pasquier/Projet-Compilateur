@@ -12,10 +12,11 @@ public class If implements Ast {
         this.line = line;
         this.condition=condition;
     }
+    
     @Override
     public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
-        return null;
+        return condition.ControleSemantique();
         
     }
 

@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,7 +23,13 @@ public class Stringg implements Ast{
     @Override
     public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
-        return null;
+
+        List<String> string=new ArrayList<>();
+        string.add("STRING");
+        string.add(String.valueOf(line));
+
+
+        return string;
         
     }
 
