@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class IntNode implements Ast {
 
     // Utile pour la dernière partie
@@ -14,9 +16,11 @@ public class IntNode implements Ast {
     }
 
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
     
 }

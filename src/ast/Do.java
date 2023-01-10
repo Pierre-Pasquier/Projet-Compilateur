@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class Do implements Ast{
     public <T> T accept(AstVisitor<T> visitor){
         return visitor.visit(this);
@@ -10,8 +12,10 @@ public class Do implements Ast{
         this.faire=faire;
     }
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
 }

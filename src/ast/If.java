@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class If implements Ast {
     public <T> T accept(AstVisitor<T> visitor){
         return visitor.visit(this);
@@ -9,9 +11,11 @@ public class If implements Ast {
         this.condition=condition;
     }
     @Override
-    public void ControleSemantique() {
-        condition.ControleSemantique();
+    public List<String> ControleSemantique() {
+        // TODO Auto-generated method stub
+        return null;
         
     }
+
 
 }

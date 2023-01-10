@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class Exprtiret  implements Ast {
 
     public <T> T accept(AstVisitor<T> visitor){
@@ -15,8 +17,10 @@ public class Exprtiret  implements Ast {
 
 
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
 }

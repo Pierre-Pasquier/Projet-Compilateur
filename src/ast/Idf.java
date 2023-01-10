@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class Idf implements Ast{
     
     // Utile pour la dernière partie
@@ -14,10 +16,12 @@ public class Idf implements Ast{
     }
 
     @Override
-    public String ControleSemantique() {
-        return name;
+    public List<String> ControleSemantique() {
+        // TODO Auto-generated method stub
+        return null;
         
     }
+
    
 
 }
