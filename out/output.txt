@@ -1,1 +1,5 @@
 Contrôles sémantiques :
+Erreur ligne 15 : nombre d'arguments incorrects pour la fonction printboard
+Erreur ligne 18 : la fonction try n'existe pas
+Erreur ligne 18 : nombre d'arguments incorrects pour la fonction try
+Erreur ligne 19 : nombre d'arguments incorrects pour la fonction try

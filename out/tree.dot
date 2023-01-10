@@ -5,7 +5,7 @@ digraph "ast"{
 
 	N2 [label="DeclarationList", shape="box"];
 	N4 [label="N", shape="box"];
-	N5 [label="8", shape="box"];
+	N5 [label="Bonjour", shape="box"];
 	N3 [label="VariableDeclaration", shape="box"];
 	N7 [label="intArray", shape="box"];
 	N8 [label="int", shape="box"];
@@ -207,7 +207,15 @@ digraph "ast"{
 	N104 [label="Ifthenelse", shape="box"];
 	N99 [label="FunctionDeclaration", shape="box"];
 	N206 [label="try", shape="box"];
-	N207 [label="0", shape="box"];
+	N207 [label="expr ,", shape="box"];
+	N209 [label="a", shape="box"];
+	N208 [label="Lvalues", shape="box"];
+	N211 [label="b", shape="box"];
+	N210 [label="Lvalues", shape="box"];
+	N213 [label="c", shape="box"];
+	N212 [label="Lvalues", shape="box"];
+	N215 [label="d", shape="box"];
+	N214 [label="Lvalues", shape="box"];
 	N205 [label="Lvalues", shape="box"];
 	N1 [label="Declarationlists", shape="box"];
 	N0 [label="Program", shape="box"];
@@ -415,6 +423,14 @@ digraph "ast"{
 	N99 -> N101; 
 	N99 -> N104; 
 	N2 -> N99; 
+	N208 -> N209; 
+	N207 -> N208; 
+	N210 -> N211; 
+	N207 -> N210; 
+	N212 -> N213; 
+	N207 -> N212; 
+	N214 -> N215; 
+	N207 -> N214; 
 	N205 -> N206; 
 	N205 -> N207; 
 	N1 -> N2; 

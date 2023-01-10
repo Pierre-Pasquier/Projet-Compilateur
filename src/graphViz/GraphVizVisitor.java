@@ -19,6 +19,7 @@ import ast.Egal;
 import ast.Diff;
 import ast.IntNode;
 import ast.Opbinexpr;
+import ast.Stringg;
 
 import ast.Ast;
 import ast.AstVisitor;
@@ -375,6 +376,14 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         return nodeIdentifier;
 
+    }
+
+    public String visit(Stringg string){
+        String nodeIdentifier = this.nextState();
+
+        this.addNode(nodeIdentifier, string.name);
+
+        return nodeIdentifier;
     }
 
     @Override

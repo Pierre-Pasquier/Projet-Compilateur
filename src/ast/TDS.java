@@ -207,6 +207,19 @@ public class TDS {
     }
 
 
+    public static int getNbFils(String x, List<List> liste_tds) {
+        for (int i = 0; i < liste_tds.size(); i++) {
+            List<List> tds = liste_tds.get(i);
+            for (int j = 1; j < tds.size(); j++) {
+                List<String> ligne = tds.get(j);
+                System.out.println(x + "    " + ligne.get(0).equals(x));
+                if (ligne.get(0).equals(x) && ligne.get(1).equals("METHOD")) {
+                    return Integer.valueOf(ligne.get(3));
+                }
+                }
+            }
+        return -1;
+    }
 }
 
 

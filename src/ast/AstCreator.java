@@ -15,6 +15,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public List<String> pile_region = new ArrayList<>();
 	public List<String> args = new ArrayList<>();
 	PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
+	public String fonction_etudiee;
+	public boolean controle_semantique = false;
 
 
 	public AstCreator() throws Exception{
@@ -41,12 +43,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			return ctx.getChild(0).accept(this);
 		}
 		String operator = ctx.getChild(1).toString();	
-		if (operator.equals("-") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+		if (operator.equals("-") && pere != null && (pere.equals("for"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
 			line.add("-");
-		} else if(operator.equals("+") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+		} else if(operator.equals("+") && pere != null && (pere.equals("for"))){
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -56,14 +58,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
             String operation = ctx.getChild(2*i+1).toString();
-			if (i != 0 && operation.equals("-") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+			if (i != 0 && operation.equals("-") && pere != null && (pere.equals("for"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
 				String calcul = line.get(line.size()-1);
 				calcul = calcul + "-";
 				line.set(line.size()-1,calcul);
-			} else if(i != 0 && operation.equals("+") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+			} else if(i != 0 && operation.equals("+") && pere != null && (pere.equals("for"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
@@ -116,14 +118,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
             
             String operation = ctx.getChild(2*i+1).toString();
 
-			if (i != 0 && operation.equals("*") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+			if (i != 0 && operation.equals("*") && pere != null && (pere.equals("for") || pere.equals("typeids") || pere2.equals("Plus"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
 				String calcul = line.get(line.size()-1);
 				calcul = calcul + "*";
 				line.set(line.size()-1,calcul);
-			} else if(i != 0 && operation.equals("/") && pere != null && (pere.equals("for") || pere.equals("typeids"))){
+			} else if(i != 0 && operation.equals("/") && pere != null && (pere.equals("for") || pere.equals("typeids") || pere2.equals("Plus"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
@@ -197,6 +199,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitCompare(exprParser.CompareContext ctx) {
 		pere2 = "Compare";
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
+		if (ctx.getChild(0).toString().substring(0,1).equals("\"")){
+			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1));
+		}
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
@@ -222,6 +227,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
     }
 	@Override public Ast visitEq(exprParser.EqContext ctx) {
 		pere2 = "Eq";
+		if (ctx.getChild(0).toString().substring(0,1).equals("\"")){
+			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1));
+		}
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
@@ -235,7 +243,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 					break;
 			} 
 		}
-		 
         return noeudTemporaire;
     }
 	
@@ -256,6 +263,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	 @Override public Ast visitExprlist(exprParser.ExprlistContext ctx) {
 		pere2 = "Exprlist";
 		ExprList exprlist = new ExprList();
+		if (TDS.getNbFils(fonction_etudiee,tds) != ctx.getChildCount()){
+			if (TDS.getNbFils(fonction_etudiee,tds) == -1){
+				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'existe pas");
+			}
+			writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee);
+		}
+		fonction_etudiee = null;
 		if (ctx.getChildCount() == 1){
 			return ctx.getChild(0).accept(this);
 		}
@@ -280,6 +294,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		IdfList Idflist = new IdfList();
 		if (ctx.getChildCount() == 1){
 			String idfString = ctx.getChild(0).toString();
+			fonction_etudiee = idfString;
+			System.out.println("Fonction étudiée = " + fonction_etudiee);
 			return new Idf(idfString);
 		}
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
@@ -291,6 +307,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitIdfexprlist(exprParser.IdfexprlistContext ctx) {
 		pere2 = "Idfexprlist";
+		System.out.println("Dans Idfexprlist, nombre de fils = " + ctx.getChildCount());
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString);
 		IdfExprList Idfexprlist = new IdfExprList();
@@ -416,6 +433,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (ctx.getChildCount() == 4){
 			tds.get(indice).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
+
+			System.out.println("---------------idf = " + idfString + "------------------expr = null : "+ (expr == null) + "\n");
 			return new VariableDeclaration(idf, expr, null);
 		} else {
 			String typeidString = ctx.getChild(3).toString();
@@ -424,7 +443,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
-			//System.out.println("expr = null : "+ (expr == null) + "\n");
+			System.out.println("expr = null : "+ (expr == null) + "\n");
 			return new VariableDeclaration(idf, expr, typeid);
 		}
 	}
@@ -534,6 +553,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		num_imbrication--;
 		pile_region.remove(pile_region.size()-1);
 		//System.out.println(pile_region);
+		controle_semantique = true;
 		Ast dans = ctx.getChild(3).accept(this);
 		return new Declarationlists(dans,affect);
 	}
@@ -613,7 +633,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitPrints(exprParser.PrintsContext ctx) { 
 		pere2 = "Prints";
 		return ctx.getChild(0).accept(this);
-	
 	}
 	@Override 
 	public Ast visitPrintis(exprParser.PrintisContext ctx) { 
