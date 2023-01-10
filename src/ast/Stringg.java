@@ -15,7 +15,6 @@ public class Stringg implements Ast{
 
     @Override
     public void ControleSemantique() {
-        // TODO Auto-generated method stub
         
     }
    

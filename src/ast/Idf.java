@@ -14,8 +14,8 @@ public class Idf implements Ast{
     }
 
     @Override
-    public void ControleSemantique() {
-        // TODO Auto-generated method stub
+    public String ControleSemantique() {
+        return name;
         
     }
    

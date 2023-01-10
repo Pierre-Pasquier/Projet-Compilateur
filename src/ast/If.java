@@ -10,7 +10,7 @@ public class If implements Ast {
     }
     @Override
     public void ControleSemantique() {
-        // TODO Auto-generated method stub
+        condition.ControleSemantique();
         
     }
 
