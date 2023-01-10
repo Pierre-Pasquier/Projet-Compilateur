@@ -12,4 +12,11 @@ public class Printe implements Ast {
     public Printe(Ast printe){
         this.printe = printe;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

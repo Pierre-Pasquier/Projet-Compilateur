@@ -9,4 +9,9 @@ public class Do implements Ast{
     public Do(Ast faire){
         this.faire=faire;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -8,4 +8,9 @@ public class Else implements Ast{
     public Else(Ast ouOccasionnel){
         this.ouOccasionnel=ouOccasionnel;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

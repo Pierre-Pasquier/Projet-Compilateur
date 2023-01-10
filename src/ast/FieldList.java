@@ -18,4 +18,10 @@ public class FieldList implements Ast{
         this.FieldList.add(expr);
         this.FieldList.add(Idf);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

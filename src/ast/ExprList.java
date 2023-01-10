@@ -16,4 +16,10 @@ public class ExprList implements Ast{
     public void addExprList(Ast expr){
         this.ExprList.add(expr);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

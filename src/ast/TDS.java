@@ -1,11 +1,21 @@
 package ast;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TDS {
-    
+    int num_region;
+    int num_imbrication;
+	PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
+
+    public TDS(int num_region, int num_imbrication, PrintWriter writer) throws Exception{
+        this.num_region = num_region;
+        this.num_imbrication = num_imbrication;
+        this.writer = writer;
+    }
+
     //Renvoie le déplacement de l'élément passé en paramètre 
     public static int depl(String x, List<List> tds, int num_region){
         if(num_region == -1){
@@ -220,6 +230,27 @@ public class TDS {
             }
         return -1;
     }
+
+    public int getRegion(){
+        return this.num_region;
+    }
+
+    public int getImbrication(){
+        return this.num_imbrication;
+    }
+
+    public void setRegion(int num_region){
+        this.num_region = num_region;
+    }
+
+    public void setImbrication(int num_imbrication){
+        this.num_imbrication = num_imbrication;
+    }
+
+    public void write(String x){
+        this.writer.println(x);
+    }
+
 }
 
 

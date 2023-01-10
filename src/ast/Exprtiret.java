@@ -12,4 +12,11 @@ public class Exprtiret  implements Ast {
     public Exprtiret(Ast expr){
         this.expr_ = expr;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

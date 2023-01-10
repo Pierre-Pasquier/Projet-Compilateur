@@ -12,5 +12,11 @@ public class IntNode implements Ast {
     public IntNode(int value) {
         this.value = value;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
     
 }

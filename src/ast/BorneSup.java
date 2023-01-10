@@ -9,4 +9,9 @@ public class BorneSup implements Ast{
     public BorneSup(Ast fin){
         this.fin=fin;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

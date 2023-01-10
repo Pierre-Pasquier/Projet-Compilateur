@@ -16,4 +16,10 @@ public class IdfExprList implements Ast {
     public void addIdfExprList(Ast expr){
         this.IdfExprList.add(expr);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

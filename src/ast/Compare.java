@@ -15,4 +15,10 @@ public class Compare implements Ast {
         this.left = left;
         this.right = right;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -17,4 +17,11 @@ public class Opbinexpr implements Ast{
     public void addOpBin(Ast binexpr){
         this.opbinexpr.add(binexpr);
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

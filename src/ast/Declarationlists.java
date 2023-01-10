@@ -14,5 +14,12 @@ public class Declarationlists implements Ast {
         this.dans=dans;
         this.affect=affect;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
   
 }

@@ -17,6 +17,12 @@ public class And implements Ast{
         this.AndList.add(and);
     }
 
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
+
     
 
 }

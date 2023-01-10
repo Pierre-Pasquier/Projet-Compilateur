@@ -16,4 +16,10 @@ public class TypeFieldList implements Ast{
     public void addTypeField(Ast typefield){
         this.typefieldList.add(typefield);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

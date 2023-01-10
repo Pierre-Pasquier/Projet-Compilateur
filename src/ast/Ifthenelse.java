@@ -23,4 +23,11 @@ public class Ifthenelse implements Ast {
         this.alors=alors;
     }
 
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

@@ -16,5 +16,12 @@ public class While implements Ast {
 
 
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }
 

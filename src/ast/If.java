@@ -8,5 +8,10 @@ public class If implements Ast {
     public If(Ast condition){
         this.condition=condition;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 
 }

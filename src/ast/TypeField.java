@@ -12,4 +12,10 @@ public class TypeField implements Ast{
         this.Idf = Idf;
         this.typeid = typeid;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

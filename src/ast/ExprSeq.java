@@ -16,4 +16,10 @@ public class ExprSeq implements Ast{
     public void addExprSeq(Ast expr){
         this.ExprSeq.add(expr);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -17,4 +17,10 @@ public class Or implements Ast{
     public void addOr(Ast or){
         this.OrList.add(or);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

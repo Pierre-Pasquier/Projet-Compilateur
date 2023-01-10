@@ -16,4 +16,14 @@ public class FunctionDeclaration implements Ast {
         this.expr = expr;
         this.typefields = typefields;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
+
+
 }

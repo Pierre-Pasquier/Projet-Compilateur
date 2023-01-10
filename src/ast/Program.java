@@ -13,4 +13,8 @@ public class Program implements Ast {
         this.expression = expr;
     }
 
+    public void ControleSemantique() {
+        this.expression.ControleSemantique();
+    }
+
 }

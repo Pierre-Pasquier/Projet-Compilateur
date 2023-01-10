@@ -12,4 +12,11 @@ public class Nilop implements Ast {
     public Nilop(Ast nilop){
         this.nilop = nilop;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

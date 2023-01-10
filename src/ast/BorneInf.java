@@ -9,4 +9,9 @@ public class BorneInf implements Ast{
     public BorneInf(Ast deb){
         this.deb=deb;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

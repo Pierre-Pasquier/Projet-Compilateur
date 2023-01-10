@@ -12,5 +12,12 @@ public class Parenthesis implements Ast {
     public Parenthesis(Ast parenthesis){
         this.parenthesis = parenthesis;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }
 

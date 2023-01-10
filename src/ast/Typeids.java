@@ -15,4 +15,10 @@ public class Typeids implements Ast {
         this.typeids2 = typeids2;
         this.typeids3 = typeids3;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

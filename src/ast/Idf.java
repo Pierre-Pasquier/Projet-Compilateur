@@ -12,6 +12,12 @@ public class Idf implements Ast{
     public Idf(String name){
         this.name = name;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
    
 
 }

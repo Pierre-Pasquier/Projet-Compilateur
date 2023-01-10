@@ -12,4 +12,10 @@ public class TypeDeclaration implements Ast{
         this.typeid = typeid;
         this.type = type;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

@@ -16,4 +16,10 @@ public class DeclarationList implements Ast{
     public void addDeclaration(Ast declaration){
         this.DeclarationList.add(declaration);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

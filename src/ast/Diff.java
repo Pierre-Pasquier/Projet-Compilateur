@@ -14,4 +14,10 @@ public class Diff implements Ast {
         this.left=left;
         this.right=right;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

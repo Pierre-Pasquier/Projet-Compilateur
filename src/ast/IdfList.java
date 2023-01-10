@@ -16,5 +16,11 @@ public class IdfList implements Ast{
     public void addIdfList(Ast Idf){
         this.IdfList.add(Idf);
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }
 // Voir si il ne faut pas faire une liste de String comme dans Idf si ça marche pas

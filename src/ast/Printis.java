@@ -12,5 +12,12 @@ public class Printis implements Ast {
     public Printis(Ast printis){
         this.printis = printis;
     }
+
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }
 

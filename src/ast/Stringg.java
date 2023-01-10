@@ -12,6 +12,12 @@ public class Stringg implements Ast{
     public Stringg(String name){
         this.name = name;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
    
 
 }

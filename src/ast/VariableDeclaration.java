@@ -19,4 +19,10 @@ public class VariableDeclaration implements Ast {
         this.Idf = Idf;
         this.expr = expr;
     }
+
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }

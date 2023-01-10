@@ -16,5 +16,12 @@ public class Lvalues implements Ast {
     }
 
 
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
+
+
 
 }

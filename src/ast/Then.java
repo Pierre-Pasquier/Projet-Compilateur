@@ -8,4 +8,9 @@ public class Then implements Ast{
     public Then(Ast alors){
         this.alors=alors;
     }
+    @Override
+    public void ControleSemantique() {
+        // TODO Auto-generated method stub
+        
+    }
 }
