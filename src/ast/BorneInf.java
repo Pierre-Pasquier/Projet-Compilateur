@@ -8,7 +8,9 @@ public class BorneInf implements Ast{
     }
     
     public Ast deb;
-    public BorneInf(Ast deb){
+    public int line;
+    public BorneInf(Ast deb,int line){
+        this.line = line;
         this.deb=deb;
     }
     @Override

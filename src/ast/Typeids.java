@@ -12,8 +12,10 @@ public class Typeids implements Ast {
     public Ast typeids1;
     public Ast typeids2;
     public Ast typeids3;
+    public int line;
     
-    public Typeids(Ast typeids1, Ast typeids2, Ast typeids3){
+    public Typeids(Ast typeids1, Ast typeids2, Ast typeids3,int line){
+        this.line = line;
         this.typeids1 = typeids1;
         this.typeids2 = typeids2;
         this.typeids3 = typeids3;

@@ -11,9 +11,12 @@ public class While implements Ast {
 
     public Ast condition;
     public Ast faire;
+    public int line;
 
 
-    public While(Ast condition,Ast faire){
+    public While(Ast condition,Ast faire,int line){
+        this.line = line;
+        this.line = line;
         this.condition = condition;
         this.faire = faire;
 

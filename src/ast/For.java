@@ -12,10 +12,12 @@ public class For implements Ast {
     public Ast fin;
     public Ast faire;
     public Ast idf;
+    public int line;
 
 
 
-    public For(Ast deb,Ast fin,Ast faire,Ast idf){
+    public For(Ast deb,Ast fin,Ast faire,Ast idf,int line){
+        this.line = line;
         this.deb=deb;
         this.fin=fin;
         this.faire=faire;

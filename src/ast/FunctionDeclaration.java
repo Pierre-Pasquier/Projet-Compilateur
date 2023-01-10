@@ -11,8 +11,10 @@ public class FunctionDeclaration implements Ast {
     public Ast Idf;
     public Ast expr;
     public Ast typefields;
+    public int line;
 
-    public FunctionDeclaration(Ast Idf, Ast typefields, Ast expr, Ast typeid){
+    public FunctionDeclaration(Ast Idf, Ast typefields, Ast expr, Ast typeid,int line){
+        this.line = line;
         this.typeid = typeid;
         this.Idf = Idf;
         this.expr = expr;

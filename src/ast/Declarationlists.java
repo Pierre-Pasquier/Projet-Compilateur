@@ -10,9 +10,11 @@ public class Declarationlists implements Ast {
 
     public Ast affect;
     public Ast dans;
+    public int line;
 
 
-    public Declarationlists(Ast dans,Ast affect){
+    public Declarationlists(Ast dans,Ast affect,int line){
+        this.line = line;
         this.dans=dans;
         this.affect=affect;
     }

@@ -10,9 +10,11 @@ public class Lvalues implements Ast {
 
     public Ast lvalue;
     public Ast listexpression;
+    public int line;
 
 
-    public Lvalues(Ast lvalue,Ast listexpression){
+    public Lvalues(Ast lvalue,Ast listexpression,int line){
+        this.line = line;
         this.lvalue=lvalue;
         this.listexpression=listexpression;
     }

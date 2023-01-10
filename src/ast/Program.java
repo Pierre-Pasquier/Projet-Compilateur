@@ -11,13 +11,16 @@ public class Program implements Ast {
     }
 
     public Ast expression;
+    public int line;
 
-    public Program(Ast expr) {
+    public Program(Ast expr,int line) {
+        this.line = line;
         this.expression = expr;
     }
 
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         this.expression.ControleSemantique();
+        return null;
     }
 
 }

@@ -8,7 +8,9 @@ public class Do implements Ast{
     }
     
     public Ast faire;
-    public Do(Ast faire){
+    public int line;
+    public Do(Ast faire,int line){
+        this.line = line;
         this.faire=faire;
     }
     @Override

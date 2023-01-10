@@ -9,8 +9,10 @@ public class IdfList implements Ast{
     }
 
     public ArrayList<Ast> IdfList;
+    public int line;
 
-    public IdfList(){
+    public IdfList(int line){
+        this.line = line;
         this.IdfList = new ArrayList<>();
     }
     

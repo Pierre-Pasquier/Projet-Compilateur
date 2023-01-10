@@ -9,8 +9,10 @@ public class And implements Ast{
     }
 
     public ArrayList<Ast> AndList;
+    int line;
 
-    public And(){
+    public And(int line){
+        this.line = line;
         this.AndList = new ArrayList<>();
     }
     

@@ -11,8 +11,10 @@ public class Mult implements Ast {
 
     public Ast left;
     public Ast right;
+    public int line;
 
-    public Mult(Ast left, Ast right){
+    public Mult(Ast left, Ast right,int line){
+        this.line = line;
         this.left=left;
         this.right=right;
     }

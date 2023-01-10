@@ -11,8 +11,10 @@ public class Compare implements Ast {
 
     public Ast left;
     public Ast right;
+    public int line;
 
-    public Compare(Ast left, Ast right){
+    public Compare(Ast left, Ast right,int line){
+        this.line = line;
         this.left = left;
         this.right = right;
     }

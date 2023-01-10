@@ -9,9 +9,11 @@ public class Exprtiret  implements Ast {
     }
 
     public Ast expr_;
+    public int line;
 
 
-    public Exprtiret(Ast expr){
+    public Exprtiret(Ast expr,int line){
+        this.line = line;
         this.expr_ = expr;
     }
 

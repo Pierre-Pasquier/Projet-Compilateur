@@ -11,8 +11,10 @@ public class Diff implements Ast {
 
     public Ast left;
     public Ast right;
+    public int line;
 
-    public Diff(Ast left, Ast right){
+    public Diff(Ast left, Ast right,int line){
+        this.line = line;
         this.left=left;
         this.right=right;
     }

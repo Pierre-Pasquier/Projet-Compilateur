@@ -10,8 +10,10 @@ public class TypeField implements Ast{
 
     public Ast typeid;
     public Ast Idf;
+    public int line;
 
-    public TypeField(Ast Idf, Ast typeid){
+    public TypeField(Ast Idf, Ast typeid,int line){
+        this.line = line;
         this.Idf = Idf;
         this.typeid = typeid;
     }

@@ -11,8 +11,10 @@ public class Stringg implements Ast{
     }
 
     public String name;
+    public int line;
 
-    public Stringg(String name){
+    public Stringg(String name,int line){
+        this.line = line;
         this.name = name;
     }
 

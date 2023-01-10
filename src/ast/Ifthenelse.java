@@ -11,9 +11,11 @@ public class Ifthenelse implements Ast {
     public Ast condition;
     public Ast alors;
     public Ast ouOccasionnel;
+    public int line;
 
 
-    public Ifthenelse(Ast condition,Ast alors,Ast ouOccasionnel){
+    public Ifthenelse(Ast condition,Ast alors,Ast ouOccasionnel,int line){
+        this.line = line;
         this.condition=condition;
         this.alors=alors;
         this.ouOccasionnel=ouOccasionnel;

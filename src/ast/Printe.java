@@ -9,9 +9,11 @@ public class Printe implements Ast {
     }
 
     public Ast printe;
+    public int line;
 
 
-    public Printe(Ast printe){
+    public Printe(Ast printe,int line){
+        this.line = line;
         this.printe = printe;
     }
 

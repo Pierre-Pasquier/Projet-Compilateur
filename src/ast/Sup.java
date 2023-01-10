@@ -10,11 +10,13 @@ public class Sup implements Ast {
     }
 
     public Ast sup;
+    public int line;
     
     public Ast left;
     public Ast right;
 
-    public Sup(Ast left, Ast right){
+    public Sup(Ast left, Ast right,int line){
+        this.line = line;
         this.left = left;
         this.right = right;
     }

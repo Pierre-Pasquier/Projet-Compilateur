@@ -8,7 +8,9 @@ public class Then implements Ast{
         return visitor.visit(this);
     }
     public Ast alors;
-    public Then(Ast alors){
+    public int line;
+    public Then(Ast alors,int line){
+        this.line = line;
         this.alors=alors;
     }
 

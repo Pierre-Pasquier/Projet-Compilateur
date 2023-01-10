@@ -9,8 +9,10 @@ public class Opbinexpr implements Ast{
     }
     
     public ArrayList<Ast> opbinexpr;
+    public int line;
 
-    public Opbinexpr(){
+    public Opbinexpr(int line){
+        this.line = line;
         this.opbinexpr = new ArrayList<>();
     }
 

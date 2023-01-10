@@ -10,9 +10,11 @@ public class Printis implements Ast {
     }
 
     public Ast printis;
+    public int line;
 
 
-    public Printis(Ast printis){
+    public Printis(Ast printis,int line){
+        this.line = line;
         this.printis = printis;
     }
 

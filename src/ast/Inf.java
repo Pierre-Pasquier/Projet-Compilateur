@@ -12,8 +12,10 @@ public class Inf implements Ast {
     
     public Ast left;
     public Ast right;
+    public int line;
 
-    public Inf(Ast left, Ast right){
+    public Inf(Ast left, Ast right,int line){
+        this.line = line;
         this.left = left;
         this.right = right;
     }

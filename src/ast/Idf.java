@@ -10,8 +10,10 @@ public class Idf implements Ast{
     }
 
     public String name;
+    public int line;
 
-    public Idf(String name){
+    public Idf(String name,int line){
+        this.line = line;
         this.name = name;
     }
 

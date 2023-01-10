@@ -9,9 +9,11 @@ public class Nilop implements Ast {
     }
 
     public Ast nilop;
+    public int line;
 
 
-    public Nilop(Ast nilop){
+    public Nilop(Ast nilop,int line){
+        this.line = line;
         this.nilop = nilop;
     }
 

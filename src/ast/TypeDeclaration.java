@@ -10,8 +10,10 @@ public class TypeDeclaration implements Ast{
     
     public Ast typeid;
     public Ast type;
+    public int line;
 
-    public TypeDeclaration(Ast typeid, Ast type){
+    public TypeDeclaration(Ast typeid, Ast type,int line){
+        this.line = line;
         this.typeid = typeid;
         this.type = type;
     }

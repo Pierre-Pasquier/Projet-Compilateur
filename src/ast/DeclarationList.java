@@ -9,8 +9,10 @@ public class DeclarationList implements Ast{
     }
     
     public ArrayList<Ast> DeclarationList;
+    public int line;
 
-    public DeclarationList(){
+    public DeclarationList(int line){
+        this.line = line;
         this.DeclarationList = new ArrayList<>();
     }
     

@@ -10,8 +10,10 @@ public class FieldList implements Ast{
 
     public ArrayList<Ast> FieldList;
     public Ast Idf;
+    public int line;
 
-    public FieldList(){
+    public FieldList(int line){
+        this.line = line;
         this.FieldList = new ArrayList<>();
     }
     

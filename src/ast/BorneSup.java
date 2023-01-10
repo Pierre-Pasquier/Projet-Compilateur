@@ -8,7 +8,9 @@ public class BorneSup implements Ast{
     }
     
     public Ast fin;
-    public BorneSup(Ast fin){
+    public int line;
+    public BorneSup(Ast fin,int line){
+        this.line = line;
         this.fin=fin;
     }
     @Override

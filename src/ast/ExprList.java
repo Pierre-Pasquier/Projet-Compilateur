@@ -9,8 +9,10 @@ public class ExprList implements Ast{
     }
 
     public ArrayList<Ast> ExprList;
+    public int line;
 
-    public ExprList(){
+    public ExprList(int line){
+        this.line = line;
         this.ExprList = new ArrayList<>();
     }
     

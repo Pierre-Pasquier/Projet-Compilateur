@@ -7,7 +7,9 @@ public class Else implements Ast{
         return visitor.visit(this);
     }
     public Ast ouOccasionnel;
-    public Else(Ast ouOccasionnel){
+    public int line;
+    public Else(Ast ouOccasionnel,int line){
+        this.line = line;
         this.ouOccasionnel=ouOccasionnel;
     }
     @Override

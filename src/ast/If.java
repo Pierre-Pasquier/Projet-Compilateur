@@ -7,7 +7,9 @@ public class If implements Ast {
         return visitor.visit(this);
     }
     public Ast condition;
-    public If(Ast condition){
+    public int line;
+    public If(Ast condition,int line){
+        this.line = line;
         this.condition=condition;
     }
     @Override

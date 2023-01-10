@@ -11,8 +11,10 @@ public class Egal implements Ast {
 
     public Ast left;
     public Ast right;
+    public int line;
 
-    public Egal(Ast left, Ast right){
+    public Egal(Ast left, Ast right,int line){
+        this.line = line;
         this.left=left;
         this.right=right;
     }

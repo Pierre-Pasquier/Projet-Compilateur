@@ -10,8 +10,10 @@ public class Or implements Ast{
     }
 
     public ArrayList<Ast> OrList;
+    public int line;
 
-    public Or(){
+    public Or(int line){
+        this.line = line;
         this.OrList = new ArrayList<>();
     }
     

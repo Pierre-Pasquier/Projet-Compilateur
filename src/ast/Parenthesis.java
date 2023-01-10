@@ -9,9 +9,11 @@ public class Parenthesis implements Ast {
     }
 
     public Ast parenthesis;
+    public int line;
 
 
-    public Parenthesis(Ast parenthesis){
+    public Parenthesis(Ast parenthesis,int line){
+        this.line = line;
         this.parenthesis = parenthesis;
     }
 

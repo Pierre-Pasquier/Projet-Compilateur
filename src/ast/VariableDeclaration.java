@@ -11,8 +11,10 @@ public class VariableDeclaration implements Ast {
     public Ast typeid;
     public Ast Idf;
     public Ast expr;
+    public int line;
 
-    public VariableDeclaration(Ast Idf, Ast expr, Ast typeid){
+    public VariableDeclaration(Ast Idf, Ast expr, Ast typeid,int line){
+        this.line = line;
         this.typeid = typeid;
         this.Idf = Idf;
         this.expr = expr;
