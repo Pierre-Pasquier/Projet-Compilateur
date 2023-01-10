@@ -22,7 +22,7 @@ public class And implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        
         return null;
         
     }

@@ -22,7 +22,7 @@ public class Lvalues implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        listexpression.ControleSemantique();
         return null;
         
     }

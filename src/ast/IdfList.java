@@ -22,7 +22,7 @@ public class IdfList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        TDS.setFonctionEtudiee(IdfList.get(0).ControleSemantique().get(0));
         return null;
         
     }
