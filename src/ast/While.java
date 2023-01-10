@@ -19,9 +19,12 @@ public class While implements Ast {
 
 
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
+
 }
 
