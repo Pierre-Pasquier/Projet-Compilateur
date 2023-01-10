@@ -12,6 +12,7 @@ public class TDS {
     public static int num_imbrication;
 	public static PrintWriter writer;
     public static String fonction_etudiee = null;
+    public static List<List> tds;
 
     public TDS(int num_region, int num_imbrication) throws FileNotFoundException, UnsupportedEncodingException{
         this.num_region = num_region;
@@ -261,6 +262,17 @@ public class TDS {
     public static String getFonctionEtudiee(){
         return fonction_etudiee;
     }
+
+    public static void setTds(List<List> tdss){
+        tds = tdss;
+    }
+
+    public static List<List> getTds(){
+        return tds;
+    }
+
+
+
 
 }
 
