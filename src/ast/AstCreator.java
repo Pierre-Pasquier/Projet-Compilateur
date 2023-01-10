@@ -63,14 +63,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
         for (int i=0;2*i<ctx.getChildCount()-1;i++){
 			
             String operation = ctx.getChild(2*i+1).toString();
-			if (/*i != 0 && */operation.equals("-") && pere != null && (pere.equals("for"))){
+			if (/*i != 0 && */operation.equals("-") && pere != null && ((pere.equals("for") || pere.equals("typeids")))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
 				String calcul = line.get(line.size()-1);
 				calcul = calcul + "-";
 				line.set(line.size()-1,calcul);
-			} else if(/*i != 0 &&*/ operation.equals("+") && pere != null && (pere.equals("for"))){
+			} else if(/*i != 0 &&*/ operation.equals("+") && pere != null && ((pere.equals("for")) || pere.equals("typeids"))){
 				int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 				List<List> list = tds.get(indice);
 				List<String> line = list.get(list.size()-1);
@@ -256,10 +256,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pere2 = "Exprlist";
 		ExprList exprlist = new ExprList();
 		if (TDS.getNbFils(fonction_etudiee,tds) != ctx.getChildCount()){
+			int nb_fils = (ctx.getChildCount()-1)/2;
 			if (TDS.getNbFils(fonction_etudiee,tds) == -1){
-				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'existe pas");
+				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'est pas définie");
+			} else {
+				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee + ", expected " + TDS.getNbFils(fonction_etudiee,tds) + ", got : " + nb_fils);
 			}
-			writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee);
+			
 		}
 		fonction_etudiee = null;
 		if (ctx.getChildCount() == 1){
