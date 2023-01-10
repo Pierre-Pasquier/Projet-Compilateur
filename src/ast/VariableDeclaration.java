@@ -20,9 +20,13 @@ public class VariableDeclaration implements Ast {
         this.expr = expr;
     }
 
+  
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
+
 }
