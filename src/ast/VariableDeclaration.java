@@ -28,7 +28,9 @@ public class VariableDeclaration implements Ast {
   
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        typeid.ControleSemantique();
+        Idf.ControleSemantique();
+        expr.ControleSemantique();
         return null;
         
     }

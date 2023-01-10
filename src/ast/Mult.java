@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Mult implements Ast {
@@ -21,8 +22,10 @@ public class Mult implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
-        return null;
+        List<String> list = new ArrayList<>();
+        list.addAll(left.ControleSemantique());
+        list.addAll(right.ControleSemantique());
+        return list;
         
     }
 

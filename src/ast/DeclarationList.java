@@ -23,6 +23,9 @@ public class DeclarationList implements Ast{
     @Override
     public List<String> ControleSemantique() {
         System.out.println("Controle sémantique DeclarationList nb fils : " + DeclarationList.size() +  "--------------- ");
+        for (int i = 0; i < DeclarationList.size(); i++) {
+            DeclarationList.get(i).ControleSemantique();
+        }
         return null;
         
     }

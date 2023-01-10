@@ -24,7 +24,9 @@ public class Typeids implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        typeids1.ControleSemantique();
+        typeids2.ControleSemantique();
+        typeids3.ControleSemantique();
         return null;
         
     }

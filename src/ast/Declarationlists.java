@@ -23,6 +23,7 @@ public class Declarationlists implements Ast {
     @Override
     public List<String> ControleSemantique() {
         affect.ControleSemantique();
+        dans.ControleSemantique();
         return null;
         
     }

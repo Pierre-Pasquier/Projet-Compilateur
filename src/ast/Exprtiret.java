@@ -20,7 +20,7 @@ public class Exprtiret  implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        expr_.ControleSemantique();
         return null;
         
     }

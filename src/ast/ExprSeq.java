@@ -22,7 +22,9 @@ public class ExprSeq implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < ExprSeq.size(); i++) {
+            ExprSeq.get(i).ControleSemantique();
+        }
         return null;
         
     }

@@ -1,6 +1,9 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.antlr.v4.runtime.misc.Array2DHashSet;
 
 
 public class Stringg implements Ast{
@@ -21,8 +24,9 @@ public class Stringg implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.add("String");
+        return list;
         
     }
 

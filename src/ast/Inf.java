@@ -22,7 +22,8 @@ public class Inf implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        left.ControleSemantique();
+        right.ControleSemantique();
         return null;
         
     }

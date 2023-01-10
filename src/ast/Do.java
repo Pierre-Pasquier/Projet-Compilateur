@@ -15,7 +15,7 @@ public class Do implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        faire.ControleSemantique();
         return null;
         
     }

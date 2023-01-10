@@ -22,7 +22,9 @@ public class IdfExprList implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < IdfExprList.size(); i++) {
+            IdfExprList.get(i).ControleSemantique();
+        }
         return null;
         
     }

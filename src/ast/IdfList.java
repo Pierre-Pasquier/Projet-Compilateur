@@ -23,16 +23,7 @@ public class IdfList implements Ast{
     @Override
     public List<String> ControleSemantique() {
         for (int i = 0; i < IdfList.size(); i++) {
-            if (i == 0){/* 
-                if (TDS.getNbFils(TDS.getFonctionEtudiee(),TDS.tds) != ctx.getChildCount()){
-                    int nb_fils = (ctx.getChildCount()-1)/2;
-                    if (TDS.getNbFils(fonction_etudiee,tds) == -1){
-                        writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'est pas définie");
-                    } else {
-                        writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee + ", expected " + TDS.getNbFils(fonction_etudiee,tds) + ", got : " + nb_fils);
-                    }
-                    
-                }*/
+            if (i == 0){
                 TDS.setFonctionEtudiee(null);
             }
             else{

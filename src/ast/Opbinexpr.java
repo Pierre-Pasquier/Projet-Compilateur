@@ -24,7 +24,9 @@ public class Opbinexpr implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < opbinexpr.size(); i++) {
+            opbinexpr.get(i).ControleSemantique();
+        }
         return null;
         
     }

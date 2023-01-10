@@ -23,7 +23,10 @@ public class FunctionDeclaration implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        typeid.ControleSemantique();
+        Idf.ControleSemantique();
+        expr.ControleSemantique();
+        typefields.ControleSemantique();
         return null;
         
     }

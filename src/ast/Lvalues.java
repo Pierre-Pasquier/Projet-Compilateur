@@ -23,6 +23,7 @@ public class Lvalues implements Ast {
     @Override
     public List<String> ControleSemantique() {
         listexpression.ControleSemantique();
+        lvalue.ControleSemantique();
         return null;
         
     }

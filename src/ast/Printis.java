@@ -22,7 +22,7 @@ public class Printis implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        printis.ControleSemantique();
         return null;
         
     }

@@ -14,7 +14,7 @@ public class Else implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        ouOccasionnel.ControleSemantique();
         return null;
         
     }

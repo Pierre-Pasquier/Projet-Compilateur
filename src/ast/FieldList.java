@@ -24,7 +24,10 @@ public class FieldList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < FieldList.size(); i++) {
+            FieldList.get(i).ControleSemantique();
+        }
+        Idf.ControleSemantique();
         return null;
         
     }

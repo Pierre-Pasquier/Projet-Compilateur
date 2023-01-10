@@ -22,14 +22,25 @@ public class ExprList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        String fonction = null;
         for (int i = 0; i < ExprList.size(); i++) {
             if (i == 0){
-                TDS.setFonctionEtudiee(ExprList.get(i).ControleSemantique().get(0));
-                TDS.setFonctionEtudiee(null);
+                fonction = ExprList.get(i).ControleSemantique().get(0);
             }
             else{
+                // verif type args
                 ExprList.get(i).ControleSemantique();
             }
+        }
+        int nb_fils = (ExprList.size()-1)/2;
+        int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
+        if (bon_nb_fils != nb_fils){
+            if (bon_nb_fils == -1){
+                TDS.write("Erreur ligne " + line + " : la fonction " + fonction + " n'est pas définie");
+            } else {
+                TDS.write("Erreur ligne " + line + " : nombre d'arguments incorrects pour la fonction " + fonction + ", expected " + bon_nb_fils + ", got : " + nb_fils);
+            }
+            
         }
         return null;
         

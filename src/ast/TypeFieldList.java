@@ -25,7 +25,9 @@ public class TypeFieldList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        
+        for (Ast typefield : typefieldList) {
+            typefield.ControleSemantique();
+        }
         return null;
         
     }

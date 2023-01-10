@@ -29,7 +29,10 @@ public class For implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        deb.ControleSemantique();
+        fin.ControleSemantique();
+        faire.ControleSemantique();
+        idf.ControleSemantique();
         return null;
         
     }

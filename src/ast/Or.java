@@ -23,7 +23,9 @@ public class Or implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        for (int i = 0; i < OrList.size(); i++) {
+            OrList.get(i).ControleSemantique();
+        }
         return null;
         
     }

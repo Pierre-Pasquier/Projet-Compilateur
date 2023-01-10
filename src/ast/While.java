@@ -26,7 +26,8 @@ public class While implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        condition.ControleSemantique();
+        faire.ControleSemantique();
         return null;
         
     }

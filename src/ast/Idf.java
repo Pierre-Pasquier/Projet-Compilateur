@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Idf implements Ast{
@@ -19,8 +20,9 @@ public class Idf implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.add(name);
+        return list;
         
     }
 

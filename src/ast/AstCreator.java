@@ -14,7 +14,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public String pere2 = null;
 	public List<String> pile_region = new ArrayList<>();
 	public List<String> args = new ArrayList<>();
-	PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
+	//PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
 	public String fonction_etudiee;
 	public boolean controle_semantique = false;
 
@@ -25,9 +25,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 	@Override 
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
-		writer.println("Contrôles sémantiques :");
+		//writer.println("Contrôles sémantiques :");
 		Ast child = ctx.getChild(0).accept(this);
-		writer.close();
+		//writer.close();
 		TDS.setTds(tds);
 		return new Program(child,ctx.getStart().getLine());
 	}
@@ -259,9 +259,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (TDS.getNbFils(fonction_etudiee,tds) != ctx.getChildCount()){
 			int nb_fils = (ctx.getChildCount()-1)/2;
 			if (TDS.getNbFils(fonction_etudiee,tds) == -1){
-				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'est pas définie");
+				//writer.println("Erreur ligne " + ctx.getStart().getLine() + " : la fonction " + fonction_etudiee + " n'est pas définie");
 			} else {
-				writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee + ", expected " + TDS.getNbFils(fonction_etudiee,tds) + ", got : " + nb_fils);
+				//writer.println("Erreur ligne " + ctx.getStart().getLine() + " : nombre d'arguments incorrects pour la fonction " + fonction_etudiee + ", expected " + TDS.getNbFils(fonction_etudiee,tds) + ", got : " + nb_fils);
 			}
 			
 		}

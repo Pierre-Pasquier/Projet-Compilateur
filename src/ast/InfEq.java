@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InfEq implements Ast {
@@ -22,7 +23,8 @@ public class InfEq implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        left.ControleSemantique();
+        right.ControleSemantique();
         return null;
         
     }

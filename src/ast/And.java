@@ -22,7 +22,10 @@ public class And implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        
+        List<String> list = new ArrayList<String>();
+        for (int i = 0; i < AndList.size(); i++) {
+            AndList.get(i).ControleSemantique();
+        }
         return null;
         
     }

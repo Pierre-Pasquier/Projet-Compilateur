@@ -14,7 +14,7 @@ public class If implements Ast {
     }
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        condition.ControleSemantique();
         return null;
         
     }

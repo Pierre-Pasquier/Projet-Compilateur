@@ -16,7 +16,7 @@ public class Then implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        alors.ControleSemantique();
         return null;
         
     }

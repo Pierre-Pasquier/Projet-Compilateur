@@ -30,7 +30,9 @@ public class Ifthenelse implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        // TODO Auto-generated method stub
+        condition.ControleSemantique();
+        alors.ControleSemantique();
+        ouOccasionnel.ControleSemantique();
         return null;
         
     }
