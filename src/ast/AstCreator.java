@@ -82,10 +82,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
             switch (operation) {
                 case "-":
-					noeudTemporaire = new Minus(noeudTemporaire,right);
+					noeudTemporaire = new Minus(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case "+":
-                    noeudTemporaire = new Minus(noeudTemporaire,right);
+                    noeudTemporaire = new Minus(noeudTemporaire,right,ctx.getStart().getLine());
                     break;
                 default:
                     break;
@@ -129,10 +129,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
             switch (operation) {
                 case "*":
-                    noeudTemporaire = new Mult(noeudTemporaire,right);
+                    noeudTemporaire = new Mult(noeudTemporaire,right,ctx.getStart().getLine());
                     break;
                 case "/":
-                    noeudTemporaire = new Div(noeudTemporaire,right);
+                    noeudTemporaire = new Div(noeudTemporaire,right,ctx.getStart().getLine());
                     break;
                 default:
                     break;
@@ -192,23 +192,23 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pere2 = "Compare";
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
 		if (ctx.getChild(0).toString().substring(0,1).equals("\"")){
-			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1));
+			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1),ctx.getStart().getLine());
 		}
         if (ctx.getChildCount() == 3){
 			String operation = ctx.getChild(1).toString();
 			Ast right = ctx.getChild(2).accept(this);
 			switch (operation) {
 				case ">":
-					noeudTemporaire = new Sup(noeudTemporaire,right);
+					noeudTemporaire = new Sup(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case "<":
-					noeudTemporaire = new Inf(noeudTemporaire,right);
+					noeudTemporaire = new Inf(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case ">=":
-					noeudTemporaire = new SupEq(noeudTemporaire,right);
+					noeudTemporaire = new SupEq(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case "<=":
-					noeudTemporaire = new InfEq(noeudTemporaire,right);
+					noeudTemporaire = new InfEq(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				default:
 					break;
@@ -220,7 +220,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override public Ast visitEq(exprParser.EqContext ctx) {
 		pere2 = "Eq";
 		if (ctx.getChild(0).toString().substring(0,1).equals("\"")){
-			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1));
+			return new Stringg(ctx.getChild(0).toString().substring(1,ctx.getChild(0).toString().length()-1),ctx.getStart().getLine());
 		}
         Ast noeudTemporaire = ctx.getChild(0).accept(this);
         if (ctx.getChildCount() == 3){
@@ -228,10 +228,10 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast right = ctx.getChild(2).accept(this);
 			switch (operation) {
 				case "=":
-					noeudTemporaire = new Egal(noeudTemporaire,right);
+					noeudTemporaire = new Egal(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case "<>":
-					noeudTemporaire = new Diff(noeudTemporaire,right);
+					noeudTemporaire = new Diff(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 			} 
 		}
@@ -279,7 +279,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		FieldList fieldlist = new FieldList();
 		for (int i=0; i<ctx.getChildCount()/3;i++){
 			String idfString = ctx.getChild(3*i).toString();
-			Idf idf = new Idf(idfString);
+			Idf idf = new Idf(idfString,ctx.getStart().getLine());
 			fieldlist.addFieldList(ctx.getChild(3*i+2).accept(this),idf);
 		}
 		return fieldlist ;
@@ -291,11 +291,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			String idfString = ctx.getChild(0).toString();
 			fonction_etudiee = idfString;
 			System.out.println("Fonction étudiée = " + fonction_etudiee);
-			return new Idf(idfString);
+			return new Idf(idfString,ctx.getStart().getLine());
 		}
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
 			String idfString = ctx.getChild(2*i).toString();
-			Idf idf = new Idf(idfString);
+			Idf idf = new Idf(idfString,ctx.getStart().getLine());
 			Idflist.addIdfList(idf);
 		}
 		return Idflist;
@@ -304,7 +304,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pere2 = "Idfexprlist";
 		System.out.println("Dans Idfexprlist, nombre de fils = " + ctx.getChildCount());
 		String idfString = ctx.getChild(0).toString();
-		Idf idf = new Idf(idfString);
+		Idf idf = new Idf(idfString,ctx.getStart().getLine());
 		IdfExprList Idfexprlist = new IdfExprList();
 		Idfexprlist.addIdfExprList(idf);
 		if (ctx.getChildCount() == 1){
@@ -347,7 +347,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		tds.get(tds.size()-1).add(typedecla);
 		Ast typeid = ctx.getChild(1).accept(this);
 		Ast type = ctx.getChild(3).accept(this);
-		return new TypeDeclaration(typeid, type);
+		return new TypeDeclaration(typeid, type,ctx.getStart().getLine());
 	}
 	@Override public Ast visitType_id(exprParser.Type_idContext ctx) { 
 		pere2 = "Type_id";
@@ -393,11 +393,11 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(0).toString();
 		line.add(idfString);
 		line.add("PARAM");
-		Idf idf = new Idf(idfString);
+		Idf idf = new Idf(idfString,ctx.getStart().getLine());
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		tds.get(indice).add(line);
 		Ast typeid = ctx.getChild(2).accept(this);
-		return new TypeField(idf,typeid);
+		return new TypeField(idf,typeid,ctx.getStart().getLine());
 	 }
 
 
@@ -414,7 +414,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		List<String> line = list.get(list.size()-1);
 		line.add(idfString);
 		
-		return new Idf(idfString); 
+		return new Idf(idfString,ctx.getStart().getLine()); 
 	}
 	@Override public Ast visitVariabledeclaration(exprParser.VariabledeclarationContext ctx) { 
 		pere2 = "Variabledeclaration";
@@ -424,13 +424,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		line.add("VAR");
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);		
 
-		Idf idf = new Idf(idfString);
+		Idf idf = new Idf(idfString,ctx.getStart().getLine());
 		if (ctx.getChildCount() == 4){
 			tds.get(indice).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
 
 			System.out.println("---------------idf = " + idfString + "------------------expr = null : "+ (expr == null) + "\n");
-			return new VariableDeclaration(idf, expr, null);
+			return new VariableDeclaration(idf, expr, null,ctx.getStart().getLine());
 		} else {
 			String typeidString = ctx.getChild(3).toString();
 			line.add(typeidString);
@@ -439,7 +439,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
 			System.out.println("expr = null : "+ (expr == null) + "\n");
-			return new VariableDeclaration(idf, expr, typeid);
+			return new VariableDeclaration(idf, expr, typeid,ctx.getStart().getLine());
 		}
 	}
 	@Override public Ast visitFunctiondeclaration(exprParser.FunctiondeclarationContext ctx) { 
@@ -452,7 +452,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		list_fun.add(nom);
 		tds.add(list_fun);
 		
-		Idf idf = new Idf(idfString);
+		Idf idf = new Idf(idfString,ctx.getStart().getLine());
 		Ast typefields = ctx.getChild(3).accept(this);
 		if (ctx.getChildCount() == 7){
 			Ast expr = ctx.getChild(6).accept(this);
@@ -469,7 +469,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			list.add(line);
 			args.clear();
 			//System.out.println(pile_region);
-			return new FunctionDeclaration(idf, typefields, expr, null);
+			return new FunctionDeclaration(idf, typefields, expr, null,ctx.getStart().getLine());
 		} else {
 			String typeidString = ctx.getChild(6).toString();
 			Ast typeid = ctx.getChild(6).accept(this);
@@ -487,18 +487,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			line.addAll(args);
 			list.add(line);
 			args.clear();
-			return new FunctionDeclaration(idf, typefields,expr, typeid);
+			return new FunctionDeclaration(idf, typefields,expr, typeid, ctx.getStart().getLine());
 		} 
 	}
 	@Override public Ast visitPrinti(exprParser.PrintiContext ctx) { 
 		pere2 = "Printi";
 		Ast printe = ctx.getChild(1).accept(this);
-		return new Printe(printe);
+		return new Printe(printe,ctx.getStart().getLine());
 	 }
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
 		pere2 = "Print";
 		Ast printe = ctx.getChild(1).accept(this);
-		return new Printe(printe);
+		return new Printe(printe,ctx.getStart().getLine());
 	 }
 	 
 	
@@ -521,14 +521,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			pile_region.remove(pile_region.size()-1);
 			//System.out.println(pile_region);
 			num_imbrication--;
-			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors), (Ast)new Else(ouOccasionnel));
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors), (Ast)new Else(ouOccasionnel),ctx.getStart().getLine());
 		}
 		else
 		{
 			num_imbrication--;
 			pile_region.remove(pile_region.size()-1);
 			//System.out.println(pile_region);
-			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors),null);
+			return new Ifthenelse((Ast)new If(condition), (Ast)new Then(alors),null,ctx.getStart().getLine());
 		}
 	}
 
@@ -550,7 +550,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		//System.out.println(pile_region);
 		controle_semantique = true;
 		Ast dans = ctx.getChild(3).accept(this);
-		return new Declarationlists(dans,affect);
+		return new Declarationlists(dans,affect,ctx.getStart().getLine());
 	}
 	@Override 
 	public Ast visitExprtiret(exprParser.ExprtiretContext ctx) { 
@@ -589,7 +589,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pile_region.remove(pile_region.size()-1);
 		//System.out.println(pile_region);
 		pere = null;
-		return new For((Ast)new Idf(idfString), (Ast)new BorneInf(deb), (Ast)new BorneSup(fin),(Ast)new Do(faire));
+		return new For((Ast)new Idf(idfString), (Ast)new BorneInf(deb), (Ast)new BorneSup(fin),(Ast)new Do(faire),ctx.getStart().getLine());
 	}
 //on met peut etre idf mais à voir plus tard
 	@Override 
@@ -600,12 +600,12 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if(ctx.getChildCount() == 3){
 			Ast Expr=ctx.getChild(2).accept(this);
 			//System.out.println("null = " + Expr == null + "\n");
-			return new Lvalues(lvalues,Expr);
+			return new Lvalues(lvalues,Expr,ctx.getStart().getLine());
 		}if(ctx.getChildCount() == 4){
 			Ast Exprlist=ctx.getChild(2).accept(this);
-			return new Lvalues(lvalues,Exprlist);
+			return new Lvalues(lvalues,Exprlist,ctx.getStart().getLine());
 		}else{
-			return new Lvalues(lvalues,null);
+			return new Lvalues(lvalues,null,ctx.getStart().getLine());
 		}
 	}
 	@Override 
@@ -642,15 +642,15 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			Ast typeids1= ctx.getChild(0).accept(this);
 			Ast fieldlist1= ctx.getChild(2).accept(this);
 
-			return new Typeids(typeids1,fieldlist1,null);
+			return new Typeids(typeids1,fieldlist1,null,ctx.getStart().getLine());
 		} else if (ctx.getChildCount()==6){
 			Ast typeids2= ctx.getChild(0).accept(this);
 			
 			Ast expr1= ctx.getChild(2).accept(this);
 			Ast expr2= ctx.getChild(5).accept(this);
-			return new Typeids(typeids2, expr1, expr2);
+			return new Typeids(typeids2, expr1, expr2,ctx.getStart().getLine());
 		} else {
-			return new Typeids(null, null, null);
+			return new Typeids(null, null, null,ctx.getStart().getLine());
 		}
 	}
 	@Override 
@@ -667,7 +667,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		Ast faire= ctx.getChild(3).accept(this);
 		num_imbrication--;
 		pile_region.remove(pile_region.size()-1);
-		return new While(condition, faire);
+		return new While(condition, faire,ctx.getStart().getLine());
 	}
 	@Override 
 	public Ast visitValint(exprParser.ValintContext ctx) {
@@ -691,7 +691,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 				line.add("" + intString);
 			}
 		}
-		return new IntNode(intString);
+		return new IntNode(intString,ctx.getStart().getLine());
 	}
 	@Override 
 	public Ast visitValidf(exprParser.ValidfContext ctx) { 
@@ -720,7 +720,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		
 		
-		return new Idf(idfString);
+		return new Idf(idfString,ctx.getStart().getLine());
 	}
 	@Override 
 	public Ast visitValop(exprParser.ValopContext ctx) {
