@@ -16,9 +16,13 @@ public class Sup implements Ast {
         this.right = right;
     }
 
+
     @Override
-    public void ControleSemantique() {
+    public List<String> ControleSemantique() {
         // TODO Auto-generated method stub
+        return null;
         
     }
+
+
 }
