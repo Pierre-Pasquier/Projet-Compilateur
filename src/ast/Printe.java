@@ -21,8 +21,8 @@ public class Printe implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        printe.ControleSemantique();
-        return null;
+        
+        return printe.ControleSemantique();
         
     }
 

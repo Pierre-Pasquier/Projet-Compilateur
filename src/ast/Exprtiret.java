@@ -20,8 +20,8 @@ public class Exprtiret  implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        expr_.ControleSemantique();
-        return null;
+        
+        return expr_.ControleSemantique();
         
     }
 

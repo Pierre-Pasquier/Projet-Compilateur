@@ -15,8 +15,8 @@ public class BorneSup implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        fin.ControleSemantique();
-        return null;
+        
+        return fin.ControleSemantique();
         
     }
 

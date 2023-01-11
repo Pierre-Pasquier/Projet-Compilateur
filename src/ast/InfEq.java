@@ -23,9 +23,11 @@ public class InfEq implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        left.ControleSemantique();
-        right.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.addAll(left.ControleSemantique());
+        list.addAll(right.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

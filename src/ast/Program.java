@@ -19,7 +19,9 @@ public class Program implements Ast {
     }
 
     public List<String> ControleSemantique() {
-        this.expression.ControleSemantique();
+        TDS.setwrite();
+        expression.ControleSemantique();
+        TDS.closewrite();
         return null;
     }
 

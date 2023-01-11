@@ -22,10 +22,13 @@ public class IdfExprList implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<String>();
+        list.add(IdfExprList.get(0).ControleSemantique().get(0));
         for (int i = 0; i < IdfExprList.size(); i++) {
-            IdfExprList.get(i).ControleSemantique();
+            list.addAll(IdfExprList.get(i).ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

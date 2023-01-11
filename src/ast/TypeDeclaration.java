@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,9 +22,11 @@ public class TypeDeclaration implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        typeid.ControleSemantique();
-        type.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<>();
+        list.addAll(typeid.ControleSemantique());
+        list.addAll(type.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

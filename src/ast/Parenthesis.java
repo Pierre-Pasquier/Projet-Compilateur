@@ -20,8 +20,7 @@ public class Parenthesis implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        parenthesis.ControleSemantique();
-        return null;
+        return parenthesis.ControleSemantique();
         
     }
 

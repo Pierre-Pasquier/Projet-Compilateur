@@ -24,10 +24,12 @@ public class Opbinexpr implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < opbinexpr.size(); i++) {
-            opbinexpr.get(i).ControleSemantique();
+            list.addAll(opbinexpr.get(i).ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

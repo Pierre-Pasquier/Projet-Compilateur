@@ -23,10 +23,12 @@ public class Or implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < OrList.size(); i++) {
-            OrList.get(i).ControleSemantique();
+            list.addAll(OrList.get(i).ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

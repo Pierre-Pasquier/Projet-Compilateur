@@ -22,20 +22,9 @@ public class Plus implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-<<<<<<< HEAD
         List<String> list = new ArrayList<>();
-        list.addAll(left.ControleSemantique());
-        list.addAll(right.ControleSemantique());
+        list.add(left.ControleSemantique().get(0) + "+" + right.ControleSemantique().get(0));
         return list;
-=======
-        // TODO Auto-generated method stub
-
-        List<String> plus=new ArrayList<>();
-        plus.addAll(left.ControleSemantique());
-        plus.addAll(right.ControleSemantique());
-
-        return plus;
->>>>>>> bc95715dad560a3c36b88805f181254914cfcd93
         
     }
 

@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,9 +27,11 @@ public class While implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        condition.ControleSemantique();
-        faire.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<>();
+        list.addAll(condition.ControleSemantique());
+        list.addAll(faire.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

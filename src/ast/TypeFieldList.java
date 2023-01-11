@@ -25,10 +25,12 @@ public class TypeFieldList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<>();
         for (Ast typefield : typefieldList) {
-            typefield.ControleSemantique();
+            list.addAll(typefield.ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

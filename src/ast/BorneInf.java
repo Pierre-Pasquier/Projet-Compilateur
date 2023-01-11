@@ -15,8 +15,7 @@ public class BorneInf implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        deb.ControleSemantique();
-        return null;
+        return deb.ControleSemantique();
         
     }
 }

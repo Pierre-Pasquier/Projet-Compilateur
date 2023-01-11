@@ -13,11 +13,11 @@ public class TDS {
 	public static PrintWriter writer;
     public static String fonction_etudiee = null;
     public static List<List> tds;
+    public static boolean write_instanciee = false;
 
     public TDS(int num_region, int num_imbrication) throws FileNotFoundException, UnsupportedEncodingException{
         this.num_region = num_region;
         this.num_imbrication = num_imbrication;
-        this.writer = new PrintWriter("out/output.txt", "UTF-8");
     }
 
     //Renvoie le déplacement de l'élément passé en paramètre 
@@ -226,12 +226,11 @@ public class TDS {
             List<List> tds = liste_tds.get(i);
             for (int j = 1; j < tds.size(); j++) {
                 List<String> ligne = tds.get(j);
-                System.out.println(x + "    " + ligne.get(0).equals(x));
                 if (ligne.get(0).equals(x) && ligne.get(1).equals("METHOD")) {
                     return Integer.valueOf(ligne.get(3));
                 }
-                }
             }
+        }
         return -1;
     }
 
@@ -264,14 +263,28 @@ public class TDS {
     }
 
     public static void setTds(List<List> tdss){
-        tds = tdss;
+        tds = tdss; // instanciation tds
     }
 
     public static List<List> getTds(){
         return tds;
     }
 
+    public static void setwrite(){
+        try {
+            writer = new PrintWriter("out/output.txt", "UTF-8");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
+    public static void closewrite(){
+        writer.close();
+    }
 
 
 }

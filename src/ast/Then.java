@@ -16,8 +16,8 @@ public class Then implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        alors.ControleSemantique();
-        return null;
+        
+        return alors.ControleSemantique();
         
     }
 

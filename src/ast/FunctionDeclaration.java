@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionDeclaration implements Ast {
@@ -23,11 +24,15 @@ public class FunctionDeclaration implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        typeid.ControleSemantique();
-        Idf.ControleSemantique();
-        expr.ControleSemantique();
-        typefields.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<>();
+        if (typeid != null){
+            list.addAll(typeid.ControleSemantique());
+        }
+        list.addAll(Idf.ControleSemantique());
+        list.addAll(expr.ControleSemantique());
+        list.addAll(typefields.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

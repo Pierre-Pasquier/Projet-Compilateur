@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,9 +25,11 @@ public class SupEq implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        left.ControleSemantique();
-        right.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.addAll(left.ControleSemantique());
+        list.addAll(right.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

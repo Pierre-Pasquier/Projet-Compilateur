@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,10 +25,18 @@ public class Typeids implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        typeids1.ControleSemantique();
-        typeids2.ControleSemantique();
-        typeids3.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<String>();
+        if (typeids1 != null){
+            list.addAll(typeids1.ControleSemantique());
+        }
+        if (typeids2 != null){
+            list.addAll(typeids2.ControleSemantique());
+        }
+        if (typeids3 != null){
+            list.addAll(typeids3.ControleSemantique());
+        }
+        list.add("");
+        return list;
         
     }
 

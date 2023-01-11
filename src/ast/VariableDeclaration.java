@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -28,10 +29,14 @@ public class VariableDeclaration implements Ast {
   
     @Override
     public List<String> ControleSemantique() {
-        typeid.ControleSemantique();
-        Idf.ControleSemantique();
-        expr.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<String>();
+        if (typeid != null){
+            list.addAll(typeid.ControleSemantique());
+        }
+        list.addAll(Idf.ControleSemantique());
+        list.addAll(expr.ControleSemantique());
+        list.add("");
+        return list;
         
     }
 

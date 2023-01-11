@@ -14,8 +14,8 @@ public class Else implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        ouOccasionnel.ControleSemantique();
-        return null;
+        
+        return ouOccasionnel.ControleSemantique();
         
     }
 

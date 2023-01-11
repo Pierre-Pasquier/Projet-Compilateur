@@ -23,20 +23,9 @@ public class Mult implements Ast {
     
     @Override
     public List<String> ControleSemantique() {
-<<<<<<< HEAD
         List<String> list = new ArrayList<>();
-        list.addAll(left.ControleSemantique());
-        list.addAll(right.ControleSemantique());
+        list.add(left.ControleSemantique().get(0) + "*" + right.ControleSemantique().get(0));
         return list;
-=======
-        // TODO Auto-generated method stub
-
-        List<String> mult=new ArrayList<>();
-        mult.addAll(left.ControleSemantique());
-        mult.addAll(right.ControleSemantique());
-
-        return mult;
->>>>>>> bc95715dad560a3c36b88805f181254914cfcd93
         
     }
 

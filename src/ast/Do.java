@@ -15,8 +15,8 @@ public class Do implements Ast{
     }
     @Override
     public List<String> ControleSemantique() {
-        faire.ControleSemantique();
-        return null;
+        
+        return faire.ControleSemantique();
         
     }
 

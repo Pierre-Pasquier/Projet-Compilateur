@@ -20,8 +20,8 @@ public class Nilop implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        nilop.ControleSemantique();
-        return null;
+        
+        return nilop.ControleSemantique();
         
     }
 

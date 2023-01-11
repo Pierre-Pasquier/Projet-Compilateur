@@ -22,16 +22,12 @@ public class IdfList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<String>();
         for (int i = 0; i < IdfList.size(); i++) {
-            if (i == 0){
-                TDS.setFonctionEtudiee(null);
-            }
-            else{
-                IdfList.get(i).ControleSemantique();
-            }
-            IdfList.get(i).ControleSemantique();
+            list.addAll(IdfList.get(i).ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

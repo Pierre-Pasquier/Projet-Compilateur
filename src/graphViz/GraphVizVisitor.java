@@ -424,7 +424,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "expr ,");
+        this.addNode(nodeIdentifier, "args");
 
         for (Ast ast:exprList.ExprList){
 

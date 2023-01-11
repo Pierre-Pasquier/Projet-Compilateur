@@ -24,11 +24,13 @@ public class FieldList implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
+        List<String> list = new ArrayList<>();
+        list.addAll(Idf.ControleSemantique());
         for (int i = 0; i < FieldList.size(); i++) {
-            FieldList.get(i).ControleSemantique();
+            list.addAll(FieldList.get(i).ControleSemantique());
         }
-        Idf.ControleSemantique();
-        return null;
+        list.add("");
+        return list;
         
     }
 

@@ -86,7 +86,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 					noeudTemporaire = new Minus(noeudTemporaire,right,ctx.getStart().getLine());
 					break;
 				case "+":
-                    noeudTemporaire = new Minus(noeudTemporaire,right,ctx.getStart().getLine());
+                    noeudTemporaire = new Plus(noeudTemporaire,right,ctx.getStart().getLine());
                     break;
                 default:
                     break;
@@ -430,7 +430,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			tds.get(indice).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
 
-			System.out.println("---------------idf = " + idfString + "------------------expr = null : "+ (expr == null) + "\n");
 			return new VariableDeclaration(idf, expr, null,ctx.getStart().getLine());
 		} else {
 			String typeidString = ctx.getChild(3).toString();
@@ -603,7 +602,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//System.out.println("null = " + Expr == null + "\n");
 			return new Lvalues(lvalues,Expr,ctx.getStart().getLine());
 		}if(ctx.getChildCount() == 4){
-			Ast Exprlist=ctx.getChild(2).accept(this);
+			ExprList Exprlist= new ExprList(ctx.getStart().getLine());
+			Exprlist.addExprList(ctx.getChild(2).accept(this));
 			return new Lvalues(lvalues,Exprlist,ctx.getStart().getLine());
 		}else{
 			return new Lvalues(lvalues,null,ctx.getStart().getLine());

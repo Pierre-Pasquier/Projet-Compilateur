@@ -26,9 +26,10 @@ public class And implements Ast{
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < AndList.size(); i++) {
-            AndList.get(i).ControleSemantique();
+            list.addAll(AndList.get(i).ControleSemantique());
         }
-        return null;
+        list.add("");
+        return list;
         
     }
 

@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.antlr.v4.codegen.SourceGenTriggers;
@@ -32,22 +33,15 @@ public class Ifthenelse implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-<<<<<<< HEAD
-        condition.ControleSemantique();
-        alors.ControleSemantique();
-        ouOccasionnel.ControleSemantique();
-        return null;
-=======
-        // TODO Auto-generated method stub
-
-        //je regarde si c'est un entier , si s'en est un alors on est bon et sinon on
-        //regarde dans la tds pour voir si c'est un entier
-
-        System.out.println(condition.ControleSemantique());
-
-
-        return condition.ControleSemantique();
->>>>>>> bc95715dad560a3c36b88805f181254914cfcd93
+        List<String> list = new ArrayList<>();
+        list.addAll(condition.ControleSemantique());
+        list.addAll(alors.ControleSemantique());
+        if (ouOccasionnel != null){
+            list.addAll(ouOccasionnel.ControleSemantique());
+        }
+        list.add("");
+        //System.out.println(condition.ControleSemantique());
+        return list;
         
     }
 

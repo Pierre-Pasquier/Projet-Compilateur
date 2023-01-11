@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,9 +22,10 @@ public class TypeField implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        typeid.ControleSemantique();
-        Idf.ControleSemantique();
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.addAll(typeid.ControleSemantique());
+        list.addAll(Idf.ControleSemantique());
+        return list;
         
     }
 
