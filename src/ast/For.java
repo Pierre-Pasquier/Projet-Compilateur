@@ -17,25 +17,23 @@ public class For implements Ast {
 
 
 
-    public For(Ast deb,Ast fin,Ast faire,Ast idf,int line){
+    public For(Ast idf,Ast deb,Ast fin,Ast faire,int line){
         this.line = line;
         this.deb=deb;
         this.fin=fin;
         this.faire=faire;
         this.idf=idf;
-
     }
 
 
 
     @Override
     public List<String> ControleSemantique() {
+        TDS.num_imbrication++;
+        TDS.num_region++;
         List<String> list = new ArrayList<String>();
-        list.addAll(deb.ControleSemantique());
-        list.addAll(fin.ControleSemantique());
         list.addAll(faire.ControleSemantique());
-        list.addAll(idf.ControleSemantique());
-        list.add("");
+        TDS.num_imbrication--;
         return list;
         
     }

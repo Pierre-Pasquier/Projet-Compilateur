@@ -32,6 +32,7 @@ public interface AstVisitor<T> {
     public T visit(FunctionDeclaration affect);
     public T visit(Program affect);
     public T visit(Stringg affect);
+    public T visit(TypeRetour affect);
 
 
     public T visit(Exprtiret exprtiret);

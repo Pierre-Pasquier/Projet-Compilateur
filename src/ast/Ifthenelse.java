@@ -33,14 +33,18 @@ public class Ifthenelse implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
+        TDS.num_imbrication++;
+        TDS.num_region++;
         List<String> list = new ArrayList<>();
-        list.addAll(condition.ControleSemantique());
-        list.addAll(alors.ControleSemantique());
         if (ouOccasionnel != null){
-            list.addAll(ouOccasionnel.ControleSemantique());
+            if (condition.ControleSemantique().get(0).equals("int") && alors.ControleSemantique().get(0).equals(ouOccasionnel.ControleSemantique().get(0))){
+                list.add(alors.ControleSemantique().get(0));
+            } else {
+                TDS.write("Erreur ligne " + line + " : les deux branches d'un ifthenelse doivent être de même type");
+                list.add("");
+            }
         }
-        list.add("");
-        //System.out.println(condition.ControleSemantique());
+        TDS.num_imbrication--;
         return list;
         
     }

@@ -27,10 +27,13 @@ public class While implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
+        TDS.num_imbrication++;
+        TDS.num_region++;
         List<String> list = new ArrayList<>();
         list.addAll(condition.ControleSemantique());
         list.addAll(faire.ControleSemantique());
         list.add("");
+        TDS.num_imbrication--;
         return list;
         
     }
