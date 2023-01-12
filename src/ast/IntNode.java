@@ -21,6 +21,8 @@ public class IntNode implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
+
+
         list.add(Integer.toString(value));
         return list;
         

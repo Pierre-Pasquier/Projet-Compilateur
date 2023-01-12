@@ -40,7 +40,10 @@ public class Ifthenelse implements Ast {
             list.addAll(ouOccasionnel.ControleSemantique());
         }
         list.add("");
-        //System.out.println(condition.ControleSemantique());
+
+        System.out.println("\n"+condition.ControleSemantique()+"\n");
+
+        System.out.println("\n"+condition.ControleSemantique().get(0)+"\n");
         return list;
         
     }
