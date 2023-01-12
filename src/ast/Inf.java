@@ -15,7 +15,7 @@ public class Inf implements Ast {
     public Ast right;
     public int line;
 
-    public Inf(Ast left, Ast right,int line){
+    public Inf(Ast left, Ast right,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.left = left;
         this.right = right;

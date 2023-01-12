@@ -11,7 +11,7 @@ public class ExprSeq implements Ast{
     public ArrayList<Ast> ExprSeq;
     public int line;
 
-    public ExprSeq(int line){
+    public ExprSeq(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.ExprSeq = new ArrayList<>();
     }

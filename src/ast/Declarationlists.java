@@ -14,7 +14,7 @@ public class Declarationlists implements Ast {
     public int line;
 
 
-    public Declarationlists(Ast dans,Ast affect,int line){
+    public Declarationlists(Ast dans,Ast affect,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.dans=dans;
         this.affect=affect;

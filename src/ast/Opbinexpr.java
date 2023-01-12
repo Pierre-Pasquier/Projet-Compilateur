@@ -11,7 +11,7 @@ public class Opbinexpr implements Ast{
     public ArrayList<Ast> opbinexpr;
     public int line;
 
-    public Opbinexpr(int line){
+    public Opbinexpr(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.opbinexpr = new ArrayList<>();
     }

@@ -11,7 +11,7 @@ public class ExprList implements Ast{
     public ArrayList<Ast> ExprList;
     public int line;
 
-    public ExprList(int line){
+    public ExprList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.ExprList = new ArrayList<>();
     }

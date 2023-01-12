@@ -17,7 +17,7 @@ public class For implements Ast {
 
 
 
-    public For(Ast idf,Ast deb,Ast fin,Ast faire,int line){
+    public For(Ast idf,Ast deb,Ast fin,Ast faire,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.deb=deb;
         this.fin=fin;

@@ -14,7 +14,7 @@ public class VariableDeclaration implements Ast {
     public Ast expr;
     public int line;
 
-    public VariableDeclaration(Ast Idf, Ast expr, Ast typeid,int line){
+    public VariableDeclaration(Ast Idf, Ast expr, Ast typeid,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.typeid = typeid;
         this.Idf = Idf;

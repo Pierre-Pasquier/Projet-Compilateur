@@ -13,7 +13,7 @@ public class Printis implements Ast {
     public int line;
 
 
-    public Printis(Ast printis,int line){
+    public Printis(Ast printis,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.printis = printis;
     }

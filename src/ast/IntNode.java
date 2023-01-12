@@ -13,7 +13,7 @@ public class IntNode implements Ast {
     public int value;
     public int line;
 
-    public IntNode(int value,int line) {
+    public IntNode(int value,int line, int num_region, int num_imbrication, List<List> tds) {
         this.line = line;
         this.value = value;
     }

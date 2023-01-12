@@ -12,7 +12,7 @@ public class Or implements Ast{
     public ArrayList<Ast> OrList;
     public int line;
 
-    public Or(int line){
+    public Or(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.OrList = new ArrayList<>();
     }

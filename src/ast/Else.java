@@ -8,7 +8,7 @@ public class Else implements Ast{
     }
     public Ast ouOccasionnel;
     public int line;
-    public Else(Ast ouOccasionnel,int line){
+    public Else(Ast ouOccasionnel,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.ouOccasionnel=ouOccasionnel;
     }

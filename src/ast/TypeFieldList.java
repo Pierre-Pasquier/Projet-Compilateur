@@ -13,7 +13,7 @@ public class TypeFieldList implements Ast{
     public ArrayList<Ast> typefieldList;
     public int line;
 
-    public TypeFieldList(int line){
+    public TypeFieldList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.typefieldList = new ArrayList<>();
     }

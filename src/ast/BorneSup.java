@@ -9,7 +9,7 @@ public class BorneSup implements Ast{
     
     public Ast fin;
     public int line;
-    public BorneSup(Ast fin,int line){
+    public BorneSup(Ast fin,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.fin=fin;
     }

@@ -12,7 +12,7 @@ public class Nilop implements Ast {
     public int line;
 
 
-    public Nilop(Ast nilop,int line){
+    public Nilop(Ast nilop,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.nilop = nilop;
     }

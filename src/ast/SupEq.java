@@ -16,7 +16,7 @@ public class SupEq implements Ast {
     public Ast left;
     public Ast right;
 
-    public SupEq(Ast left, Ast right,int line){
+    public SupEq(Ast left, Ast right,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.left = left;
         this.right = right;

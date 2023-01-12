@@ -12,7 +12,7 @@ public class Parenthesis implements Ast {
     public int line;
 
 
-    public Parenthesis(Ast parenthesis,int line){
+    public Parenthesis(Ast parenthesis,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.parenthesis = parenthesis;
     }

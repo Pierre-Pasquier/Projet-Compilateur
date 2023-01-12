@@ -8,7 +8,7 @@ public class If implements Ast {
     }
     public Ast condition;
     public int line;
-    public If(Ast condition,int line){
+    public If(Ast condition,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.condition=condition;
     }

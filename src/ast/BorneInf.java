@@ -9,7 +9,7 @@ public class BorneInf implements Ast{
     
     public Ast deb;
     public int line;
-    public BorneInf(Ast deb,int line){
+    public BorneInf(Ast deb,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.deb=deb;
     }

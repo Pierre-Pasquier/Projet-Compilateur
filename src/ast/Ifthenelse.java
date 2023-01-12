@@ -17,7 +17,7 @@ public class Ifthenelse implements Ast {
     public int line;
 
 
-    public Ifthenelse(Ast condition,Ast alors,Ast ouOccasionnel,int line){
+    public Ifthenelse(Ast condition,Ast alors,Ast ouOccasionnel,int line,int num_region,int num_imbrication,List<List> tds){
         this.line = line;
         this.condition=condition;
         this.alors=alors;
@@ -25,7 +25,7 @@ public class Ifthenelse implements Ast {
     }
 
 
-    public Ifthenelse(Ast condition,Ast alors){
+    public Ifthenelse(Ast condition,Ast alors, int num_region, int num_imbrication, List<List> tds){
         this.condition=condition;
         this.alors=alors;
     }
