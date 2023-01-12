@@ -41,9 +41,14 @@ public class Ifthenelse implements Ast {
         }
         list.add("");
 
+
+        System.out.println();
+
+
         System.out.println("\n"+condition.ControleSemantique()+"\n");
 
-        System.out.println("\n"+condition.ControleSemantique().get(0)+"\n");
+
+
         return list;
         
     }

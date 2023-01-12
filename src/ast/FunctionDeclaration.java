@@ -24,14 +24,19 @@ public class FunctionDeclaration implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
+        TDS.num_imbrication++;
+        TDS.num_region++;
         List<String> list = new ArrayList<>();
-        if (typeid != null){
-            list.addAll(typeid.ControleSemantique());
+        //boucle sur les élément de expr et on vérifie si ils sont ous égaux ou non
+        for (int i = 0; i < expr.ControleSemantique().size(); i++) {
+            if (expr.ControleSemantique().get(i).equals(typefields.ControleSemantique().get(i))){
+                list.add(expr.ControleSemantique().get(i));
+            } else {
+                TDS.write("Erreur ligne " + line + " : type de retour de la fonction " + Idf.ControleSemantique().get(1) + " non conforme");
+                list.add("");
+            }
         }
-        list.addAll(Idf.ControleSemantique());
-        list.addAll(expr.ControleSemantique());
-        list.addAll(typefields.ControleSemantique());
-        list.add("");
+        TDS.num_imbrication--;
         return list;
         
     }

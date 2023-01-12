@@ -1,4 +1,3 @@
-
 parser :
 	java -jar ./lib/antlr-4.9.2-complete.jar ./expr.g4 -no-listener -visitor -o ./src/parser
 

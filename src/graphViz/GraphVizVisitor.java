@@ -53,6 +53,7 @@ import ast.Printe;
 import ast.Printis;
 import ast.Typeids;
 import ast.While;
+import ast.TypeRetour;
 
 
 
@@ -255,7 +256,8 @@ public class GraphVizVisitor implements AstVisitor<String> {
         this.addNode(nodeIdentifier, "Do");
         this.addTransition(nodeIdentifier, faireState);
 
-        return nodeIdentifier;}
+        return nodeIdentifier;
+    }
 
 
 
@@ -908,6 +910,17 @@ public class GraphVizVisitor implements AstVisitor<String> {
 
         return nodeIdentifier;
 
+    }
+
+    @Override
+    public String visit(TypeRetour typeretour) {
+
+        String nodeIdentifier = this.nextState();
+        String faireState = typeretour.type.accept(this);
+        this.addNode(nodeIdentifier, "TypeRetour");
+        this.addTransition(nodeIdentifier, faireState);
+
+        return nodeIdentifier;
     }
 
 }

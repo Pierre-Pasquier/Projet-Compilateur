@@ -8,8 +8,9 @@ import java.util.List;
 
 
 public class TDS {
-    public static int num_region;
-    public static int num_imbrication;
+    public static int num_region = 1;
+    public static List<Integer> pile_region = new ArrayList<Integer>();
+    public static int num_imbrication = 0;
 	public static PrintWriter writer;
     public static String fonction_etudiee = null;
     public static List<List> tds;
@@ -125,6 +126,9 @@ public class TDS {
         //Renvoie l'attribut de l'élément passé en paramètre
     public static String getAttribut(String x, List<List> tds_list, int num_region){
         int i = getTds(num_region, tds_list);       //Récupère le numéro de la tds avec le num de la région
+        if (i == -1){
+            return null;
+        }
         List<List> tds = tds_list.get(i);       //Récupère la tds
         Result res = is_in_tds(x,tds_list,num_region);  
         if (res != null){
@@ -164,7 +168,7 @@ public class TDS {
     }
     //Retourne le type d'un élément dont l'attribut est VAR
     public static String getType(String x, List<List> tds_list, int num_region){ 
-        if (getAttribut(x, tds_list, num_region).equals("VAR")){
+        if (getAttribut(x, tds_list, num_region) != null && getAttribut(x, tds_list, num_region).equals("VAR")){
             int i = getTds(num_region, tds_list);       //Récupère le numéro de la tds avec le num de la région
             List<List> tds = tds_list.get(i);       //Récupère la tds
             Result res = is_in_tds(x,tds_list,num_region);  

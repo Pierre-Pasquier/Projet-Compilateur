@@ -23,11 +23,17 @@ public class Minus implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        list.addAll(left.ControleSemantique());
-        list.addAll(right.ControleSemantique());
-        list.add("");
+        if (left.ControleSemantique().get(0).equals("")){
+            list.add(right.ControleSemantique().get(0));
+        } else if (right.ControleSemantique().get(0).equals("")){
+            list.add(left.ControleSemantique().get(0));
+        } else if (left.ControleSemantique().get(0) != right.ControleSemantique().get(0)){
+            TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
+            list.add("");
+        } else {
+            list.add(left.ControleSemantique().get(0));
+        }
         return list;
-        
     }
 
 }

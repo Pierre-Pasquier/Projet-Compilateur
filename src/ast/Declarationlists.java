@@ -23,10 +23,13 @@ public class Declarationlists implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
+        TDS.num_imbrication++;
+        TDS.num_region++;
         List<String> list = new ArrayList<String>();
         list.addAll(affect.ControleSemantique());
         list.addAll(dans.ControleSemantique());
         list.add("");
+        TDS.num_imbrication--;
         return list;
         
     }

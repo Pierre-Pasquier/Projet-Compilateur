@@ -17,7 +17,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	//PrintWriter writer = new PrintWriter("out/output.txt", "UTF-8");
 	public String fonction_etudiee;
 	public boolean controle_semantique = false;
-
+	public String typeretour = null;
 
 	public AstCreator() throws Exception{
 	}
@@ -407,6 +407,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (pere2.equals("Typefield")){
 			args.add(idfString);
 		}
+		if (pere2.equals("Functiondeclaration")){
+			typeretour = idfString;
+		}
 		pere2 = "Typeid";
 		System.out.println("Dans typeid");
 		System.out.println("idf = " + idfString);
@@ -471,18 +474,18 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null,ctx.getStart().getLine());
 		} else {
-			String typeidString = ctx.getChild(6).toString();
-			Ast typeid = ctx.getChild(6).accept(this);
-			Ast expr = ctx.getChild(8).accept(this);
-			pile_region.remove(pile_region.size()-1);
-			//System.out.println(pile_region);
 			num_imbrication--;
+			pile_region.remove(pile_region.size()-1);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = new ArrayList<>();
 			line.add(idfString);
 			line.add("METHOD");
-			line.add(ctx.getChild(6).accept(this).toString());
+			pere2 = "Functiondeclaration";
+			Ast typeid = ctx.getChild(6).accept(this);
+			Ast expr = ctx.getChild(8).accept(this);
+			//System.out.println(pile_region);
+			line.add(typeretour);
 			line.add(Integer.toString(args.size()));
 			line.addAll(args);
 			list.add(line);
@@ -591,7 +594,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pere = null;
 		return new For((Ast)new Idf(idfString,ctx.getStart().getLine()), (Ast)new BorneInf(deb,ctx.getStart().getLine()), (Ast)new BorneSup(fin,ctx.getStart().getLine()),(Ast)new Do(faire,ctx.getStart().getLine()),ctx.getStart().getLine());
 	}
-//on met peut etre idf mais à voir plus tard
+	//on met peut etre idf mais à voir plus tard
 	@Override 
 	public Ast visitLvalues(exprParser.LvaluesContext ctx) { 
 		pere2 = "Lvalues";
