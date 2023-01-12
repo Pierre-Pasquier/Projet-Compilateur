@@ -32,10 +32,10 @@ public class Egal implements Ast {
             list.add(left.ControleSemantique().get(0));
         } else if (left.ControleSemantique().get(0) != right.ControleSemantique().get(0)){
             TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
-            System.out.println("PAS EGAL ");
+            //System.out.println("PAS EGAL ");
             list.add("");
         }else{
-            list.add("INT");
+            list.add(left.ControleSemantique().get(0));
         }
 
         return list;

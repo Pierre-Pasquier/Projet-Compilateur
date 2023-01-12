@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class If implements Ast {
@@ -22,13 +23,18 @@ public class If implements Ast {
     @Override
     public List<String> ControleSemantique() {
 
-        if(condition.ControleSemantique().get(0).equals("INT")){
+        List<String> list = new ArrayList<>();
+        list.addAll(condition.ControleSemantique());
+
+        if(list.get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
+            list.add("");
+            //System.out.println(list);
+            //System.out.println("attrapé");
         }
+        //System.out.println(list);
 
-        System.out.println(condition.ControleSemantique());
-
-        return condition.ControleSemantique();
+        return list;
         
     }
 

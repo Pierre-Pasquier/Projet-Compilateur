@@ -30,10 +30,11 @@ public class While implements Ast {
         TDS.num_imbrication++;
         TDS.num_region++;
         List<String> list = new ArrayList<>();
-        list.addAll(condition.ControleSemantique());
+        List<String> cond = condition.ControleSemantique();
+        list.addAll(cond);
         list.addAll(faire.ControleSemantique());
 
-        if(condition.ControleSemantique().get(0).equals("INT")){
+        if(cond.get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
         }
 

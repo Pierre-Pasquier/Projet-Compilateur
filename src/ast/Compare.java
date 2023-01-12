@@ -29,9 +29,8 @@ public class Compare implements Ast {
             list.add(left.ControleSemantique().get(0));
         } else if (left.ControleSemantique().get(0) != right.ControleSemantique().get(0)){
             TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
-            list.add("");
         } else {
-            list.add("INT");
+            list.add("");
         }
         return list;
     }

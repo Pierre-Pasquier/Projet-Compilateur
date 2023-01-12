@@ -25,7 +25,8 @@ public class Stringg implements Ast{
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        list.add("STRING");
+        list.add("string");
+        System.out.println("string");
         return list;
         
     }

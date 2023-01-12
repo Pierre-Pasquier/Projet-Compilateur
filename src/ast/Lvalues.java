@@ -39,7 +39,7 @@ public class Lvalues implements Ast {
                 }
             }
         }
-        list.add("");
+        list.add(fonction);
 
         
         return list;
