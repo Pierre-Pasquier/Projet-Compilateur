@@ -34,9 +34,9 @@ public class InfEq implements Ast {
         } else {
             list.add(left.ControleSemantique().get(0));
         }
-       // System.out.println(right.ControleSemantique());
-       // System.out.println("right.ControleSemantique().get(0)");
-        //System.out.println(left.ControleSemantique());
+        System.out.println(right.ControleSemantique());
+
+        System.out.println(left.ControleSemantique());
 
         return list;
     }

@@ -23,16 +23,6 @@ public class Egal implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-<<<<<<< HEAD
-        List<String> r = right.ControleSemantique();
-        List<String> l = left.ControleSemantique();
-        if (!l.get(0).equals(r.get(0)) && !l.get(0).equals("") && !r.get(0).equals("")){
-            System.out.println("r : " + r + "      l : " + l + "------------------------------------------");
-            TDS.write("Erreur ligne " + line + " : les deux opérandes de l'égalité doivent être de même type");
-            list.add("");
-        } else {
-            list.add("int");
-=======
         list.addAll(left.ControleSemantique());
         list.addAll(right.ControleSemantique());
 
@@ -46,7 +36,6 @@ public class Egal implements Ast {
             list.add("");
         }else{
             list.add(left.ControleSemantique().get(0));
->>>>>>> b543f331b6bd3478213cd6e63b43181fe4005920
         }
         return list;
     }
