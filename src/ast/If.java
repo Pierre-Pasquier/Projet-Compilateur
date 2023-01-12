@@ -21,14 +21,13 @@ public class If implements Ast {
     
     @Override
     public List<String> ControleSemantique() {
-
-        if(condition.ControleSemantique().get(0).equals("INT")){
+        List<String> cond = condition.ControleSemantique();
+        if(cond.get(0).equals("INT")){
             TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
         }
 
-        System.out.println(condition.ControleSemantique());
 
-        return condition.ControleSemantique();
+        return cond;
         
     }
 

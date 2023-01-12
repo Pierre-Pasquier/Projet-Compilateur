@@ -12,12 +12,14 @@ public class Lvalues implements Ast {
     public Ast lvalue;
     public Ast listexpression;
     public int line;
+    public List<List> tds;
 
 
     public Lvalues(Ast lvalue,Ast listexpression,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.lvalue=lvalue;
         this.listexpression=listexpression;
+        this.tds = tds;
     }
 
 
@@ -27,8 +29,7 @@ public class Lvalues implements Ast {
         String fonction = lvalue.ControleSemantique().get(1);
         if (listexpression instanceof ExprList){
             List<String> listexpr = listexpression.ControleSemantique(); //liste des arguments
-            //System.out.println("Fonction : " + fonction);
-            //System.out.println(listexpr);
+            list.add(TDS.getType(fonction, tds));
             int nb_fils = listexpr.size();
             int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
             if (bon_nb_fils != nb_fils){
@@ -38,8 +39,11 @@ public class Lvalues implements Ast {
                     TDS.write("Erreur ligne " + line + " : nombre d'arguments incorrects pour la fonction " + fonction + ", expected " + bon_nb_fils + ", got : " + nb_fils);
                 }
             }
+        } else if (listexpression == null){
+            list.addAll(lvalue.ControleSemantique());
+        } else {
+            list.add("void");
         }
-        list.add("");
 
         
         return list;

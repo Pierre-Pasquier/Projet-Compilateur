@@ -23,15 +23,13 @@ public class Compare implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        if (left.ControleSemantique().get(0).equals("")){
-            list.add(right.ControleSemantique().get(0));
-        } else if (right.ControleSemantique().get(0).equals("")){
-            list.add(left.ControleSemantique().get(0));
-        } else if (left.ControleSemantique().get(0) != right.ControleSemantique().get(0)){
-            TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
+        List<String> r = right.ControleSemantique();
+        List<String> l = left.ControleSemantique();
+        if (l.get(0) != r.get(0)){
+            TDS.write("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de même type");
             list.add("");
         } else {
-            list.add("INT");
+            list.add("int");
         }
         return list;
     }

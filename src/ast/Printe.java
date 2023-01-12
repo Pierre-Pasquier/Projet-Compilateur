@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Printe implements Ast {
@@ -21,8 +22,9 @@ public class Printe implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        
-        return printe.ControleSemantique();
+        List<String> list = new ArrayList<String>();
+        list.add("void");
+        return list;
         
     }
 

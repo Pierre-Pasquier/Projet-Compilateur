@@ -10,10 +10,12 @@ public class IdfExprList implements Ast {
 
     public ArrayList<Ast> IdfExprList;
     public int line;
+    public List<List> tds;
 
     public IdfExprList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.IdfExprList = new ArrayList<>();
+        this.tds = tds;
     }
     
     public void addIdfExprList(Ast expr){
@@ -23,12 +25,17 @@ public class IdfExprList implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        list.add(IdfExprList.get(0).ControleSemantique().get(0));
         for (int i = 0; i < IdfExprList.size(); i++) {
-            list.addAll(IdfExprList.get(i).ControleSemantique());
+            List<String> sem = IdfExprList.get(i).ControleSemantique();
+            if (sem.size() > 1){
+                String name = sem.get(1);
+                String type = TDS.getType(TDS.getType(name,tds),tds);
+                list.add(type);
+                list.add(name);
+            }
+            
         }
         return list;
-        
     }
 
 }

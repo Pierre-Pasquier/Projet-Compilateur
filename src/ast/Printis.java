@@ -1,5 +1,6 @@
 package ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,8 +23,9 @@ public class Printis implements Ast {
 
     @Override
     public List<String> ControleSemantique() {
-        
-        return printis.ControleSemantique();
+        List<String> list = new ArrayList<String>();
+        list.add("void");
+        return list;
         
     }
 

@@ -282,14 +282,11 @@ public class TDS {
                     String tds_region_var = tds_region.get(k);
                     if (tds_region_var.equals(name)){       //Si la variable est dans la TDS
                         String attr = tds_region.get(1);    //On récupère son attribut
-                        if (attr != null && (attr.equals("VAR") || attr.equals("PARAM") || attr.equals("METHOD") || attr.equals("TYPEARRAY"))){
-                            if (tds_region.size() > 2){
-                                return tds_region.get(2);
-                            }
-                            else{
-                                return null;
-                            }
-                        } else if(attr != null && attr.equals("COMPT")){
+                        if (tds_region.size() > 2 && attr != null && (attr.equals("VAR") || attr.equals("PARAM") || attr.equals("METHOD") || attr.equals("TYPEARRAY"))){
+                            return tds_region.get(2);
+                        } else if (tds_region.size() == 2){
+                            return "";
+                        } else if(attr.equals("COMPT")){
                             return "int";
                         } else {
                             return null;

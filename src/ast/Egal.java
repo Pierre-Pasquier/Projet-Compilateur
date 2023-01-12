@@ -23,21 +23,15 @@ public class Egal implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        list.addAll(left.ControleSemantique());
-        list.addAll(right.ControleSemantique());
-
-        if (left.ControleSemantique().get(0).equals("")){
-            list.add(right.ControleSemantique().get(0));
-        } else if (right.ControleSemantique().get(0).equals("")){
-            list.add(left.ControleSemantique().get(0));
-        } else if (left.ControleSemantique().get(0) != right.ControleSemantique().get(0)){
-            TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
-            System.out.println("PAS EGAL ");
+        List<String> r = right.ControleSemantique();
+        List<String> l = left.ControleSemantique();
+        if (!l.get(0).equals(r.get(0)) && !l.get(0).equals("") && !r.get(0).equals("")){
+            System.out.println("r : " + r + "      l : " + l + "------------------------------------------");
+            TDS.write("Erreur ligne " + line + " : les deux opérandes de l'égalité doivent être de même type");
             list.add("");
-        }else{
-            list.add("INT");
+        } else {
+            list.add("int");
         }
-
         return list;
     }
 
