@@ -27,7 +27,6 @@ public class IdfExprList implements Ast {
         for (int i = 0; i < IdfExprList.size(); i++) {
             list.addAll(IdfExprList.get(i).ControleSemantique());
         }
-        list.add("");
         return list;
         
     }

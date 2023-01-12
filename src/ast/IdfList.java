@@ -26,7 +26,6 @@ public class IdfList implements Ast{
         for (int i = 0; i < IdfList.size(); i++) {
             list.addAll(IdfList.get(i).ControleSemantique());
         }
-        list.add("");
         return list;
         
     }

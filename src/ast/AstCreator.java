@@ -702,9 +702,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
 		//System.out.println("Pere : " + pere + "\n");
 		if (pere != null && (pere.equals("for") || pere.equals("typeids"))){
-			System.out.println("pere = " + pere2);
+			//System.out.println("pere = " + pere2);
 			//System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
-			System.out.println("Idf : " + idfString);
+			//System.out.println("Idf : " + idfString);
 			//System.out.println("tds : " + tds);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);

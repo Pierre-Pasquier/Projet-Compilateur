@@ -23,7 +23,7 @@ public class IntNode implements Ast {
         List<String> list = new ArrayList<String>();
 
 
-        list.add(Integer.toString(value));
+        list.add("INT");
         return list;
         
     }

@@ -15,6 +15,10 @@ public class If implements Ast {
     
     @Override
     public List<String> ControleSemantique() {
+
+        
+        System.out.println(condition.ControleSemantique());
+
         return condition.ControleSemantique();
         
     }

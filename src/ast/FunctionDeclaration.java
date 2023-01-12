@@ -28,7 +28,7 @@ public class FunctionDeclaration implements Ast {
         TDS.num_region++;
         List<String> list = new ArrayList<>();
         //boucle sur les élément de expr et on vérifie si ils sont ous égaux ou non
-        for (int i = 0; i < expr.ControleSemantique().size(); i++) {
+        for (int i = 0; i < expr.ControleSemantique().size() && i < typefields.ControleSemantique().size() ; i++) {
             if (expr.ControleSemantique().get(i).equals(typefields.ControleSemantique().get(i))){
                 list.add(expr.ControleSemantique().get(i));
             } else {
@@ -40,9 +40,4 @@ public class FunctionDeclaration implements Ast {
         return list;
         
     }
-
-
-    
-
-
 }

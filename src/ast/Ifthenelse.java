@@ -39,14 +39,8 @@ public class Ifthenelse implements Ast {
         if (ouOccasionnel != null){
             list.addAll(ouOccasionnel.ControleSemantique());
         }
-        list.add("");
-
-
-        System.out.println();
-
-
-        System.out.println("\n"+condition.ControleSemantique()+"\n");
-
+        list.add("");        
+        
 
 
         return list;

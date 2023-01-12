@@ -27,8 +27,8 @@ public class Lvalues implements Ast {
         String fonction = lvalue.ControleSemantique().get(1);
         if (listexpression instanceof ExprList){
             List<String> listexpr = listexpression.ControleSemantique(); //liste des arguments
-            System.out.println("Fonction : " + fonction);
-            System.out.println(listexpr);
+            //System.out.println("Fonction : " + fonction);
+            //System.out.println(listexpr);
             int nb_fils = listexpr.size();
             int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
             if (bon_nb_fils != nb_fils){

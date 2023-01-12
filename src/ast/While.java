@@ -32,12 +32,16 @@ public class While implements Ast {
         List<String> list = new ArrayList<>();
         list.addAll(condition.ControleSemantique());
         list.addAll(faire.ControleSemantique());
+
+        if(condition.ControleSemantique().get(0).equals("INT")){
+            TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
+        }
+
         list.add("");
         TDS.num_imbrication--;
         return list;
         
     }
-
 
 }
 
