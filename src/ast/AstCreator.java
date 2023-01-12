@@ -291,7 +291,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		if (ctx.getChildCount() == 1){
 			String idfString = ctx.getChild(0).toString();
 			fonction_etudiee = idfString;
-			System.out.println("Fonction étudiée = " + fonction_etudiee);
+			//System.out.println("Fonction étudiée = " + fonction_etudiee);
 			return new Idf(idfString,ctx.getStart().getLine());
 		}
 		for (int i=0; i<(ctx.getChildCount()+1)/2;i++){
@@ -303,7 +303,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	}
 	@Override public Ast visitIdfexprlist(exprParser.IdfexprlistContext ctx) {
 		pere2 = "Idfexprlist";
-		System.out.println("Dans Idfexprlist, nombre de fils = " + ctx.getChildCount());
+		//System.out.println("Dans Idfexprlist, nombre de fils = " + ctx.getChildCount());
 		String idfString = ctx.getChild(0).toString();
 		Idf idf = new Idf(idfString,ctx.getStart().getLine());
 		IdfExprList Idfexprlist = new IdfExprList(ctx.getStart().getLine());
@@ -342,6 +342,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) {
+		System.out.println(num_imbrication);
 		pere2 = "Typedeclaration";
 		pere = "typedeclaration";
 		List<String> typedecla = new ArrayList<>();
@@ -389,6 +390,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return typefieldList;
 	}
 	@Override public Ast visitTypefield(exprParser.TypefieldContext ctx) {
+		//System.out.println(num_imbrication);
 		pere2 = "Typefield";
 		List<String> line = new ArrayList<>(); 
 		String idfString = ctx.getChild(0).toString();
@@ -403,13 +405,14 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 
 
 	 @Override public Ast visitTypeid(exprParser.TypeidContext ctx) { 
+		//System.out.println(num_imbrication);
 		String idfString = ctx.getChild(0).toString();
 		if (pere2.equals("Typefield")){
 			args.add(idfString);
 		}
 		pere2 = "Typeid";
-		System.out.println("Dans typeid");
-		System.out.println("idf = " + idfString);
+		//System.out.println("Dans typeid");
+		//System.out.println("idf = " + idfString);
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		List<List> list = tds.get(indice);
 		List<String> line = list.get(list.size()-1);
@@ -418,6 +421,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return new Idf(idfString,ctx.getStart().getLine()); 
 	}
 	@Override public Ast visitVariabledeclaration(exprParser.VariabledeclarationContext ctx) { 
+		System.out.println(num_imbrication);
 		pere2 = "Variabledeclaration";
 		List<String> line = new ArrayList<>();
 		String idfString = ctx.getChild(1).toString();
@@ -438,17 +442,19 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
-			System.out.println("expr = null : "+ (expr == null) + "\n");
+			//System.out.println("expr = null : "+ (expr == null) + "\n");
 			return new VariableDeclaration(idf, expr, typeid,ctx.getStart().getLine());
 		}
 	}
 	@Override public Ast visitFunctiondeclaration(exprParser.FunctiondeclarationContext ctx) { 
+		num_imbrication+=1;
+		System.out.println(num_imbrication);
 		pere2 = "Functiondeclaration";
 		pile_region.add(String.valueOf(num_region));
 		String idfString = ctx.getChild(1).toString();
 		List<List> list_fun = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
-		nom.add("TDS_" + idfString + "_" + (num_region++) + "_" + (num_imbrication++));
+		nom.add("TDS_" + idfString + "_" + (num_region++) + "_" + (num_imbrication));
 		list_fun.add(nom);
 		tds.add(list_fun);
 		
@@ -468,6 +474,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			line.addAll(args);
 			list.add(line);
 			args.clear();
+			num_imbrication-=1;
+			System.out.println(num_imbrication);
 			//System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null,ctx.getStart().getLine());
 		} else {
@@ -487,15 +495,19 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			line.addAll(args);
 			list.add(line);
 			args.clear();
+			num_imbrication-=1;
+			System.out.println(num_imbrication);
 			return new FunctionDeclaration(idf, typefields,expr, typeid, ctx.getStart().getLine());
 		} 
 	}
 	@Override public Ast visitPrinti(exprParser.PrintiContext ctx) { 
+		
 		pere2 = "Printi";
 		Ast printe = ctx.getChild(1).accept(this);
 		return new Printe(printe,ctx.getStart().getLine());
 	 }
 	@Override public Ast visitPrint(exprParser.PrintContext ctx) { 
+		
 		pere2 = "Print";
 		Ast printe = ctx.getChild(1).accept(this);
 		return new Printe(printe,ctx.getStart().getLine());
@@ -622,7 +634,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	@Override 
 	public Ast visitParenthesis(exprParser.ParenthesisContext ctx) { 
 		pere2 = "Parenthesis";
-		System.out.println("Dans parentheses");
+		//System.out.println("Dans parentheses");
 		return ctx.getChild(1).accept(this);
 	}
 	@Override 
@@ -674,8 +686,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitValint(exprParser.ValintContext ctx) {
 		int intString = Integer.parseInt(ctx.getChild(ctx.getChildCount()-1).toString());
 		if (pere != null && (pere.equals("for") || pere.equals("typeids"))){
-			System.out.println("pere = " + pere2);
-			System.out.println("Idf : " + intString);
+			//System.out.println("pere = " + pere2);
+			//System.out.println("Idf : " + intString);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
 			List<String> line = list.get(list.size()-1);
@@ -699,9 +711,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(ctx.getChildCount()-1).toString();
 		//System.out.println("Pere : " + pere + "\n");
 		if (pere != null && (pere.equals("for") || pere.equals("typeids"))){
-			System.out.println("pere = " + pere2);
+			//System.out.println("pere = " + pere2);
 			//System.out.println("pile_region : " + pile_region.get(pile_region.size()-1));
-			System.out.println("Idf : " + idfString);
+			//System.out.println("Idf : " + idfString);
 			//System.out.println("tds : " + tds);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 			List<List> list = tds.get(indice);
