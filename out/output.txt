@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Erreur ligne 15 : nombre d'arguments incorrects pour la fonction printboard, expected 2, got : 1
 Erreur ligne 18 : variable fdfjshdkjhfsd non déclarée
 Erreur ligne 18 : la fonction fdfjshdkjhfsd n'est pas définie
@@ -10,3 +11,5 @@ Erreur ligne 19 : variable b non déclarée
 Erreur ligne 19 : variable d non déclarée
 Erreur ligne 19 : variable d non déclarée
 Erreur ligne 19 : nombre d'arguments incorrects pour la fonction try, expected 1, got : 4
+=======
+>>>>>>> 08549a324b5bdddb8b74c2d789cf224a4e9b3562

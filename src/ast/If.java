@@ -25,6 +25,7 @@ public class If implements Ast {
 
         List<String> list = new ArrayList<>();
         list.addAll(condition.ControleSemantique());
+        list.add("");
 
         if(list.get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
