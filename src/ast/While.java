@@ -34,7 +34,7 @@ public class While implements Ast {
         list.addAll(cond);
         list.addAll(faire.ControleSemantique());
 
-        if(condition.ControleSemantique().get(0).equals("int")){
+        if(condition.ControleSemantique().get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : La condition doit se traduire par un booléan (0 ou 1)");
         }
 
