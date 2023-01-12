@@ -25,7 +25,7 @@ public class Compare implements Ast {
         List<String> list = new ArrayList<String>();
         List<String> r = right.ControleSemantique();
         List<String> l = left.ControleSemantique();
-        if (l.get(0) != r.get(0)){
+        if (!l.get(0).equals(r.get(0))){
             TDS.write("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de même type");
             list.add("");
         } else {
