@@ -11,7 +11,7 @@ public class DeclarationList implements Ast{
     public ArrayList<Ast> DeclarationList;
     public int line;
 
-    public DeclarationList(int line){
+    public DeclarationList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.DeclarationList = new ArrayList<>();
     }

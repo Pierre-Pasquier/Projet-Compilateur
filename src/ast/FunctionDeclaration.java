@@ -14,7 +14,7 @@ public class FunctionDeclaration implements Ast {
     public Ast typefields;
     public int line;
 
-    public FunctionDeclaration(Ast Idf, Ast typefields, Ast expr, Ast typeid,int line){
+    public FunctionDeclaration(Ast Idf, Ast typefields, Ast expr, Ast typeid,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.typeid = typeid;
         this.Idf = Idf;

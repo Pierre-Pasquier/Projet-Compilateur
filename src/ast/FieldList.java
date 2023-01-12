@@ -12,7 +12,7 @@ public class FieldList implements Ast{
     public Ast Idf;
     public int line;
 
-    public FieldList(int line){
+    public FieldList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.FieldList = new ArrayList<>();
     }

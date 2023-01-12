@@ -10,7 +10,7 @@ public class TypeRetour implements Ast{
     public Ast type;
     public int line;
     
-    public TypeRetour(Ast type,int line){
+    public TypeRetour(Ast type,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.type=type;
     }

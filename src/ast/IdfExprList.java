@@ -11,7 +11,7 @@ public class IdfExprList implements Ast {
     public ArrayList<Ast> IdfExprList;
     public int line;
 
-    public IdfExprList(int line){
+    public IdfExprList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.IdfExprList = new ArrayList<>();
     }

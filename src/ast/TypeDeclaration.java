@@ -13,7 +13,7 @@ public class TypeDeclaration implements Ast{
     public Ast type;
     public int line;
 
-    public TypeDeclaration(Ast typeid, Ast type,int line){
+    public TypeDeclaration(Ast typeid, Ast type,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.typeid = typeid;
         this.type = type;

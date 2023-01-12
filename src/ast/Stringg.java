@@ -16,7 +16,7 @@ public class Stringg implements Ast{
     public String name;
     public int line;
 
-    public Stringg(String name,int line){
+    public Stringg(String name,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.name = name;
     }

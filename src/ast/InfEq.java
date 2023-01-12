@@ -15,7 +15,7 @@ public class InfEq implements Ast {
     public Ast right;
     public int line;
 
-    public InfEq(Ast left, Ast right,int line){
+    public InfEq(Ast left, Ast right,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.left = left;
         this.right = right;

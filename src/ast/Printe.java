@@ -12,7 +12,7 @@ public class Printe implements Ast {
     public int line;
 
 
-    public Printe(Ast printe,int line){
+    public Printe(Ast printe,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.printe = printe;
     }

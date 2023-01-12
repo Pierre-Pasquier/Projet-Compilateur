@@ -15,7 +15,7 @@ public class While implements Ast {
     public int line;
 
 
-    public While(Ast condition,Ast faire,int line){
+    public While(Ast condition,Ast faire,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.line = line;
         this.condition = condition;

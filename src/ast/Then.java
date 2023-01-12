@@ -9,7 +9,7 @@ public class Then implements Ast{
     }
     public Ast alors;
     public int line;
-    public Then(Ast alors,int line){
+    public Then(Ast alors,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.alors=alors;
     }

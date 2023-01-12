@@ -13,7 +13,7 @@ public class TypeField implements Ast{
     public Ast Idf;
     public int line;
 
-    public TypeField(Ast Idf, Ast typeid,int line){
+    public TypeField(Ast Idf, Ast typeid,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.Idf = Idf;
         this.typeid = typeid;

@@ -16,7 +16,7 @@ public class Sup implements Ast {
     public Ast left;
     public Ast right;
 
-    public Sup(Ast left, Ast right,int line){
+    public Sup(Ast left, Ast right,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.left = left;
         this.right = right;

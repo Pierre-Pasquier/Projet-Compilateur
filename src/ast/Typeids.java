@@ -15,7 +15,7 @@ public class Typeids implements Ast {
     public Ast typeids3;
     public int line;
     
-    public Typeids(Ast typeids1, Ast typeids2, Ast typeids3,int line){
+    public Typeids(Ast typeids1, Ast typeids2, Ast typeids3,int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
         this.typeids1 = typeids1;
         this.typeids2 = typeids2;
