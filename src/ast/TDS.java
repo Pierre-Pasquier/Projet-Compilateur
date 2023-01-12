@@ -234,20 +234,6 @@ public class TDS {
         return -1;
     }
 
-    public static List<String> getVAR(String idf, List<List> list_tds){
-        for (int i = 0; i < liste_tds.size(); i++) {
-            List<List> tds = liste_tds.get(i);
-            for (int j = 1; j < tds.size(); j++) {
-                List<String> ligne = tds.get(j);
-                    if (ligne.get(0).equals(idf) && ligne.get(1).equals("VAR"))
-                    {
-                    return ligne;
-                    }
-                }
-            }
-        }
-    }
-
     public static int getRegion(){
         return num_region;
     }
