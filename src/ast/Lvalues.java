@@ -29,13 +29,15 @@ public class Lvalues implements Ast {
         String fonction = lvalue.ControleSemantique().get(1);
         if (listexpression instanceof ExprList){
             List<String> listexpr = listexpression.ControleSemantique(); //liste des arguments
-            list.add(TDS.getType(fonction, tds));
-            int nb_fils = listexpr.size();
-            int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
-            if (bon_nb_fils != nb_fils){
-                if (bon_nb_fils == -1){
-                    TDS.write("Erreur ligne " + line + " : la fonction " + fonction + " n'est pas définie");
-                } else {
+            if (TDS.getType(fonction, tds) == null){
+                TDS.write("Erreur ligne " + line + " : la fonction " + fonction + " n'est pas définie");
+                list.add("");
+            } else {
+                list.add(TDS.getType(fonction, tds));
+                System.out.println(fonction + "---------------- " + TDS.getType(fonction, tds));
+                int nb_fils = listexpr.size()/2;
+                int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
+                if (bon_nb_fils != nb_fils){
                     TDS.write("Erreur ligne " + line + " : nombre d'arguments incorrects pour la fonction " + fonction + ", expected " + bon_nb_fils + ", got : " + nb_fils);
                 }
             }
@@ -44,8 +46,8 @@ public class Lvalues implements Ast {
         } else {
             list.add("void");
         }
-
         
+        System.out.println("Dans Lvalues : " + list);
         return list;
         
     }

@@ -33,9 +33,11 @@ public class FunctionDeclaration implements Ast {
         String name = Idf.ControleSemantique().get(1);
         List<String> typf = typefields.ControleSemantique();
         String type = TDS.getType(name, tds);
+        System.out.println("type de retour de la fonction " + name + " : " + type);
+        System.out.println(exp);
         //boucle sur les élément de expr et on vérifie si ils sont tous égaux ou non
         for (int i = 0; i < exp.size(); i++) {
-            if (exp.get(i).equals(type)){
+            if (exp.get(i).equals(type) || exp.get(i).equals("")){
                 list.add(exp.get(i));
             } else {
                 TDS.write("Erreur ligne " + line + " : type de retour de la fonction " + name + " non conforme");

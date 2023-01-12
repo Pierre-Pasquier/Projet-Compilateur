@@ -27,29 +27,14 @@ public class Idf implements Ast{
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-<<<<<<< HEAD
         String type = TDS.getType(name, tds);
-=======
-        //System.out.println("Idf = " + name + " " + num_region + " " + num_imbrication);
-        //System.out.println("len tds : " + tds.size());
-        String type = TDS.getType(name, tds);
-        //System.out.println("type : " + type);
-
-        
->>>>>>> b543f331b6bd3478213cd6e63b43181fe4005920
         if (type == null){
             TDS.write("Erreur ligne " + line + " : variable " + name + " non déclarée");
             list.add("");
         } else  {
             list.add(type);
-<<<<<<< HEAD
         }
         
-=======
-           // System.out.println(type);
-
-        }
->>>>>>> b543f331b6bd3478213cd6e63b43181fe4005920
         list.add(name);
         
         return list;
