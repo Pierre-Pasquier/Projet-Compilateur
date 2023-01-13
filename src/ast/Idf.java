@@ -46,11 +46,16 @@ public class Idf implements Ast{
         }*/
         
         List<String> line = TDS.getDECLARATION(name,TDS.tds);
+        
         //System.out.println(line);
-        if (line.size()==0){
+        if (line.size()==0 && !TDS.list_var.contains(name)){
             System.out.println("La variable " + name + " n'est pas déclarée avant d'être utilisée");
+            TDS.list_var.add(name);
         }
-        else{System.out.println("La variable "+ name +" est déclarée avant d'être utilisée");};
+        else if (line.size()!=0 && !TDS.list_var.contains(name))
+        {System.out.println("La variable "+ name +" est déclarée avant d'être utilisée");
+        TDS.list_var.add(name);
+        };
         
         list.add(name);
         

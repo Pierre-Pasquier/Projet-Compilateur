@@ -13,6 +13,7 @@ public class TDS {
     public static int num_imbrication = 0;
 	public static PrintWriter writer;
     public static String fonction_etudiee = null;
+    public static List<String> list_var = new ArrayList<String>();
     public static List<List> tds;
     public static boolean write_instanciee = false;
 
