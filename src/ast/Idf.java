@@ -33,14 +33,25 @@ public class Idf implements Ast{
             list.add("");
         } else  {
             list.add(type);
-<<<<<<< HEAD
+        }
+
+       /* if (!list.contains(name)){
+            list.add(name);
+            System.out.println(name);
         }
         
-=======
-           // System.out.println(type);
-
+        if (TDS.global_name==0){
+            TDS.global_name=1;
+            list.get(list.size()-1);
+        }*/
+        
+        List<String> line = TDS.getDECLARATION(name,TDS.tds);
+        //System.out.println(line);
+        if (line.size()==0){
+            System.out.println("La variable " + name + " n'est pas déclarée avant d'être utilisée");
         }
->>>>>>> 08549a324b5bdddb8b74c2d789cf224a4e9b3562
+        else{System.out.println("La variable "+ name +" est déclarée avant d'être utilisée");};
+        
         list.add(name);
         
         return list;
