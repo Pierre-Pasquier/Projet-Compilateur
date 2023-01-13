@@ -53,7 +53,7 @@ public class Idf implements Ast{
             TDS.list_var.add(name);
         }
         else if (line.size()!=0 && !TDS.list_var.contains(name))
-        {System.out.println("La variable "+ name +" est déclarée avant d'être utilisée");
+        {System.out.println("La variable "+ name +" est déclarée à la ligne " +this.line +" avant d'être utilisée");
         TDS.list_var.add(name);
         };
         
