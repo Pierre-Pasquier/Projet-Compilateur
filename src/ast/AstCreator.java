@@ -483,6 +483,8 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 		} else {
+			Ast typeid = ctx.getChild(6).accept(this);
+			Ast expr = ctx.getChild(8).accept(this);
 			num_imbrication--;
 			pile_region.remove(pile_region.size()-1);
 			int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
@@ -491,8 +493,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			line.add(idfString);
 			line.add("METHOD");
 			pere2 = "Functiondeclaration";
-			Ast typeid = ctx.getChild(6).accept(this);
-			Ast expr = ctx.getChild(8).accept(this);
 			//System.out.println(pile_region);
 			line.add(typeretour);
 			line.add(Integer.toString(args.size()));

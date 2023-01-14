@@ -33,8 +33,10 @@ public class Lvalues implements Ast {
             if (TDS.getType(fonction.get(1), tds) == null){
                 TDS.write("Erreur ligne " + line + " : la fonction " + fonction.get(1) + " n'est pas définie");
                 list.add("");
+                list.add(line + "");
             } else {
                 list.add(TDS.getType(fonction.get(1), tds));
+                list.add(line + "");
                 System.out.println(fonction.get(1) + "---------------- " + TDS.getType(fonction.get(1), tds));
                 int nb_fils = listexpr.size()/2;
                 int bon_nb_fils = TDS.getNbFils(fonction.get(1),TDS.tds);
@@ -53,10 +55,9 @@ public class Lvalues implements Ast {
             list.addAll(fonction);
         } else {
             list.add("void");
+            list.add(line + "");
         }
-        System.out.println("lvalues");
-
-        System.out.println(list);
+        System.out.println("Dans Lvalues : " + list);
 
         return list;
         

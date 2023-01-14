@@ -34,12 +34,20 @@ public class Ifthenelse implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<>();
-        condition.ControleSemantique();
-        list.addAll(alors.ControleSemantique());
+        List<String> cond = condition.ControleSemantique();
+        List<String> then = alors.ControleSemantique();
+        list.addAll(then);
         if (ouOccasionnel != null){
-            list.addAll(ouOccasionnel.ControleSemantique());
+            List<String> elsee = ouOccasionnel.ControleSemantique();
+            list.addAll(elsee);
+            if (!then.get(0).equals(elsee.get(0))){
+                TDS.write("Erreur ligne " + line + " : les deux branches d'un ifthenelse doivent être de même type");
+                list.add("");
+                list.add(line + "");
+            }
+
         }     
-        
+        System.out.println("Dans ifthenelse : " + list);
         return list;
         
     }
