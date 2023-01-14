@@ -13,6 +13,7 @@ public class TDS {
     public static int num_imbrication = 0;
 	public static PrintWriter writer;
     public static String fonction_etudiee = null;
+    public static List<String> list_var = new ArrayList<String>();
     public static List<List> tds;
     public static boolean write_instanciee = false;
 
@@ -188,6 +189,23 @@ public class TDS {
             return null;
         }
     }
+
+    public static List<String> getDECLARATION(String idf, List<List> liste_tds){
+        List<String> liste = new ArrayList<String>();
+        for (int i = 0; i < liste_tds.size(); i++) {
+            List<List> tds = liste_tds.get(i);
+            for (int j = 1; j < tds.size(); j++) {
+                List<String> ligne = tds.get(j);
+                    if (ligne.get(0).equals(idf) && (ligne.get(1).equals("VAR") || ligne.get(1).equals("PARAM") ||  ligne.get(1).equals("COMPT")))
+                    {
+                    liste=ligne;
+                    }
+                }
+            }
+            return liste;
+        }
+    
+
 
     // Renvoie le type des éléments de la matrice passée en paramtètre
     public static String getTypeElemOfArray(String x, List<List> tds_list, int num_region){     
