@@ -10,9 +10,11 @@ public class ExprList implements Ast{
 
     public ArrayList<Ast> ExprList;
     public int line;
+    public List<List> tds= new ArrayList<>();
 
     public ExprList(int line, int num_region, int num_imbrication, List<List> tds){
         this.line = line;
+        this.tds = tds;
         this.ExprList = new ArrayList<>();
     }
     
@@ -24,8 +26,8 @@ public class ExprList implements Ast{
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < ExprList.size(); i++) {
-            // verif type args
-            list.addAll(ExprList.get(i).ControleSemantique());
+            List<String> args = ExprList.get(i).ControleSemantique();
+            list.addAll(args);
         }
         return list;
         

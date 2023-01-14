@@ -33,8 +33,8 @@ public class Idf implements Ast{
             list.add("");
         } else  {
             list.add(type);
+           // System.out.println(type);
         }
-
        /* if (!list.contains(name)){
             list.add(name);
             System.out.println(name);
@@ -49,15 +49,16 @@ public class Idf implements Ast{
         
         //System.out.println(line);
         if (line.size()==0 && !TDS.list_var.contains(name)){
-            System.out.println("La variable " + name + " n'est pas déclarée avant d'être utilisée");
+            TDS.write("La variable " + name + " n'est pas déclarée avant d'être utilisée");
             TDS.list_var.add(name);
         }
-        else if (line.size()!=0 && !TDS.list_var.contains(name))
-        {System.out.println("La variable "+ name +" est déclarée à la ligne " +this.line +" avant d'être utilisée");
-        TDS.list_var.add(name);
+        else if (line.size()!=0 && !TDS.list_var.contains(name)){
+            TDS.write("La variable "+ name +" est déclarée à la ligne " +this.line +" avant d'être utilisée");
+            TDS.list_var.add(name);
         };
         
         list.add(name);
+        
         
         return list;
     }

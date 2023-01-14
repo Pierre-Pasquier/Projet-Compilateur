@@ -52,7 +52,6 @@ public class IdfExprList implements Ast {
             }
             
         }
-        System.out.println("Dans IdfExprList : " + list);
         return list;
     }
 

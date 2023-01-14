@@ -35,7 +35,6 @@ public class Minus implements Ast {
         } else {
             list.add(l.get(0));
         }
-        System.out.println("Dans minus : " + list);
         return list;
     }
 
