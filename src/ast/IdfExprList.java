@@ -34,11 +34,15 @@ public class IdfExprList implements Ast {
                 //System.out.println("Dans sem nom: " + name);
                 //System.out.println("Dans sem type du nom de base: " + TDS.getType(name,tds));
                 //si le type récupéré est une liste 
-                if(TDS.getType(name,tds).indexOf("Array")!=-1){
+                //System.out.println(TDS.getAttribut(TDS.getType(name, tds),tds));
+                //System.out.println(TDS.getAttribut(TDS.getType(name, tds),tds).compareTo("TYPEARRAY")==0);
+                if(TDS.getType(name,tds)!=null && TDS.getAttribut(TDS.getType(name, tds),tds).compareTo("TYPEARRAY")==0){
                     //System.out.println("on a un array");
                     //System.out.println("indice dans idfexprList : " + i);
                     //si l'indice passé à cette liste n'est pas un entier
+                    //System.out.println(IdfExprList.get(0).ControleSemantique());
                     if(i+1<IdfExprList.size() && IdfExprList.get(i+1).ControleSemantique().get(0).compareTo("int")!=0){
+                        //System.out.println("on note");
                         //System.out.println("on chope le n qui suis");
                         TDS.write("Erreur ligne " + line + " : l'indice saisie pour obtenir un élément dans la liste n'est pas un entier");
 
