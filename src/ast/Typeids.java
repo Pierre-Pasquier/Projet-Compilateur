@@ -35,6 +35,8 @@ public class Typeids implements Ast {
         if (typeids3 != null){
             list.addAll(typeids3.ControleSemantique());
         }
+        System.out.println("list typeids");
+        System.out.println(list);
         list.add("");
         return list;
         

@@ -54,7 +54,10 @@ public class Lvalues implements Ast {
         } else {
             list.add("void");
         }
-        
+        System.out.println("lvalues");
+
+        System.out.println(list);
+
         return list;
         
     }

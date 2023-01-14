@@ -27,7 +27,7 @@ public class IdfExprList implements Ast {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < IdfExprList.size(); i++) {
             List<String> sem = IdfExprList.get(i).ControleSemantique();
-            System.out.println("Dans sem : " + sem);
+            //System.out.println("Dans sem : " + sem);
 
             if (sem.size() > 1){
                 String name = sem.get(1);
