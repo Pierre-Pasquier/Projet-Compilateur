@@ -34,15 +34,12 @@ public class Ifthenelse implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<>();
-        list.addAll(condition.ControleSemantique());
+        condition.ControleSemantique();
         list.addAll(alors.ControleSemantique());
         if (ouOccasionnel != null){
             list.addAll(ouOccasionnel.ControleSemantique());
-        }
-        list.add("");        
+        }     
         
-
-
         return list;
         
     }

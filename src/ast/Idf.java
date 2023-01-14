@@ -33,14 +33,9 @@ public class Idf implements Ast{
             list.add("");
         } else  {
             list.add(type);
-<<<<<<< HEAD
-        }
-        
-=======
            // System.out.println(type);
 
         }
->>>>>>> 08549a324b5bdddb8b74c2d789cf224a4e9b3562
         list.add(name);
         
         return list;

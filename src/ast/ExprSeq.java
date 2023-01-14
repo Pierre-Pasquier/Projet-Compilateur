@@ -26,7 +26,6 @@ public class ExprSeq implements Ast{
         for (int i = 0; i < ExprSeq.size(); i++) {
             list.addAll(ExprSeq.get(i).ControleSemantique());
         }
-        System.out.println("Dans ExprSeq : " + list);
         return list;
         
     }

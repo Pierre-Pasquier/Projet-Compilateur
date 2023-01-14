@@ -26,28 +26,35 @@ public class Lvalues implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-        String fonction = lvalue.ControleSemantique().get(1);
+        List<String> fonction = lvalue.ControleSemantique();
         if (listexpression instanceof ExprList){
             List<String> listexpr = listexpression.ControleSemantique(); //liste des arguments
-            if (TDS.getType(fonction, tds) == null){
-                TDS.write("Erreur ligne " + line + " : la fonction " + fonction + " n'est pas définie");
+            System.out.println("Liste des arguments de la fonction " + fonction.get(1) + " : " + listexpr);
+            if (TDS.getType(fonction.get(1), tds) == null){
+                TDS.write("Erreur ligne " + line + " : la fonction " + fonction.get(1) + " n'est pas définie");
                 list.add("");
             } else {
-                list.add(TDS.getType(fonction, tds));
-                System.out.println(fonction + "---------------- " + TDS.getType(fonction, tds));
+                list.add(TDS.getType(fonction.get(1), tds));
+                System.out.println(fonction.get(1) + "---------------- " + TDS.getType(fonction.get(1), tds));
                 int nb_fils = listexpr.size()/2;
-                int bon_nb_fils = TDS.getNbFils(fonction,TDS.tds);
+                int bon_nb_fils = TDS.getNbFils(fonction.get(1),TDS.tds);
                 if (bon_nb_fils != nb_fils){
-                    TDS.write("Erreur ligne " + line + " : nombre d'arguments incorrects pour la fonction " + fonction + ", expected " + bon_nb_fils + ", got : " + nb_fils);
+                    TDS.write("Erreur ligne " + line + " : nombre d'arguments incorrects pour la fonction " + fonction.get(1) + ", expected " + bon_nb_fils + ", got : " + nb_fils);
+                }
+            }
+            for (int i = 0; i < listexpr.size()/2; i++) {
+                String type_param = TDS.getTypeParam(fonction.get(1),i, tds);
+                System.out.println("fonction : " + fonction.get(1) + " type_param " + i + " : " + type_param + " type_arg : " + listexpr.get(2*i));
+                if (!listexpr.get(2*i).equals("") && type_param != null && !type_param.equals(listexpr.get(2*i))){
+                    TDS.write("Erreur ligne " + line + " : type incorrect pour l'argument " + (i+1) + " de la fonction " + fonction.get(1) + ", expected " + type_param + ", got : " + listexpr.get(2*i));
                 }
             }
         } else if (listexpression == null){
-            list.addAll(lvalue.ControleSemantique());
+            list.addAll(fonction);
         } else {
             list.add("void");
         }
         
-        System.out.println("Dans Lvalues : " + list);
         return list;
         
     }

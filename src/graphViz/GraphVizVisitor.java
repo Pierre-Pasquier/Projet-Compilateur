@@ -429,7 +429,6 @@ public class GraphVizVisitor implements AstVisitor<String> {
         this.addNode(nodeIdentifier, "args");
 
         for (Ast ast:exprList.ExprList){
-
             String astState = ast.accept(this);
             this.addTransition(nodeIdentifier, astState);
 
@@ -554,7 +553,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
            
         String nodeIdentifier = this.nextState();
 
-        this.addNode(nodeIdentifier, "TypeFieldList");
+        this.addNode(nodeIdentifier, "ListParam");
 
         for (Ast ast:typefield.typefieldList){
 
@@ -575,7 +574,7 @@ public class GraphVizVisitor implements AstVisitor<String> {
         String idfState = typefield.Idf .accept(this);
         String typeidState = typefield.typeid.accept(this);
 
-        this.addNode(nodeIdentifier, "TypeField");
+        this.addNode(nodeIdentifier, "Param");
 
     
         this.addTransition(nodeIdentifier, idfState);

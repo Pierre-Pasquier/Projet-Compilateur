@@ -24,6 +24,7 @@ public class IntNode implements Ast {
 
 
         list.add("int");
+        list.add(value+ "");
         return list;
         
     }

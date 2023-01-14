@@ -299,5 +299,45 @@ public class TDS {
     }
 
 
+    // Retourne type du paramètre x de la fonction donnée en paramètre
+    public static String getTypeParam(String fonction, int x, List<List> list_tds) { 
+        for (int i=0 ; i < list_tds.size() ; i++){
+            List<List> tds = list_tds.get(i);
+            for (int j = 0; j < tds.size(); j++){   //Pour chaque ligne de la tds
+                List<String> tds_region = tds.get(j);
+                for (int k = 0; k < tds_region.size(); k++){    //Pour chaque élément de la TDS
+                    String tds_region_var = tds_region.get(k);
+                    if (tds_region_var.equals(fonction) && tds_region.get(1).equals("METHOD")){       //Si la variable est dans la TDS
+                        if (tds_region.size() > x+4){
+                            return tds_region.get(x+4);
+                        } else {
+                            return null;
+                        }
+                    }
+                }
+            }
+    }
+        return null;
+    }
+
+
+
+     //Renvoie l'attribut de l'élément passé en paramètre sans numéro de région
+     public static String getAttribut(String name, List<List> list_tds){
+        for (int i=0 ; i < list_tds.size() ; i++){
+            List<List> tds = list_tds.get(i);
+            for (int j = 0; j < tds.size(); j++){   //Pour chaque ligne de la tds
+                List<String> tds_region = tds.get(j);
+                for (int k = 0; k < tds_region.size(); k++){    //Pour chaque élément de la TDS
+                    String tds_region_var = tds_region.get(k);
+                    if (tds_region_var.equals(name)){       //Si la variable est dans la TDS
+                        return tds_region.get(1);    //On retourne son attribut
+                    }
+                }
+            }
+    }
+        return null;
+    }
+
 }
 

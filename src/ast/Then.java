@@ -16,8 +16,9 @@ public class Then implements Ast{
 
     @Override
     public List<String> ControleSemantique() {
-        
-        return alors.ControleSemantique();
+        List<String> list = alors.ControleSemantique();
+        System.out.println("Dans Then : " + list);
+        return list;
         
     }
 
