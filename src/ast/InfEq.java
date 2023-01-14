@@ -24,22 +24,21 @@ public class InfEq implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
-
-        if (left.ControleSemantique().get(0).equals("")){
-            list.add(right.ControleSemantique().get(0));
-        } else if (right.ControleSemantique().get(0).equals("")){
-            list.add(left.ControleSemantique().get(0));
-        } else if (right.ControleSemantique().get(0).compareTo(left.ControleSemantique().get(0))!=0){
-            TDS.write("Erreur ligne " + line + " : les deux opérandes doivent être de même type");
+        List<String> r = right.ControleSemantique();
+        List<String> l = left.ControleSemantique();
+        if (l.get(0).equals("")){
+            list.add(r.get(0));
+        } else if (r.get(0).equals("")){
+            list.add(l.get(0));
+        } else if (!l.get(0).equals(r.get(0))){
+            TDS.write("Erreur ligne " + line + " : on ne peut pas comparer un "+ l.get(0) + " avec un " + r.get(0) + " avec l'opérateur \"<=\"");
+            list.add("");
         } else {
-            list.add(left.ControleSemantique().get(0));
+            list.add(l.get(0));
         }
-        System.out.println(right.ControleSemantique());
-
-        System.out.println(left.ControleSemantique());
-
         return list;
     }
 
+    }
 
-}
+

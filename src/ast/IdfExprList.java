@@ -27,8 +27,25 @@ public class IdfExprList implements Ast {
         List<String> list = new ArrayList<String>();
         for (int i = 0; i < IdfExprList.size(); i++) {
             List<String> sem = IdfExprList.get(i).ControleSemantique();
+            System.out.println("Dans sem : " + sem);
+
             if (sem.size() > 1){
                 String name = sem.get(1);
+                //System.out.println("Dans sem nom: " + name);
+                //System.out.println("Dans sem type du nom de base: " + TDS.getType(name,tds));
+                //si le type récupéré est une liste 
+                if(TDS.getType(name,tds).indexOf("Array")!=-1){
+                    //System.out.println("on a un array");
+                    //System.out.println("indice dans idfexprList : " + i);
+                    //si l'indice passé à cette liste n'est pas un entier
+                    if(i+1<IdfExprList.size() && IdfExprList.get(i+1).ControleSemantique().get(0).compareTo("int")!=0){
+                        //System.out.println("on chope le n qui suis");
+                        TDS.write("Erreur ligne " + line + " : l'indice saisie pour obtenir un élément dans la liste n'est pas un entier");
+
+                    }
+                }
+                //System.out.println("Dans sem type avec double passage: " + TDS.getType(TDS.getType(name,tds),tds));
+
                 String type = TDS.getType(TDS.getType(name,tds),tds);
                 list.add(type);
                 list.add(name);
