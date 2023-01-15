@@ -28,6 +28,8 @@ public class VariableDeclaration implements Ast {
         this.expr = expr;
     }
 
+
+    //regarder si typeid est du même type que expr
   
     @Override
     public List<String> ControleSemantique() {

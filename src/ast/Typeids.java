@@ -10,7 +10,7 @@ public class Typeids implements Ast {
         return visitor.visit(this);
     }
 
-    public Ast typeids1;
+    public Ast typeids1;  //nom du type
     public Ast typeids2;
     public Ast typeids3;
     public int line;
