@@ -59,7 +59,7 @@ public class Lvalues implements Ast {
 
 
         } else {
-                        //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
+                        //regarder si le type de lvalue est le meme que expr(list expr) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
 
             
             list.add("void");

@@ -35,16 +35,16 @@ public class Typeids implements Ast {
                 List<String> parametre = typeids2.ControleSemantique(); // on récupère ce qu'il y a entre les crochets
                 System.out.println("parametre : " + parametre);
                 System.out.println("type : " + type);
-                if(TDS.getType(parametre.get(parametre.size()-1), tds).compareTo(type)!=0){
-                    System.out.println("couille dans parametre de la liste");
+                if(TDS.getType(parametre.get(parametre.size()-1), tds)!=null && TDS.getType(parametre.get(parametre.size()-1), tds).compareTo(type)!=0 && TDS.getType(parametre.get(parametre.size()-1), tds).compareTo("")!=0 ){
+                    System.out.println(TDS.getType(parametre.get(parametre.size()-1), tds));
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(parametre.get(parametre.size()-1), tds) + " comme indice de matrice");
 
                 }
             }
             if (typeids3 != null){
-                List<String> val = typeids2.ControleSemantique(); // on récupère ce qu'il y a après le of
+                List<String> val = typeids3.ControleSemantique(); // on récupère ce qu'il y a après le of
                 System.out.println("truc dans val :" + val);
-                if(TDS.getType(val.get(val.size()-1), tds).compareTo(type)!=0){
+                if(val.get(0)!=null && val.get(0).compareTo(type)!=0 && val.get(0).compareTo("")!=0 ){
                     System.out.println("couille dans le of");
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(val.get(val.size()-1), tds) + " à une matrice de type " + type);
                 }
