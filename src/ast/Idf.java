@@ -44,7 +44,7 @@ public class Idf implements Ast{
             TDS.global_name=1;
             list.get(list.size()-1);
         }*/
-        
+        /* 
         List<String> line = TDS.getDECLARATION(name,TDS.tds);
         
         //System.out.println(line);
@@ -56,7 +56,7 @@ public class Idf implements Ast{
             TDS.write("La variable "+ name +" est déclarée à la ligne " +this.line +" avant d'être utilisée");
             TDS.list_var.add(name);
         };
-        
+        */
         list.add(name);
         
         

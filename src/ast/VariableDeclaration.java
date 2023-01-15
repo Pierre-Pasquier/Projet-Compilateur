@@ -50,12 +50,11 @@ public class VariableDeclaration implements Ast {
                 TDS.write("Erreur ligne " + line + " : l'élément affecté à la liste "+list.get(1)+" n'est pas du même type que cette liste");
             }
         }
-        //test de la taile pour déclarer une liste
+        //test de la taille pour déclarer une liste
 
 
         System.out.println("list");
         System.out.println(list);
-        list.add("");
         return list;
         
     }

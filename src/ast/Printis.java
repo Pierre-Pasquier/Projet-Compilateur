@@ -25,6 +25,7 @@ public class Printis implements Ast {
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
         list.add("void");
+        list.add(line + "");
         return list;
         
     }

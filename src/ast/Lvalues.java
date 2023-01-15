@@ -33,8 +33,10 @@ public class Lvalues implements Ast {
             if (TDS.getType(fonction.get(1), tds) == null){
                 TDS.write("Erreur ligne " + line + " : la fonction " + fonction.get(1) + " n'est pas définie");
                 list.add("");
+                list.add(line + "");
             } else {
                 list.add(TDS.getType(fonction.get(1), tds));
+                list.add(line + "");
                 System.out.println(fonction.get(1) + "---------------- " + TDS.getType(fonction.get(1), tds));
                 int nb_fils = listexpr.size()/2;
                 int bon_nb_fils = TDS.getNbFils(fonction.get(1),TDS.tds);
@@ -52,12 +54,19 @@ public class Lvalues implements Ast {
         } else if (listexpression == null){
             list.addAll(fonction);
         } else {
+<<<<<<< HEAD
             //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
             list.add("void");
         }
         System.out.println("lvalues");
+=======
+                        //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
+>>>>>>> refs/remotes/origin/master
 
-        System.out.println(list);
+            list.add("void");
+            list.add(line + "");
+        }
+        System.out.println("Dans Lvalues : " + list);
 
         return list;
         

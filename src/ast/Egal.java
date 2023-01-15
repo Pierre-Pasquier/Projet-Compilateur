@@ -32,6 +32,7 @@ public class Egal implements Ast {
         } else {
             list.add("int");
         }
+        list.add(line + "");
         return list;
     }
 
