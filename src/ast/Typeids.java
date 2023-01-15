@@ -31,15 +31,26 @@ public class Typeids implements Ast {
         if (typeids1 != null){
             List<String> name = typeids1.ControleSemantique();
             String type = TDS.getType(TDS.getType(name.get(1),tds),tds); // on récupère le type des éléments dans la matrice
+            if (typeids2 != null){
+                List<String> parametre = typeids2.ControleSemantique(); // on récupère ce qu'il y a entre les crochets
+                System.out.println("parametre : " + parametre);
+                System.out.println("type : " + type);
+                if(TDS.getType(parametre.get(parametre.size()-1), tds).compareTo(type)!=0){
+                    System.out.println("couille dans parametre de la liste");
+                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(parametre.get(parametre.size()-1), tds) + " comme indice de matrice");
+
+                }
+            }
+            if (typeids3 != null){
+                List<String> val = typeids2.ControleSemantique(); // on récupère ce qu'il y a après le of
+                System.out.println("truc dans val :" + val);
+                if(TDS.getType(val.get(val.size()-1), tds).compareTo(type)!=0){
+                    System.out.println("couille dans le of");
+                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(val.get(val.size()-1), tds) + " à une matrice de type " + type);
+                }
+            }
         }
-        if (typeids2 != null){
-            List<String> parametre = typeids2.ControleSemantique(); // on récupère ce qu'il y a entre les crochets
-            
-        }
-        if (typeids3 != null){
-            List<String> val = typeids2.ControleSemantique(); // on récupère ce qu'il y a après le of
         
-        }
         // on vérifie que val == type et que paramètre est un entier
         System.out.println("list typeids");
         System.out.println(list);
@@ -47,5 +58,5 @@ public class Typeids implements Ast {
         return list;
         
     }
-
+    
 }

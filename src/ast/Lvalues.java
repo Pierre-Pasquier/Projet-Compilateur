@@ -27,8 +27,10 @@ public class Lvalues implements Ast {
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
         List<String> fonction = lvalue.ControleSemantique();
+        System.out.println("dans lvalue :" + fonction);
         if (listexpression instanceof ExprList){
             List<String> listexpr = listexpression.ControleSemantique(); //liste des arguments
+            System.out.println("dans listexpr : " + listexpr + line);
             System.out.println("Liste des arguments de la fonction " + fonction.get(1) + " : " + listexpr);
             if (TDS.getType(fonction.get(1), tds) == null){
                 TDS.write("Erreur ligne " + line + " : la fonction " + fonction.get(1) + " n'est pas définie");
@@ -53,19 +55,17 @@ public class Lvalues implements Ast {
             }
         } else if (listexpression == null){
             list.addAll(fonction);
-        } else {
-<<<<<<< HEAD
-            //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
-            list.add("void");
-        }
-        System.out.println("lvalues");
-=======
-                        //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
->>>>>>> refs/remotes/origin/master
+            System.out.println("Dans fonction: " + fonction);
 
+
+        } else {
+                        //regarder si le type de lvalue est le meme que expr(list expression) et lvalue cest fonction; le type de lvalue c'est TDS.gettype(fonction.get(1),tds)
+
+            
             list.add("void");
             list.add(line + "");
         }
+
         System.out.println("Dans Lvalues : " + list);
 
         return list;
