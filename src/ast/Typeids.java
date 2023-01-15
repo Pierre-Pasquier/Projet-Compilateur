@@ -35,9 +35,14 @@ public class Typeids implements Ast {
                 List<String> parametre = typeids2.ControleSemantique(); // on récupère ce qu'il y a entre les crochets
                 System.out.println("parametre : " + parametre);
                 System.out.println("type : " + type);
-                if(TDS.getType(parametre.get(parametre.size()-1), tds)!=null && TDS.getType(parametre.get(parametre.size()-1), tds).compareTo(type)!=0 && TDS.getType(parametre.get(parametre.size()-1), tds).compareTo("")!=0 ){
+                System.out.println("typeT : " + TDS.getType(parametre.get(parametre.size()-1),tds));
+                if(parametre.get(0).compareTo(type)!=0 && parametre.get(0).compareTo("")!=0 ){
                     System.out.println(TDS.getType(parametre.get(parametre.size()-1), tds));
-                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(parametre.get(parametre.size()-1), tds) + " comme indice de matrice");
+                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ parametre.get(0) + " comme indice de matrice");
+                    //if(TDS.getType(parametre.get(parametre.size()-1), tds)==0){
+                    //    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un élément sans type comme indice de matrice");
+                    //TDS.getType(parametre.get(parametre.size()-1), tds)!=null && 
+                    //}
 
                 }
             }
@@ -45,8 +50,7 @@ public class Typeids implements Ast {
                 List<String> val = typeids3.ControleSemantique(); // on récupère ce qu'il y a après le of
                 System.out.println("truc dans val :" + val);
                 if(val.get(0)!=null && val.get(0).compareTo(type)!=0 && val.get(0).compareTo("")!=0 ){
-                    System.out.println("couille dans le of");
-                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ TDS.getType(val.get(val.size()-1), tds) + " à une matrice de type " + type);
+                    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ val.get(0) + " à une matrice de type " + type);
                 }
             }
         }
