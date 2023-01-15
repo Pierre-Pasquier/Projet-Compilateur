@@ -435,18 +435,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		line.add("VAR");
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);	
 		List<List> clone_tds = new ArrayList<List>(tds);	
-
+		tds.get(indice).add(line);
 		Idf idf = new Idf(idfString,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,clone_tds);
 		if (ctx.getChildCount() == 4){
-			tds.get(indice).add(line);
 			Ast expr = ctx.getChild(3).accept(this);
 
 			return new VariableDeclaration(idf, expr, null,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 		} else {
-			String typeidString = ctx.getChild(3).toString();
-			line.add(typeidString);
-			tds.get(indice).add(line);
-			//line.add(tds.) il faut ajouter le déplacement
 			Ast typeid = ctx.getChild(3).accept(this);
 			Ast expr = ctx.getChild(5).accept(this);
 			System.out.println("expr = null : "+ (expr == null) + "\n");

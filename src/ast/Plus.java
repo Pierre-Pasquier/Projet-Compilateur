@@ -35,6 +35,7 @@ public class Plus implements Ast {
         } else {
             list.add(l.get(0));
         }
+
         return list;
     }
 
