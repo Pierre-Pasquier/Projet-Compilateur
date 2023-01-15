@@ -30,7 +30,7 @@ public class Mult implements Ast {
             list.add(r.get(0));
         } else if (r.get(0).equals("")){
             list.add(l.get(0));
-        } else if (l.get(0) != r.get(0)){
+        } else if (!l.get(0).equals(r.get(0))){
             TDS.write("Erreur ligne " + line + " : les deux opérandes de la multiplication doivent être de même type");
             list.add("");
         } else {
