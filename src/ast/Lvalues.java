@@ -54,8 +54,6 @@ public class Lvalues implements Ast {
         } else if (listexpression == null){
             list.addAll(fonction);
         } else {
-
-            
             list.add("void");
             list.add(line + "");
         }
