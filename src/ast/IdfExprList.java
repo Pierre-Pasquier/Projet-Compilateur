@@ -42,7 +42,7 @@ public class IdfExprList implements Ast {
                     //si l'indice passé à cette liste n'est pas un entier
                     //System.out.println(IdfExprList.get(0).ControleSemantique());
                     if(i+1<IdfExprList.size() && IdfExprList.get(i+1).ControleSemantique().get(0).compareTo("int")!=0){
-                        System.out.println("on note");
+                        //System.out.println("on note");
                         //System.out.println("on chope le n qui suis");
                         TDS.write("Erreur ligne " + line + " : l'indice saisi pour obtenir un élément dans la liste n'est pas un entier");
 
