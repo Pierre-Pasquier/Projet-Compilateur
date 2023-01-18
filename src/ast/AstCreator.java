@@ -18,6 +18,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public String fonction_etudiee;
 	public boolean controle_semantique = false;
 	public String typeretour = null;
+	public String record = null;
 
 	public AstCreator() throws Exception{
 	}
@@ -27,7 +28,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitProgram(exprParser.ProgramContext ctx) { 
 		//List<List> clone_tds = new ArrayList<List>(tds);
 		//writer.println("Contrôles sémantiques :");
-		pile_region.add("1");
+		pile_region.add("0");
 		Ast child = ctx.getChild(0).accept(this);
 		//writer.close();
 		TDS.setTds(tds);
@@ -347,12 +348,13 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		return ctx.getChild(0).accept(this);
 	}
 	@Override public Ast visitTypedeclaration(exprParser.TypedeclarationContext ctx) {
-		pere2 = "Typedeclaration";
 		pere = "typedeclaration";
+		pere2 = "Typedeclaration";
 		List<String> typedecla = new ArrayList<>();
 		tds.get(tds.size()-1).add(typedecla);
 		Ast typeid = ctx.getChild(1).accept(this);
 		Ast type = ctx.getChild(3).accept(this);
+		record = null;
 		return new TypeDeclaration(typeid, type,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 	}
 	@Override public Ast visitType_id(exprParser.Type_idContext ctx) { 
@@ -404,6 +406,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		int indice = TDS.getTds(Integer.parseInt(pile_region.get(pile_region.size()-1)),tds);
 		tds.get(indice).add(line);
 		Ast typeid = ctx.getChild(2).accept(this);
+		if (record != null){
+			line.add(record);
+		}
 		return new TypeField(idf,typeid,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 	 }
 
@@ -415,6 +420,9 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		}
 		if (pere2.equals("Functiondeclaration")){
 			typeretour = idfString;
+		}
+		if (pere2.equals("Typedeclaration")){
+			record = idfString;
 		}
 		pere2 = "Typeid";
 		System.out.println("Dans typeid");
@@ -454,7 +462,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		String idfString = ctx.getChild(1).toString();
 		List<List> list_fun = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
-		nom.add("TDS_" + idfString + "_" + (num_region++) + "_" + (num_imbrication++));
+		nom.add("TDS_" + idfString + "_" + (num_region++) + "_" + (num_imbrication++) + "_" + pile_region.get(pile_region.size()-2));
 		list_fun.add(nom);
 		tds.add(list_fun);
 		List<List> clone_tds = new ArrayList<List>(tds);
@@ -549,7 +557,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_let = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
-		nom.add("TDS_let_" + (num_region++) + "_" + (num_imbrication++));
+		nom.add("TDS_let_" + (num_region++) + "_" + (num_imbrication++) + "_" + pile_region.get(pile_region.size()-2));
 		list_let.add(nom);
 		tds.add(list_let);
 		Ast affect = ctx.getChild(1).accept(this);
@@ -575,7 +583,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		List<List> list_for = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
 		List<String> caractéristiques = new ArrayList<>();
-		nom.add("TDS_for_" + (num_region++) + "_" + (num_imbrication++));
+		nom.add("TDS_for_" + (num_region++) + "_" + (num_imbrication++) + "_" + pile_region.get(pile_region.size()-2));
 		list_for.add(nom);
 
 
@@ -669,7 +677,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		pile_region.add(String.valueOf(num_region));
 		List<List> list_while = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
-		nom.add("TDS_while_" + (num_region++) + "_" + (num_imbrication++));
+		nom.add("TDS_while_" + (num_region++) + "_" + (num_imbrication++) + "_" + pile_region.get(pile_region.size()-2));
 		list_while.add(nom);
 		tds.add(list_while);
 
