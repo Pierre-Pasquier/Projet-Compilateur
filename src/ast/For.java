@@ -32,13 +32,15 @@ public class For implements Ast {
         TDS.num_imbrication++;
         TDS.num_region++;
         List<String> list = new ArrayList<String>();
+        List<String> list_faire = faire.ControleSemantique();
+        List<String> list_deb = deb.ControleSemantique();
+        List<String> list_fin = fin.ControleSemantique();
         list.addAll(faire.ControleSemantique());
-        System.out.println(deb.ControleSemantique());
-        if(deb.ControleSemantique().get(0)!=null && deb.ControleSemantique().get(0).compareTo("int")!=0){
+        if(list_deb.get(0)!=null && list_deb.get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : le premier indice de la boucle for n'est pas un entier");
 
         }
-        if(fin.ControleSemantique().get(0)!=null && fin.ControleSemantique().get(0).compareTo("int")!=0){
+        if(list_fin.get(0)!=null && list_fin.get(0).compareTo("int")!=0){
             TDS.write("Erreur ligne " + line + " : le dernier indice de la boucle for n'est pas un entier");
 
         }

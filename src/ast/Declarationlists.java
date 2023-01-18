@@ -26,9 +26,10 @@ public class Declarationlists implements Ast {
         TDS.num_imbrication++;
         TDS.num_region++;
         List<String> list = new ArrayList<String>();
-        list.addAll(affect.ControleSemantique());
-        list.addAll(dans.ControleSemantique());
-        list.add("");
+        affect.ControleSemantique();
+        dans.ControleSemantique();
+        list.add("void");
+        list.add(line + "");
         TDS.num_imbrication--;
         return list;
         
