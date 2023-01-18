@@ -478,6 +478,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			//System.out.println(pile_region);
 			return new FunctionDeclaration(idf, typefields, expr, null,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 		} else {
+			pere2 = "Functiondeclaration";
 			Ast typeid = ctx.getChild(6).accept(this);
 			Ast expr = ctx.getChild(8).accept(this);
 			num_imbrication--;
@@ -513,27 +514,27 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 	public Ast visitIfthenelse(exprParser.IfthenelseContext ctx){
 		pere2 = "Ifthenelse";
 		pere = "if";
-		pile_region.add(String.valueOf(num_region));
+		//pile_region.add(String.valueOf(num_region));
 		List<List> list_if = new ArrayList<>();
 		List<String> nom = new ArrayList<>();
-		nom.add("TDS_if_" + (num_region++) + "_" + (num_imbrication++));
-		list_if.add(nom);
-		tds.add(list_if);
+		//nom.add("TDS_if_" + (num_region++) + "_" + (num_imbrication++));
+		//list_if.add(nom);
+		//tds.add(list_if);
 
 		Ast condition = ctx.getChild(1).accept(this);
 		Ast alors = ctx.getChild(3).accept(this);
 		if(ctx.getChildCount()>5)
 		{
 			Ast ouOccasionnel = ctx.getChild(5).accept(this);
-			pile_region.remove(pile_region.size()-1);
+			//pile_region.remove(pile_region.size()-1);
 			//System.out.println(pile_region);
-			num_imbrication--;
+			//num_imbrication--;
 			return new Ifthenelse((Ast)new If(condition,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds), (Ast)new Then(alors,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds), (Ast)new Else(ouOccasionnel,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds),ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 		}
 		else
 		{
-			num_imbrication--;
-			pile_region.remove(pile_region.size()-1);
+			//num_imbrication--;
+			//pile_region.remove(pile_region.size()-1);
 			//System.out.println(pile_region);
 			return new Ifthenelse((Ast)new If(condition,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds), (Ast)new Then(alors,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds),null,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,tds);
 		}
