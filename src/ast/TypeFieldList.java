@@ -29,18 +29,7 @@ public class TypeFieldList implements Ast{
             list.addAll(typefield.ControleSemantique());
         }
         System.out.println("type field list : " + list);
-        for(int i=0;i<list.size()/4;i++){
-            List<String> listel = new ArrayList<>();
-            if(list.get(i*4)!=null && list.get((i*4)+3)!=null){
-                listel.add(list.get(i*4));
-                listel.add(list.get((i*4)+3));
-                for(int k=i+1;k<list.size()/4;k++){
-                    if(listel.get(0)!=null && listel.get(1)!=null && listel.get(0).compareTo(list.get(k*4))==0 && listel.get(1).compareTo(list.get((k*4)+3))==0 ){
-                        TDS.write("Erreur ligne " + line + " : plusieurs arguments ont le nom " + listel.get(1)+ " et le même type "+ listel.get(0));
-                    }
-                }
-            }
-        }
+
         list.add("");
         return list;
         
