@@ -33,9 +33,9 @@ public class Typeids implements Ast {
             String type = TDS.getType(TDS.getType(name.get(1),tds),tds); // on récupère le type des éléments dans la matrice
             if (typeids2 != null){
                 List<String> parametre = typeids2.ControleSemantique(); // on récupère ce qu'il y a entre les crochets
-                System.out.println("parametre : " + parametre);
-                System.out.println("type : " + type);
-                System.out.println("typeT : " + TDS.getType(parametre.get(parametre.size()-1),tds));
+                //System.out.println("parametre : " + parametre);
+                //System.out.println("type : " + type);
+                //System.out.println("typeT : " + TDS.getType(parametre.get(parametre.size()-1),tds));
                 if(parametre.get(0).compareTo(type)!=0 && parametre.get(0).compareTo("")!=0 ){
                     System.out.println(TDS.getType(parametre.get(parametre.size()-1), tds));
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ parametre.get(0) + " comme indice de matrice");
@@ -48,7 +48,7 @@ public class Typeids implements Ast {
             }
             if (typeids3 != null){
                 List<String> val = typeids3.ControleSemantique(); // on récupère ce qu'il y a après le of
-                System.out.println("truc dans val :" + val);
+                //System.out.println("truc dans val :" + val);
                 if(val.get(0)!=null && val.get(0).compareTo(type)!=0 && val.get(0).compareTo("")!=0 ){
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ val.get(0) + " à une matrice de type " + type);
                 }
@@ -56,8 +56,8 @@ public class Typeids implements Ast {
         }
         
         // on vérifie que val == type et que paramètre est un entier
-        System.out.println("list typeids");
-        System.out.println(list);
+        //System.out.println("list typeids");
+        //System.out.println(list);
         list.add("");
         return list;
         
