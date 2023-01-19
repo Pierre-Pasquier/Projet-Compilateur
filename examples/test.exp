@@ -1,0 +1,32 @@
+let 
+    var a : int := 1
+    var b : string := a
+    var b : int := a
+    var c : int := "Bonjour"
+    var c : string := "Bonjour"
+    type intArray = array of int
+    function l(x : int) = 
+        for i := 1 to 10 do (
+            a > c;
+            print(a+c);
+            print(a*a)
+        )
+    function f(x : int) : int = 
+        x + 1
+    function g(x : int, y : string, x :int) = (
+        for i := "Bonjour" to 10 do (
+            print(x);
+            facto(y);
+            f(y)
+        );
+        if "Bonjour" 
+            then print("Bonjour")
+            else print("Au revoir");
+        if "Bonjour" = "Au revoir"
+            then f(5)
+            else print("Au revoir")
+        )
+    var d : int := f(4)
+in
+    g(a,b,c,d,e)
+end

@@ -41,13 +41,13 @@ public class Ifthenelse implements Ast {
             List<String> elsee = ouOccasionnel.ControleSemantique();
             list.addAll(elsee);
             if (!then.get(0).equals(elsee.get(0))){
+                System.out.println("Erreur ligne " + line + " : les deux branches d'un ifthenelse doivent être de même type");
                 TDS.write("Erreur ligne " + line + " : les deux branches d'un ifthenelse doivent être de même type");
                 list.add("");
                 list.add(line + "");
             }
 
         }     
-        System.out.println("Dans ifthenelse : " + list);
         return list;
         
     }

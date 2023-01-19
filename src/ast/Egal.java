@@ -26,7 +26,7 @@ public class Egal implements Ast {
         List<String> r = right.ControleSemantique();
         List<String> l = left.ControleSemantique();
         if (!l.get(0).equals(r.get(0)) && !l.get(0).equals("") && !r.get(0).equals("")){
-            System.out.println("r : " + r + "      l : " + l + "------------------------------------------");
+            System.out.println("Erreur ligne " + line + " : les deux opérandes de l'égalité doivent être de même type");
             TDS.write("Erreur ligne " + line + " : les deux opérandes de l'égalité doivent être de même type");
             list.add("");
         } else {

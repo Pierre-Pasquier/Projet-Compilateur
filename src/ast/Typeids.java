@@ -38,6 +38,7 @@ public class Typeids implements Ast {
                 //System.out.println("typeT : " + TDS.getType(parametre.get(parametre.size()-1),tds));
                 if(parametre.get(0).compareTo(type)!=0 && parametre.get(0).compareTo("")!=0 ){
                     System.out.println(TDS.getType(parametre.get(parametre.size()-1), tds));
+                    System.out.println("Erreur ligne " + line + " : on ne peut pas affecter un "+ parametre.get(0) + " comme indice de matrice");
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ parametre.get(0) + " comme indice de matrice");
                     //if(TDS.getType(parametre.get(parametre.size()-1), tds)==0){
                     //    TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un élément sans type comme indice de matrice");
@@ -50,6 +51,7 @@ public class Typeids implements Ast {
                 List<String> val = typeids3.ControleSemantique(); // on récupère ce qu'il y a après le of
                 //System.out.println("truc dans val :" + val);
                 if(val.get(0)!=null && val.get(0).compareTo(type)!=0 && val.get(0).compareTo("")!=0 ){
+                    System.out.println("Erreur ligne " + line + " : on ne peut pas affecter un "+ val.get(0) + " à une matrice de type " + type);
                     TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+ val.get(0) + " à une matrice de type " + type);
                 }
             }

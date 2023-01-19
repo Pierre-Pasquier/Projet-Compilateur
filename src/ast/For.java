@@ -37,10 +37,12 @@ public class For implements Ast {
         List<String> list_fin = fin.ControleSemantique();
         list.addAll(faire.ControleSemantique());
         if(list_deb.get(0)!=null && list_deb.get(0).compareTo("int")!=0){
+            System.out.println("Erreur ligne " + line + " : le premier indice de la boucle for n'est pas un entier");
             TDS.write("Erreur ligne " + line + " : le premier indice de la boucle for n'est pas un entier");
 
         }
         if(list_fin.get(0)!=null && list_fin.get(0).compareTo("int")!=0){
+            System.out.println("Erreur ligne " + line + " : le dernier indice de la boucle for n'est pas un entier");
             TDS.write("Erreur ligne " + line + " : le dernier indice de la boucle for n'est pas un entier");
 
         }

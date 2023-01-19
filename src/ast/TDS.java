@@ -159,10 +159,10 @@ public class TDS {
         }
         for (int i = 0; i < liste_ordonnee.size(); i++){
             List<List> tds = liste_ordonnee.get(i);
-            System.out.println("\n" + tds.get(0).get(0) + " :");
+            //System.out.println("\n" + tds.get(0).get(0) + " :");
             for (int j = 1; j < tds.size(); j++){
                 List<String> tds_region = tds.get(j);
-                System.out.println(tds_region);
+                //System.out.println(tds_region);
             }
         }
 
