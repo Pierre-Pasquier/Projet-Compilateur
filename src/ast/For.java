@@ -35,7 +35,7 @@ public class For implements Ast {
         List<String> list_faire = faire.ControleSemantique();
         List<String> list_deb = deb.ControleSemantique();
         List<String> list_fin = fin.ControleSemantique();
-        list.addAll(faire.ControleSemantique());
+        list.addAll(list_faire);
         if(list_deb.get(0)!=null && list_deb.get(0).compareTo("int")!=0){
             System.out.println("Erreur ligne " + line + " : le premier indice de la boucle for n'est pas un entier");
             TDS.write("Erreur ligne " + line + " : le premier indice de la boucle for n'est pas un entier");

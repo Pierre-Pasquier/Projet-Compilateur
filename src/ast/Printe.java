@@ -23,6 +23,7 @@ public class Printe implements Ast {
     @Override
     public List<String> ControleSemantique() {
         List<String> list = new ArrayList<String>();
+        printe.ControleSemantique();
         list.add("void");
         list.add(line + "");
         return list;

@@ -25,13 +25,18 @@ public class Compare implements Ast {
         List<String> list = new ArrayList<String>();
         List<String> r = right.ControleSemantique();
         List<String> l = left.ControleSemantique();
-        if (!l.get(0).equals(r.get(0))){
-            System.out.println("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de même type");
-            TDS.write("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de même type");
+        if (l.get(0).equals("")){
+            list.add(r.get(0));
+        } else if (r.get(0).equals("")){
+            list.add(l.get(0));
+        } else if (!l.get(0).equals("int") || !r.get(0).equals("int")){
+            System.out.println("Erreur ligne " + line + " : les deux opérandes de l'addition doivent être de type int");
+            TDS.write("Erreur ligne " + line + " : les deux opérandes de l'addition doivent être de type int");
             list.add("");
         } else {
-            list.add("int");
+            list.add(l.get(0));
         }
+
         return list;
     }
 
