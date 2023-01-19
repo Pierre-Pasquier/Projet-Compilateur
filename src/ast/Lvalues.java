@@ -61,9 +61,13 @@ public class Lvalues implements Ast {
             List<String> listexpr = listexpression.ControleSemantique();
 
             if(listexpr.get(0)!= null && fonction.get(0)!=null && listexpr.get(0).compareTo(fonction.get(0))!=0){
-                System.out.println("Erreur ligne " + line + " : il est impossible d'affecter à " + fonction.get(1) + " qui est un élément qui prend des " + fonction.get(0) + " un élément de type " + listexpr.get(0));
-                TDS.write("Erreur ligne " + line + " : il est impossible d'affecter à " + fonction.get(1) + " qui est un élément qui prend des " + fonction.get(0) + " un élément de type " + listexpr.get(0));
-
+                if (listexpr.get(0).equals("")){
+                    System.out.println("Erreur ligne " + line + " : L'élément affecté à la variable " + fonction.get(1) + " n'est pas de type de type " + fonction.get(0));
+                    TDS.write("Erreur ligne " + line + " : L'élément affecté à la variable " + fonction.get(1) + " n'est pas de type de type " + fonction.get(0));
+                } else {
+                    System.out.println("Erreur ligne " + line + " : il est impossible d'affecter à " + fonction.get(1) + " qui est un élément qui prend des " + fonction.get(0) + " un élément de type " + listexpr.get(0));
+                    TDS.write("Erreur ligne " + line + " : il est impossible d'affecter à " + fonction.get(1) + " qui est un élément qui prend des " + fonction.get(0) + " un élément de type " + listexpr.get(0));
+                }
             }
 
 

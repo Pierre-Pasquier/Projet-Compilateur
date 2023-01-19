@@ -30,8 +30,8 @@ public class Compare implements Ast {
         } else if (r.get(0).equals("")){
             list.add(l.get(0));
         } else if (!l.get(0).equals("int") || !r.get(0).equals("int")){
-            System.out.println("Erreur ligne " + line + " : les deux opérandes de l'addition doivent être de type int");
-            TDS.write("Erreur ligne " + line + " : les deux opérandes de l'addition doivent être de type int");
+            System.out.println("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de type int");
+            TDS.write("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de type int");
             list.add("");
         } else {
             list.add(l.get(0));

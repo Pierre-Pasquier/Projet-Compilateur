@@ -10,7 +10,7 @@ let
     var col := intArray [ N ] of 0
     var diag1 := intArray [ N+N-1 ] of 0
     var diag2 := intArray [ N+N-1 ] of 0
-    function printboard(c:int, a:string) =
+    function printboard(v:int, w:string) =
         (for i := 0 to N-1
         do (for j := 0 to N*1+1
             do print(if "Bonjour" then 1+2 else 2*3);
@@ -33,12 +33,13 @@ let
         for i := 1 to 10 do (
             a > c;
             print(a+c);
-            print(a*a)
+            print(a*a);
+            printboard("Bonjour",row[10]);
         )
     function f(x : int) : int = 
         x + 1
     function g(x : int, y : string, x : int) = (
-        for i := "Bonjour" to 10 do (
+        for i := "Bonjour" to "Au revoir" do (
             print(x);
             facto(y);
             f(y)
@@ -50,7 +51,11 @@ let
             then f(5)
             else print("Au revoir")
         )
+    while "Bonjour" do (
+        print(a);
+        a := "Bonjour"
+    )
     var d : int := f(4)
 in 
-    try(a,b,c,d) 
+    try(b,a,c,d) 
 end

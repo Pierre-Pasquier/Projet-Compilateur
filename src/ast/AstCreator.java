@@ -466,7 +466,7 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 		list_fun.add(nom);
 		tds.add(list_fun);
 		List<List> clone_tds = new ArrayList<List>(tds);
-		
+		args.clear();
 		Idf idf = new Idf(idfString,ctx.getStart().getLine(),Integer.parseInt(pile_region.get(pile_region.size()-1)),num_imbrication,clone_tds);
 		Ast typefields = ctx.getChild(3).accept(this);
 		if (ctx.getChildCount() == 7){
@@ -496,7 +496,6 @@ public class AstCreator extends exprBaseVisitor<Ast>{
 			List<String> line = new ArrayList<>();
 			line.add(idfString);
 			line.add("METHOD");
-			pere2 = "Functiondeclaration";
 			//System.out.println(pile_region);
 			line.add(typeretour);
 			line.add(Integer.toString(args.size()));
