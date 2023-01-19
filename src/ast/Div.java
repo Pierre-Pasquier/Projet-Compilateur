@@ -29,7 +29,7 @@ public class Div implements Ast {
             list.add(r.get(0));
         } else if (r.get(0).equals("")){
             list.add(l.get(0));
-        } else if (!l.get(0).equals(r.get(0))){
+        } else if (!l.get(0).equals("int") || !r.get(0).equals("int")){
             TDS.write("Erreur ligne " + line + " : les deux opérandes de la division doivent être de même type");
             list.add("");
         } else {
