@@ -21,7 +21,6 @@ public class Program implements Ast {
     }
 
     public List<String> ControleSemantique() {
-        System.out.println(("Test : " + TDS.getType("c",tds)));
         TDS.setwrite();
         expression.ControleSemantique();
         TDS.closewrite();

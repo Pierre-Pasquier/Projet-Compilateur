@@ -29,7 +29,6 @@ public class ExprList implements Ast{
             List<String> args = ExprList.get(i).ControleSemantique();
             list.addAll(args);
         }
-        System.out.println("list Exprlist : "+ list);
         return list;
         
     }

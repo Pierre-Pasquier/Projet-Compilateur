@@ -28,7 +28,7 @@ public class TypeFieldList implements Ast{
         for (Ast typefield : typefieldList) {
             list.addAll(typefield.ControleSemantique());
         }
-        System.out.println("type field list : " + list);
+        //System.out.println("type field list : " + list);
 
         list.add("");
         return list;

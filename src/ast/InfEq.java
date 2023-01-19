@@ -31,6 +31,7 @@ public class InfEq implements Ast {
         } else if (r.get(0).equals("")){
             list.add(l.get(0));
         } else if (!l.get(0).equals(r.get(0))){
+            System.out.println("Erreur ligne " + line + " : les deux opérandes de la comparaison doivent être de même type");
             TDS.write("Erreur ligne " + line + " : on ne peut pas comparer un "+ l.get(0) + " avec un " + r.get(0) + " avec l'opérateur \"<=\"");
             list.add("");
         } else {

@@ -41,6 +41,7 @@ public class FunctionDeclaration implements Ast {
                 listel.add(typf.get((i*4)+3));
                 for(int k=i+1;k<typf.size()/4;k++){
                     if(listel.get(0)!=null && listel.get(1)!=null && listel.get(0).compareTo(typf.get(k*4))==0 && listel.get(1).compareTo(typf.get((k*4)+3))==0 ){
+                        System.out.println("Erreur ligne " + line + " : plusieurs arguments ont le nom " + listel.get(1)+ " et le même type "+ listel.get(0));
                         TDS.write("Erreur ligne " + line + " : plusieurs arguments ont le nom " + listel.get(1)+ " et le même type "+ listel.get(0));
                     }
                 }
@@ -54,6 +55,7 @@ public class FunctionDeclaration implements Ast {
             if (exp.get(2*i).equals(type) || exp.get(2*i).equals("")){
                 list.add(exp.get(2*i));
             } else {
+                System.out.println("Erreur ligne " + exp.get(2*i+1) + " : type de retour de la fonction " + name + " non conforme");
                 TDS.write("Erreur ligne " + exp.get(2*i+1) + " : type de retour de la fonction " + name + " non conforme");
                 list.add("");
             }

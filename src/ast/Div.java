@@ -30,6 +30,7 @@ public class Div implements Ast {
         } else if (r.get(0).equals("")){
             list.add(l.get(0));
         } else if (!l.get(0).equals(r.get(0))){
+            System.out.println("Erreur ligne " + line + " : les deux opérandes de la division doivent être de même type");
             TDS.write("Erreur ligne " + line + " : les deux opérandes de la division doivent être de même type");
             list.add("");
         } else {

@@ -15,7 +15,6 @@ public class Else implements Ast{
     @Override
     public List<String> ControleSemantique() {
         List<String> list = ouOccasionnel.ControleSemantique();
-        System.out.println("Dans Else : " + list);
         return list;
         
     }

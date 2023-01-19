@@ -29,6 +29,7 @@ public class Idf implements Ast{
         List<String> list = new ArrayList<String>();
         String type = TDS.getType(name, tds);
         if (type == null){
+            System.out.println("Erreur ligne " + line + " : variable " + name + " non déclarée");
             TDS.write("Erreur ligne " + line + " : variable " + name + " non déclarée");
             list.add("");
         } else  {

@@ -60,6 +60,7 @@ public class VariableDeclaration implements Ast {
            // System.out.println("typeid");
 
            // System.out.println(typeid.ControleSemantique());
+           System.out.println("Erreur ligne " + line + " : on ne peut pas affecter un "+listexpr.get(0)+ " à un " + listTypeid.get(1));
             TDS.write("Erreur ligne " + line + " : on ne peut pas affecter un "+listexpr.get(0)+ " à un " + listTypeid.get(1) );
         }
         return list;
