@@ -3,11 +3,11 @@ let
     var b : string := a
     var b : int := a
     var c : int := "Bonjour"
-    var N : int := b+1
+    var N : int := 1
     type record = {r1 : int, r2 : string, r3 : int}
     type intArray = array of int
     var row := intArray [ N ] of "Bonjour"
-    var col := intArray [ N ] of 0
+    var col := intArray [ N ] of record.r2
     var diag1 := intArray [ N+N-1 ] of 0
     var diag2 := intArray [ N+N-1 ] of 0
     function printboard(v:int, w:string) =
