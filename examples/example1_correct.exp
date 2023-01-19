@@ -13,7 +13,7 @@ let
     function printboard(c:int, a:string) =
         (for i := 0 to N-1
         do (for j := 0 to N*1+1
-            do print(if col[i]=j then 1+2 else 2*3);
+            do print(if "Bonjour" then 1+2 else 2*3);
             print(1+2));
         print(1+2))
     function try(c:int) =
