@@ -1,19 +1,56 @@
 let
-    var N := "Bonjour"
+    var a : int := 1
+    var b : string := a
+    var b : int := a
+    var c : int := "Bonjour"
+    var N : int := 1
+    type record = {r1 : int, r2 : string, r3 : int}
     type intArray = array of int
-    var row := intArray [ N ] of 0
+    var row := intArray [ N ] of "Bonjour"
     var col := intArray [ N ] of 0
     var diag1 := intArray [ N+N-1 ] of 0
     var diag2 := intArray [ N+N-1 ] of 0
     function printboard(c:int, a:string) =
         (for i := 0 to N-1
         do (for j := 0 to N*1+1
-            do print(if col[i]=j then 1+2 else 2*3);
+            do print(if "Bonjour" then 1+2 else 2*3);
             print(1+2));
         print(1+2))
     function try(c:int) =
-        if c=N then printboard(1,"Bonjour")
+        if c=N then (printboard(1,"Bonjour"); let var f : string := N in end)
         else for r := 0 to N-1
             do if row[r]=0 & diag1[r+c]=0 & diag2[r+7-c]=0
-            then (row[r] := 1; diag1[r+c] := 1; diag2[r+7-c] := 1; col[c] := r;fdfjshdkjhfsd(c+1);row[r] := 0; diag1[r+c] := 0;diag2[r+7-c] := 0)
-in try(a,b,c,d) end
+            then (row["Bonjour"] := 1;
+            diag1[r+c] := 1; 
+            diag2[r+7-c] := "Bonjour"; 
+            col[c] := r;
+            facto(c+1);
+            row[r] := 0; 
+            diag1[r+c] := 0;
+            diag2[r+7-c] := 0
+        )
+    function l(x : int) = 
+        for i := 1 to 10 do (
+            a > c;
+            print(a+c);
+            print(a*a)
+        )
+    function f(x : int) : int = 
+        x + 1
+    function g(x : int, y : string, x : int) = (
+        for i := "Bonjour" to 10 do (
+            print(x);
+            facto(y);
+            f(y)
+        );
+        if "Bonjour" 
+            then print("Bonjour")
+            else print("Au revoir");
+        if "Bonjour" = "Au revoir"
+            then f(5)
+            else print("Au revoir")
+        )
+    var d : int := f(4)
+in 
+    try(a,b,c,d) 
+end
